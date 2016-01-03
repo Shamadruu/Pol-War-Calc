@@ -10,7 +10,7 @@
                 localStorage.setItem(name, "");
             },
             load: function(name, obj){
-                obj = localStorage.getItem(name);
+                obj = JSON.parse(localStorage.getItem(name));
             }
         }
     }
