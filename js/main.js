@@ -908,7 +908,7 @@
             $("#delete").on("click", function() {
                 main.nation.data.cityBackup.push(main.nation.data.cities.pop());
             });
-            $("#cities").on("click", ".ciy span.copy", function(){
+            $("#cities").on("click", ".city span.copy", function(){
                 var c = jQuery.extend(true, {}, main.nation.data.cities[Number($(this).parents().eq(2).attr("id")) -1]);
                 c.id = main.nation.data.cities.length + 1;
                 main.nation.data.cities.push(c);
