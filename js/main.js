@@ -2,6 +2,17 @@
     var main = {
         display: {},
         nation: {},
+        local : {
+            create: function(name, obj){
+                localStorage.setItem(name, JSON.stringify(obj));
+            },
+            reset: function(name){
+                localStorage.setItem(name, "");
+            },
+            load: function(name, obj){
+                obj = localStorage.getItem(name);
+            }
+        }
     }
     main.nation.init = function() {
         main.nation = {
@@ -1027,10 +1038,22 @@
             main.nation.data.update();
             main.display.city.updateDisplay();
         }, 250);
+    },
+    main.save = function(){
+        main.local.create("cities", main.nation.data.cities);
+        main.local.create("inputData", main.nation.inputData);
+    },
+    main.load = function(){
+      main.local.load("cities", main.nation.data.cities);
+      main.local.load("inputData", main.nation.inputData);
+    },
+    main.saveLoop = function(){
+        setInterval(main.save , 30000);
     }
     main.nation.init();
     main.nation.data.update();
     main.display.init();
+    main.load();
     main.update();
 //}());
 //The Obfuscation!
