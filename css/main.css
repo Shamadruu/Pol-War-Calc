@@ -4,7 +4,7 @@
 */
 
 .container-fluid.col-sm-10.col-sm-offset-1 {
-  height: 100%;
+  height: auto;
   padding: 0px;
   border: 15px solid #d8d8f3;
   border-top: 0px;
