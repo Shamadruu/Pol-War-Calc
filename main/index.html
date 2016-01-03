@@ -1,0 +1,71 @@
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <title>Politics and War Calculator (WIP)</title>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-default" id="navbar">
+    <div class="container-fluid">
+      <div>
+        <ul class="nav nav-tabs nav-justified" id="navbar-tabs">
+          <li class="active"><a data-toggle="tab" href="#nation">Nation</a></li>
+          <li><a data-toggle="tab" href="#cities">Cities</a></li>
+          <!--<li><a data-toggle="tab" href="#military">Military</a></li>-->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="tab-content">
+    <div class="tab-pane fade in active" id="nation">
+      <div class="container-fluid col-sm-10 col-sm-offset-1" id="nationConfig">
+        <div class=row>
+          <div class="col-sm-12 header name">
+            Nation Configuration<span class="glyphicon glyphicon-minus pointer toggle" style=color:#000;zoom:1.25;float:right title="Maximize or minimize this city.">
+          </div></div>
+              <div class="container-fluid"></div>
+          </div>
+        
+      <div class="container-fluid col-sm-10 col-sm-offset-1" id="nationOver">
+        <div class=row>
+          <div class="col-sm-12 header name">
+            National Overview<span class="glyphicon glyphicon-minus pointer toggle" style=color:#000;zoom:1.25;float:right title="Maximize or minimize this city.">
+          </div></div>
+              <div class="container-fluid">
+  
+            </div>      
+          </div>
+
+            <div class="container-fluid col-sm-10 col-sm-offset-1" id="projectsConfig">
+        <div class=row>
+          <div class="col-sm-12 header name">
+            Projects<span class="glyphicon glyphicon-minus pointer toggle" style=color:#000;zoom:1.25;float:right title="Maximize or minimize this city.">
+          </div></div>
+              <div class="container-fluid"></div></div>
+          <div class="container-fluid col-sm-10 col-sm-offset-1" id="cityOver">
+        <div class=row>
+          <div class="col-sm-12 header name">
+            City Overview<span class="glyphicon glyphicon-minus pointer toggle" style=color:#000;zoom:1.25;float:right title="Maximize or minimize this city.">
+          </div></div>
+              <div class="container-fluid"></div>
+            </div>
+	  </div>
+    <div class="tab-pane fade" id="cities">
+      <div style="text-align: center; padding-bottom: 10px;"><span class="glyphicon glyphicon-plus pointer" style="color: #33cc33; zoom: 1.5;" title="Create a new city." id="create"></span><span class="glyphicon glyphicon-minus pointer" style="color: #ff3300; zoom: 1.5; "
+            title="Delete the last city in the list." id="delete"></span></div>
+
+
+        </div>
+        <div class="tab-pane fade" id="military">
+
+        </div>
+
+      </div>
+</body>
+
+</html>
