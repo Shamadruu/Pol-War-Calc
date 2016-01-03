@@ -1053,7 +1053,7 @@
     main.nation.init();
     main.nation.data.update();
     main.display.init();
-    main.load();
+    
     main.update();
 //}());
 //The Obfuscation!
