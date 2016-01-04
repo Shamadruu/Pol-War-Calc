@@ -11,6 +11,12 @@
             },
             load: function(name, obj){
                 obj = JSON.parse(localStorage.getItem(name));
+                if(name == "cities"){
+                    for(var i=0;i<obj.length;i++){
+                        var x = obj[i];
+                        Object.defineProperties(x, {"update" : { value: main.nation.data.City.prototype.update} });
+                    }
+                }
             }
         }
     }
@@ -1054,7 +1060,7 @@
     main.nation.init();
     main.nation.data.update();
     main.display.init();
-    
+    main.load();
    // main.update();
 //}());
 //The Obfuscation!
