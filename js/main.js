@@ -1115,7 +1115,7 @@ main.display = {
             }
         });
         //Military
-        $("#miliMasater").on("change", "input"){
+        $("#miliMasater").on("change", "input", function(){
             if(Number($(this).val()) >= 0 && Number($(this).val()) <= main.nation.data.military[$(this).attr("name")].cap){
                 main.nation.data.military[$(this).attr("name")].amount = Number($(this).val());
             }
@@ -1127,7 +1127,7 @@ main.display = {
                 $(this).val(0);
                 main.nation.data.military[$(this).attr("name")].amount = 0;
             }
-        }
+        });
     },
     nation: {
         genNationConfig: function() {
