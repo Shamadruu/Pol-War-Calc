@@ -554,7 +554,7 @@ main.nation.init = function() {
             },
             peaceInc: 750,
             warInc: 500,
-            peaceUpkeep: 1.25
+            peaceUpkeep: 1.25,
             warUpkeep: 1.88
         },
         tanks: {
