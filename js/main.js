@@ -1206,7 +1206,7 @@ main.display = {
     },
     military: {
         genDisplay : function(){
-            var HTML = '<div class="row"><div class="col-sm-2 header>Name</div><div class="col-sm-2">Cost</div><div class="col-sm-3">Upkeep (Peace/War)</div><div class="col-sm-3">Amount</div><div class="col-sm-2">Cap</div></div>';
+            var HTML = '<div class="row"><div class="col-sm-2 header">Name</div><div class="col-sm-2">Cost</div><div class="col-sm-3">Upkeep (Peace/War)</div><div class="col-sm-3">Amount</div><div class="col-sm-2">Cap</div></div>';
             for(var m in main.nation.data.military){
                 HTML += '<div class="row ' + m + '><div class="col-sm-2 header>' + main.nation.data.military[m].name + '</div><div class="col-sm-2">Cost</div><div class="col-sm-3">Upkeep (Peace/War)</div><div class="col-sm-3">Amount</div><div class="col-sm-2">' + main.nation.data.military[m].cap + '</div></div></div>';
             }
