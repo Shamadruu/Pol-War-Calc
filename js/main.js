@@ -930,6 +930,7 @@ main.display = {
         });
         $("#create").on("click", function() {
             main.nation.data.cities.push(new main.nation.data.City());
+            console.log(main.nation.data.cities);
         });
         $("#delete").on("click", function() {
             main.nation.data.cityBackup.push(main.nation.data.cities.pop());
