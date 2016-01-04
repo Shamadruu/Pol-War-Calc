@@ -1194,15 +1194,6 @@ main.display = {
                 $(this).find("div.row.net").html('<div class="col-sm-3 header">Net Revenue</div><div class="col-sm-3 np"><div class="container-fluid nb" style=font-size:12px><div class=row><div class="col-sm-3 nb np">' + c.revenue.coal.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/coal.png title=Coal style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.oil.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/oil.png title=oil style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.uranium.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/uranium.png title=Uranium style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.lead.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/lead.png title=Lead style=width:12px;height:12px></div></div><div class=row><div class="col-sm-3 nb np">' + c.revenue.iron.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/iron.png title=Iron style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.bauxite.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/bauxite.png title=Bauxite style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.gasoline.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/gasoline.png title=Gasoline style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.munitions.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/munitions.png title=Munitions style=width:12px;height:12px></div></div><div class=row><div class="col-sm-3 nb np">' + c.revenue.steel.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/steel.png title=Steel style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.aluminum.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/aluminum.png title=Aluminum style=width:12px;height:12px></div><div class="col-sm-6 nb np">' + c.revenue.food.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px></div></div><div class="col-sm-6"></div>');
             });
         },
-        military: {
-            genDisplay : function(){
-                var HTML = '<div class="row"><div class="col-sm-2 header>Name</div><div class="col-sm-2">Cost</div><div class="col-sm-3">Upkeep (Peace/War)</div><div class="col-sm-3">Amount</div><div class="col-sm-2">Cap</div></div>';
-                for(var m in main.nation.data.military){
-                    HTML += '<div class="row ' + m + '><div class="col-sm-2 header>' + main.nation.data.military[m].name + '</div><div class="col-sm-2">Cost</div><div class="col-sm-3">Upkeep (Peace/War)</div><div class="col-sm-3">Amount</div><div class="col-sm-2">' + main.nation.data.military[m].cap + '</div></div></div>';
-                }
-                return HTML;
-            },
-        },
         updateDisplay: function() {
             main.display.city.displayNewCities();
             main.display.city.removeOldCities();
@@ -1212,6 +1203,15 @@ main.display = {
             $("#cityOver div.container-fluid").empty();
             $("#cityOver div.container-fluid").append(main.display.nation.genCityOverview());
         }
+    },
+    military: {
+        genDisplay : function(){
+            var HTML = '<div class="row"><div class="col-sm-2 header>Name</div><div class="col-sm-2">Cost</div><div class="col-sm-3">Upkeep (Peace/War)</div><div class="col-sm-3">Amount</div><div class="col-sm-2">Cap</div></div>';
+            for(var m in main.nation.data.military){
+                HTML += '<div class="row ' + m + '><div class="col-sm-2 header>' + main.nation.data.military[m].name + '</div><div class="col-sm-2">Cost</div><div class="col-sm-3">Upkeep (Peace/War)</div><div class="col-sm-3">Amount</div><div class="col-sm-2">' + main.nation.data.military[m].cap + '</div></div></div>';
+            }
+            return HTML;
+        },
     },
 };
 main.display.init = function() {
