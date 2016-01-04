@@ -1,4 +1,4 @@
-(function() {
+//(function() {
 var main = {
     display: {},
     nation: {},
@@ -1220,5 +1220,5 @@ main.nation.data.update();
 main.display.init();
 main.saveLoop();
 main.update();
-}());
+//}());
 //The Obfuscation!
