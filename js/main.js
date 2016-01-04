@@ -1003,16 +1003,19 @@ main.nation.init = function() {
         for (var r in this.revenue) {
             this.revenue[r].net = this.revenue[r].prod - this.revenue[r].cons;
         }
+        
         var prod = {};
         for (var r in this.revenue) {
             prod[r] = this.revenue[r].prod;
         }
         this.production = prod;
+        
         var cons = {};
         for (var r in this.revenue) {
             cons[r] = this.revenue[r].cons;
         }
         this.consumption = cons;
+        
         var net = {};
         for (var r in this.revenue) {
             net[r] = this.revenue[r].net;
