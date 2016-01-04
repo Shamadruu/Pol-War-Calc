@@ -930,7 +930,7 @@ main.display = {
         });
         $("#create").on("click", function() {
             main.nation.data.cities.push(new main.nation.data.City());
-            console.log(main.nation.data.cities);
+            
         });
         $("#delete").on("click", function() {
             main.nation.data.cityBackup.push(main.nation.data.cities.pop());
@@ -939,6 +939,7 @@ main.display = {
             var c = jQuery.extend(true, {}, main.nation.data.cities[Number($(this).parents().eq(2).attr("id")) - 1]);
             c.id = main.nation.data.cities.length + 1;
             main.nation.data.cities.push(c);
+            console.log(main.nation.data.cities);
         });
         $("#cities").on("change", ".city .cityname", function() {
             var c = main.nation.data.cities[Number($(this).parents().eq(2).attr("id")) - 1];
