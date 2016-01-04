@@ -649,7 +649,9 @@
                     drydock: 0
                 }
             };
-            this.update = function() {
+            
+        };
+        main.nation.data.City.prototype.update = function() {
                 this.slots = Math.floor(this.infra / 50);
                 this.slotsUsed = 0;
                 this.pop = this.infra * 100;
@@ -858,7 +860,6 @@
                 }
                 this.netRevenue = net;
             };
-        };
         main.nation.data.cities.push(new main.nation.data.City());
         main.nation.data.update();
         delete main.nation.init;
