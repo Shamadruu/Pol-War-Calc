@@ -406,7 +406,8 @@ main.nation.init = function() {
                 cons: {
                     money: 5400
                 },
-                commerce: 12
+                pollution: 2,
+                commerce: 12,
             },
             stadium: {
                 name: "Stadium",
@@ -419,6 +420,7 @@ main.nation.init = function() {
                 cons: {
                     money: 12150
                 },
+                pollution: 5,
                 commerce: 18
             }
         },
