@@ -17,6 +17,7 @@
                         Object.defineProperties(x, {"update" : { value: main.nation.data.City.prototype.update} });
                     }
                 }
+                return obj;
             }
         }
     }
