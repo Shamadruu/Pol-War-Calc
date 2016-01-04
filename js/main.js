@@ -1055,6 +1055,6 @@
     main.nation.data.update();
     main.display.init();
     
-    main.update();
+   // main.update();
 //}());
 //The Obfuscation!
