@@ -1059,9 +1059,9 @@
         setInterval(main.save , 30000);
     }
     main.nation.init();
+    main.load();
     main.nation.data.update();
     main.display.init();
-    main.load();
     main.saveLoop();
     main.update();
 //}());
