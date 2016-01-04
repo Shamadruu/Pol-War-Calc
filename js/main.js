@@ -471,6 +471,7 @@ main.nation.init = function() {
         }
     };
     Object.freeze(main.nation.data.buildings);
+    
     main.nation.data.update = function() {
         this.revenue = {
             coal: {
@@ -543,6 +544,90 @@ main.nation.init = function() {
             mili: 0,
             improve: 0
         };
+        this.military = {
+        soldiers: {
+            name: "Soldiers",
+            cap: 0,
+            amount: 0,
+            cost: {
+                money: 2
+            },
+            peaceInc: 750,
+            warInc: 500,
+            peaceUpkeep: 1.25
+            warUpkeep: 1.88
+        },
+        tanks: {
+            name: "Tanks",
+            cap: 0,
+            amount: 0,
+            cost: {
+                money: 60,
+                steel: 1
+            },
+            peaceUpkeep: 50,
+            warUpkeep: 75
+        },
+        aircraft: {
+            name: "Aircraft",
+            cap: 0,
+            amount: 0,
+            cost: {
+                money: 4000,
+                aluminum: 3
+            },
+            peaceUpkeep: 500,
+            warUpkeep: 750
+        },
+        ships: {
+            name: "Ships",
+            cap: 0,
+            amount: 0,
+            cost: {
+                money: 50000,
+                steel: 25
+            },
+            peaceUpkeep: 3750,
+            warUpkeep: 5625
+        },
+        spies: {
+            name: "Spies",
+            cap: 50,
+            amount: 0,
+            cost: {
+                money: 50000,
+                steel: 1
+            },
+            peaceUpkeep: 2400,
+            warUpkeep: 2400
+        },
+        missiles: {
+            name: "Missiles",
+            cap: 0,
+            amount: 0,
+            cost: {
+                money: 150000,
+                aluminum: 100,
+                gasoline: 75,
+                munitions: 75
+            },
+            peaceUpkeep: 21000,
+            warUpkeep: 31500
+        },
+        nukes: {
+            name: "Nuclear Weapons",
+            cap: 0,
+            amount: 0,
+            cost: {
+                money: 1750000,
+                aluminum: 750,
+                gasoline: 500,
+                uranium: 250
+            },
+            peaceUpkeep: 35000,
+            warUpkeep: 52500
+        }
+    };
         this.infra = 0;
         this.avgInfra = 0;
         this.land = 0;
@@ -559,20 +644,6 @@ main.nation.init = function() {
         this.avgPop = 0;
         this.totalSlots = 0;
         this.slotsUsed = 0;
-        this.military = {
-            soldiers: {
-                amount: 0
-            },
-            tanks: {
-                amount: 0
-            },
-            aircraft: {
-                amount: 0
-            },
-            ships: {
-                amount: 0
-            }
-        };
         this.cityCount = this.cities.length;
         for (var c in this.cities) {
             if(this.cities[c].update === undefined){
@@ -605,23 +676,74 @@ main.nation.init = function() {
             this.avgPollution += this.cities[c].pollution / this.cityCount;
             this.totalSlots += this.cities[c].slots;
             this.slotsUsed += this.cities[c].slotsUsed;
+            
+            for(var m in this.cities[c].military){
+                this.military[m].cap += this.cities[c].military[m].cap;
+            }
         }
         this.wAvgIncome /= this.pop;
+        
+        
+        //Military
+        if(main.nation.inputData.projects.cia.value === true){
+            this.military.spies.cap = 60;
+        }
+        if(main.nation.inputData.projects.launchPad.value === true){
+            this.military.missiles.cap = -1;
+        }
+        if(main.nation.inputData.projects.nukeFacility.value === true){
+            this.military.nukes.cap = -1;
+        }
+        for(var m in this.military){
+            if(this.military[m].amount < 0){
+                this.military[m].amount = 0;
+            }
+            if(this.military[m].amount > this.military[m].cap && this.military[m].cap !== -1){
+                this.military[m].amount = this.military[m].cap;
+            }
+            if(main.nation.inputData.war === true){
+                this.revenue.money.cons += this.military[m].amount * this.military[m].warUpkeep;
+            }
+            else{
+                this.revenue.money.cons += this.military[m].amount * this.military[m].peaceUpkeep;
+            }
+            if(m == "soldiers"){
+                if(main.nation.inputData.war === true){
+                    this.revenue.food.cons += this.military[m].amount/500;
+                }
+                else{
+                   this.revenue.money.cons += this.military[m].amount/750;
+               }
+            }
+            this.military[m].totalCost = {
+                money: 0,
+                aluminum: 0,
+                steel: 0,
+                munitions: 0,
+                uranium: 0,
+                gasoline: 0,
+            }
+            
+            for(var r in this.military[m].cost){
+                this.military[m].totalCost[r] += this.military[m].cost[r] * this.military[m].amount;
+            }
+        }
+        
         var prod = {};
         for (var r in this.revenue) {
             prod[r] = this.revenue[r].prod;
         }
-        main.nation.data.production = prod;
+        this.production = prod;
         var cons = {};
         for (var r in this.revenue) {
             cons[r] = this.revenue[r].cons;
         }
-        main.nation.data.consumption = cons;
+        this.data.consumption = cons;
         var net = {};
         for (var r in this.revenue) {
             net[r] = this.revenue[r].net;
         }
-        main.nation.data.netRevenue = net;
+        this.netRevenue = net;
     };
     main.nation.data.City = function() {
         this.id = (main.nation.data.cities.length + 1);
@@ -755,6 +877,22 @@ main.nation.init = function() {
         this.production = {};
         this.consumption = {};
         this.netRevenue = {};
+        
+        this.military = {
+            soldiers: {
+                cap: 0
+            },
+            tanks: {
+                cap: 0
+            },
+            aircraft: {
+                cap: 0
+            },
+            ships: {
+                cap: 0
+            }
+        };
+        
         for (var x in this.buildings) {
             if (x == "power") {
                 for (var y in this.buildings.power) {
@@ -813,7 +951,7 @@ main.nation.init = function() {
                     }
                     if (main.nation.data.buildings[x][y].military !== undefined) {
                         for (var m in main.nation.data.buildings[x][y].military) {
-                            main.nation.data.military[m].amount += main.nation.data.buildings[x][y].military[m] * this.buildings[x][y];
+                            this.military[m].cap += main.nation.data.buildings[x][y].military[m] * this.buildings[x][y];
                         }
                     }
                 }
