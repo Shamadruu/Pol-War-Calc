@@ -9,8 +9,8 @@
             reset: function(name){
                 localStorage.setItem(name, "");
             },
-            load: function(name, obj){
-                obj = JSON.parse(localStorage.getItem(name));
+            load: function(name){
+                var obj = JSON.parse(localStorage.getItem(name));
                 if(name == "cities"){
                     for(var i=0;i<obj.length;i++){
                         var x = obj[i];
@@ -1052,8 +1052,8 @@
         main.local.create("inputData", main.nation.inputData);
     },
     main.load = function(){
-      main.local.load("cities", main.nation.data.cities);
-      main.local.load("inputData", main.nation.inputData);
+      main.nation.data.cities = main.local.load("cities");
+      main.nation.inputData = main.local.load("inputData");
     },
     main.saveLoop = function(){
         setInterval(main.save , 30000);
@@ -1062,6 +1062,7 @@
     main.nation.data.update();
     main.display.init();
     main.load();
-   // main.update();
+    main.saveLoop();
+    main.update();
 //}());
 //The Obfuscation!
