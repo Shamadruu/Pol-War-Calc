@@ -575,6 +575,13 @@ main.nation.init = function() {
         };
         this.cityCount = this.cities.length;
         for (var c in this.cities) {
+            if(this.cities[c].update === undefined){
+                Object.defineProperties(this.cities[c], {
+                    "update": {
+                        value:this.City.prototype.update
+                    }
+                });
+            }
             this.cities[c].update();
             for (var r in this.cities[c].revenue) {
                 for (var t in this.cities[c].revenue[r]) {
