@@ -1217,7 +1217,7 @@ main.display = {
                 if(m == "soldiers"){
                     HTML += ' ' + (1/500 * main.nation.data.military[m].amount).toFixed(2) + '<img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
-                HTML += '</div></div><div class="row"><div class="col-sm-12 buffer"></div></row>';
+                HTML += '</div></div><div class="row"><div class="col-sm-12 buffer"></div></div>';
             }
             return HTML;
         },
