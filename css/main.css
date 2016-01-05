@@ -167,7 +167,7 @@ div > div.col-sm-3 > input[type=checkbox] {
 #nation > div {
   margin-bottom: 60px;
 }
-.totalCost, .totalCostHeaders {
+.totalCost > div, .totalCostHeaders > div{
   height: 2em;
 }
 div.row > div.buffer {
