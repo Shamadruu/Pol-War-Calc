@@ -29,13 +29,13 @@
 #nation div.container-fluid > div.container-fluid > div.row > .col-sm-4,
 #nation div.container-fluid > div.container-fluid > div.row > .col-sm-6,
 #nation div.container-fluid > div.container-fluid > div.row > .col-sm-8,
-#nation div.container-fluid > div.container-fluid > div.row > .col-sm-10, #military div.container-fluid > div.container-fluid > div.row > .col-sm-1,
-#military div.container-fluid > div.container-fluid > div.row > .col-sm-2,
-#military div.container-fluid > div.container-fluid > div.row > .col-sm-3,
-#military div.container-fluid > div.container-fluid > div.row > .col-sm-4,
-#military div.container-fluid > div.container-fluid > div.row > .col-sm-6,
-#military div.container-fluid > div.container-fluid > div.row > .col-sm-8,
-#military div.container-fluid > div.container-fluid > div.row > .col-sm-10, #cityOver > div.container-fluid > div.row > div {
+#nation div.container-fluid > div.container-fluid > div.row > .col-sm-10, #military div.container-fluid > div.container-fluid > div > div.row > .col-sm-1,
+#military div.container-fluid > div.container-fluid > div > div.row > .col-sm-2,
+#military div.container-fluid > div.container-fluid > div > div.row > .col-sm-3,
+#military div.container-fluid > div.container-fluid > div > div.row > .col-sm-4,
+#military div.container-fluid > div.container-fluid > div > div.row > .col-sm-6,
+#military div.container-fluid > div.container-fluid > div > div.row > .col-sm-8,
+#military div.container-fluid > div.container-fluid > div > div.row > .col-sm-10, #cityOver > div.container-fluid > div.row > div {
   background-color: white;
   color: black;
   border: 1px solid #b1b1e7;
