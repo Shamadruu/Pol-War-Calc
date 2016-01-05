@@ -46,7 +46,7 @@
 }
 
 .city > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div,
-#nation > div.container-fluid > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div, #military > div.container-fluid > div.container-fluid > div > div.row:nth-child(even):not(:first-of-type) > div {
+#nation > div.container-fluid > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div, #military > div.container-fluid > div.container-fluid > div > div.row:nth-child(odd):not(:first-of-type) > div {
   background-color: #c5c5ed;
 }
 
