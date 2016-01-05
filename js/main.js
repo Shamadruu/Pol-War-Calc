@@ -96,7 +96,7 @@ main.nation.init = function() {
                     }
                 }
             },
-            military = {
+            military : {
                 soldiers: {
                     name: "Soldiers",
                     cap: 0,
