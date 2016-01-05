@@ -95,6 +95,90 @@ main.nation.init = function() {
                         }
                     }
                 }
+            },
+            military = {
+                soldiers: {
+                    name: "Soldiers",
+                    cap: 0,
+                    amount: 0,
+                    cost: {
+                        money: 2
+                    },
+                    peaceInc: 750,
+                    warInc: 500,
+                    peaceUpkeep: 1.25,
+                    warUpkeep: 1.88
+                },
+                tanks: {
+                    name: "Tanks",
+                    cap: 0,
+                    amount: 0,
+                    cost: {
+                        money: 60,
+                        steel: 1
+                    },
+                    peaceUpkeep: 50,
+                    warUpkeep: 75
+                },
+                aircraft: {
+                    name: "Aircraft",
+                    cap: 0,
+                    amount: 0,
+                    cost: {
+                        money: 4000,
+                        aluminum: 3
+                    },
+                    peaceUpkeep: 500,
+                    warUpkeep: 750
+                },
+                ships: {
+                    name: "Ships",
+                    cap: 0,
+                    amount: 0,
+                    cost: {
+                        money: 50000,
+                        steel: 25
+                    },
+                    peaceUpkeep: 3750,
+                    warUpkeep: 5625
+                },
+                spies: {
+                    name: "Spies",
+                    cap: 50,
+                    amount: 0,
+                    cost: {
+                        money: 50000,
+                        steel: 1
+                    },
+                    peaceUpkeep: 2400,
+                    warUpkeep: 2400
+                },
+                missiles: {
+                    name: "Missiles",
+                    cap: 0,
+                    amount: 0,
+                    cost: {
+                        money: 150000,
+                        aluminum: 100,
+                        gasoline: 75,
+                        munitions: 75
+                    },
+                    peaceUpkeep: 21000,
+                    warUpkeep: 31500
+                },
+                nukes: {
+                    name: "Nuclear Weapons",
+                    cap: 0,
+                    amount: 0,
+                    cost: {
+                        money: 1750000,
+                        aluminum: 750,
+                        gasoline: 500,
+                        uranium: 250
+                    },
+                    peaceUpkeep: 35000,
+                    warUpkeep: 52500
+                }
             }
         },
     };
@@ -544,90 +628,30 @@ main.nation.init = function() {
             mili: 0,
             improve: 0
         };
+        //Reset military caps
         this.military = {
-        soldiers: {
-            name: "Soldiers",
-            cap: 0,
-            amount: 0,
-            cost: {
-                money: 2
+            soldiers: {
+                cap: 0,
             },
-            peaceInc: 750,
-            warInc: 500,
-            peaceUpkeep: 1.25,
-            warUpkeep: 1.88
-        },
-        tanks: {
-            name: "Tanks",
-            cap: 0,
-            amount: 0,
-            cost: {
-                money: 60,
-                steel: 1
+            tanks: {
+                cap: 0,
             },
-            peaceUpkeep: 50,
-            warUpkeep: 75
-        },
-        aircraft: {
-            name: "Aircraft",
-            cap: 0,
-            amount: 0,
-            cost: {
-                money: 4000,
-                aluminum: 3
+            aircraft: {
+                cap: 0,
             },
-            peaceUpkeep: 500,
-            warUpkeep: 750
-        },
-        ships: {
-            name: "Ships",
-            cap: 0,
-            amount: 0,
-            cost: {
-                money: 50000,
-                steel: 25
+            ships: {
+                cap: 0,
             },
-            peaceUpkeep: 3750,
-            warUpkeep: 5625
-        },
-        spies: {
-            name: "Spies",
-            cap: 50,
-            amount: 0,
-            cost: {
-                money: 50000,
-                steel: 1
+            spies: {
+                cap: 50,
             },
-            peaceUpkeep: 2400,
-            warUpkeep: 2400
-        },
-        missiles: {
-            name: "Missiles",
-            cap: 0,
-            amount: 0,
-            cost: {
-                money: 150000,
-                aluminum: 100,
-                gasoline: 75,
-                munitions: 75
+            missiles: {
+                cap: 0,
             },
-            peaceUpkeep: 21000,
-            warUpkeep: 31500
-        },
-        nukes: {
-            name: "Nuclear Weapons",
-            cap: 0,
-            amount: 0,
-            cost: {
-                money: 1750000,
-                aluminum: 750,
-                gasoline: 500,
-                uranium: 250
-            },
-            peaceUpkeep: 35000,
-            warUpkeep: 52500
-        }
-    };
+            nukes: {
+                cap: 0,
+            }
+        };
         this.infra = 0;
         this.avgInfra = 0;
         this.land = 0;
@@ -714,18 +738,6 @@ main.nation.init = function() {
                 else{
                    this.revenue.money.cons += this.military[m].amount/750;
                }
-            }
-            this.military[m].totalCost = {
-                money: 0,
-                aluminum: 0,
-                steel: 0,
-                munitions: 0,
-                uranium: 0,
-                gasoline: 0,
-            }
-            
-            for(var r in this.military[m].cost){
-                this.military[m].totalCost[r] += this.military[m].cost[r] * this.military[m].amount;
             }
         }
         
