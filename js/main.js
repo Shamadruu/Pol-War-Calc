@@ -723,11 +723,11 @@ main.nation.init = function() {
             }
         }
         for(var r in this.revenue){
-			this.revenue[r].net = this.revenue[r].prod - this.revenue[r].cons;
-			if(this.revenue[r].net > 0){
-				this.revenue[r].net *= (1-main.nation.inputData.taxRate);
-			}
+		this.revenue[r].net = this.revenue[r].prod - this.revenue[r].cons;
+		if(this.revenue[r].net > 0){
+			this.revenue[r].net *= (1-main.nation.inputData.taxRate);
 		}
+	}
     };
     main.nation.data.City = function() {
         this.id = (main.nation.data.cities.length + 1);
@@ -985,6 +985,9 @@ main.nation.init = function() {
         this.revenue.food.cons += this.pop / 1000;
         this.revenue.money.prod += this.avgIncome * this.pop * (1 + (main.nation.inputData.colorBonus/100));
         
+         for(var r in this.revenue){
+		this.revenue[r].net = this.revenue[r].prod - this.revenue[r].cons;
+         }
     };
     main.nation.data.cities.push(new main.nation.data.City());
     main.nation.data.update();
