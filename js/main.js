@@ -1212,7 +1212,7 @@ main.display = {
                 for(var r in main.nation.data.military[m].cost){
                     HTML += '<div class="col-sm-2">'  + main.nation.data.military[m].cost[r] + '<img src="https://politicsandwar.com/img/resources/' + r + '.png" title="' + r + '"></div>'
                 }
-                HTML += '</div></div></div></div>'
+                HTML += '</div></div></div></div></div>'
             }
             return HTML;
         },
