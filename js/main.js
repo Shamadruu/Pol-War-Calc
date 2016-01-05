@@ -1221,7 +1221,7 @@ main.display = {
                     HTML += '1/500 <img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
                 HTML += '</div><div class="col-sm-2" style="text-align: right;"><input type="number" name="' + m + '" max="' + main.nation.data.military[m].cap + '" value="' + main.nation.data.military[m].amount + '"></div><div class="col-sm-2" style="text-align: right;">' + main.nation.data.military[m].cap + '</div></div>';
-                HTML == '<div class="row"><div class="col-sm-6">Total Cost to Produce</div><div class="col-sm-3">Upkeep (Peace)</div><div class="col-sm-3">Upkeep (War)</div></div>;
+                HTML =+= '<div class="row"><div class="col-sm-6">Total Cost to Produce</div><div class="col-sm-3">Upkeep (Peace)</div><div class="col-sm-3">Upkeep (War)</div></div>';
                 HTML += '<div class="row totalCost "' + m +  '"><div class="col-sm-6 np"><div class="container-fluid nb" style=font-size:12px><div class=row>';
                 for(var r in main.nation.data.military[m].cost){
                     HTML += '<div class="col-sm-3">'  + (main.nation.data.military[m].cost[r] * main.nation.data.military[m].amount) + '<img src="https://politicsandwar.com/img/resources/' + r + '.png" title="' + r + '"></div>';
