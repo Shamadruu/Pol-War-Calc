@@ -1199,6 +1199,8 @@ main.display = {
         },
         updateMili: function(){
             for(var m in main.nation.data.military){
+            	$("#miliMaster").find("." + m).find("div.col-sm-2:last-of-type").text(main.nation.data.military[m].cap)
+            	
                 var HTML = '<div class="col-sm-6 np" style="height: 2em;"><div class="container-fluid nb" style=font-size:12px><div class="row" style="text-align: right;">';
                 for(var r in main.nation.data.military[m].cost){
                     HTML += '<div class="col-sm-3">'  + (main.nation.data.military[m].cost[r] * main.nation.data.military[m].amount) + '<img src="https://politicsandwar.com/img/resources/' + r + '.png" title="' + r + '"></div>';
