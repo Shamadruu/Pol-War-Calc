@@ -1198,9 +1198,9 @@ main.display = {
                 }
                 HTML += '</div></div></div><div class="col-sm-3" style="text-align: center;">$' + main.nation.data.military[m].peaceUpkeep + ' ';
                 if(m == "soldiers"){
-                    HTML += '1/750 <img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
+                    HTML += '    1/750 <img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
-                HTML += '/ $' + main.nation.data.military[m].warUpkeep + ' ';
+                HTML += '|| $' + main.nation.data.military[m].warUpkeep + '     ';
                 if(m == "soldiers"){
                     HTML += '1/500 <img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
@@ -1230,11 +1230,11 @@ main.display = {
                 }
                 HTML += '</div></div></div><div class="col-sm-3" style="text-align: center; height: 2em;">$' + (main.nation.data.military[m].peaceUpkeep*main.nation.data.military[m].amount).toFixed(2);
                 if(m == "soldiers"){
-                    HTML += ' ' + (1/750 * main.nation.data.military[m].amount).toFixed(2) + '<img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
+                    HTML += '    ' + (1/750 * main.nation.data.military[m].amount).toFixed(2) + '<img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
                 HTML += '</div><div class="col-sm-3" style="text-align: center; height: 2em;>$' + (main.nation.data.military[m].warUpkeep*main.nation.data.military[m].amount).toFixed(2);
                 if(m == "soldiers"){
-                    HTML += ' ' + (1/500 * main.nation.data.military[m].amount).toFixed(2) + '<img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
+                    HTML += '    ' + (1/500 * main.nation.data.military[m].amount).toFixed(2) + '<img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
                 HTML += '</div>';
                 $("#miliMaster").find(".totalCost." + m).html(HTML);
