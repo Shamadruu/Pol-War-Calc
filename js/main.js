@@ -1206,7 +1206,7 @@ main.display = {
     },
     military: {
         genDisplay : function(){
-            var HTML = '<div class="row"><div class="col-sm-2 header">Name</div><div class="col-sm-3 header">Cost</div><div class="col-sm-3 header">Upkeep (Peace/War)</div><div class="col-sm-2 header">Amount</div><div class="col-sm-2 header">Cap</div></div>';
+            var HTML = '<div class="row"><div class="col-sm-2 header">Name</div><div class="col-sm-3 header">Cost</div><div class="col-sm-3 header" style="text-align: center;">Upkeep (Peace/War)</div><div class="col-sm-2 header" style="text-align: right;">Amount</div><div class="col-sm-2 header" style="text-align: right;">Cap</div></div>';
             for(var m in main.nation.data.military){
                 HTML += '<div class="row ' + m + '"><div class="col-sm-2 header">' + main.nation.data.military[m].name + '</div><div class="col-sm-3 np"><div class="container-fluid nb" style=font-size:12px><div class=row>';
                 for(var r in main.nation.data.military[m].cost){
@@ -1220,7 +1220,7 @@ main.display = {
                 if(m == "soliders"){
                     HTML += '1/500 <img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
-                HTML += '</div><div class="col-sm-2"><input type="number" name="' + m + '" max="' + main.nation.data.military[m].cap + '"></div><div class="col-sm-2" style="text-align: right;">' + main.nation.data.military[m].cap + '</div></div>';
+                HTML += '</div><div class="col-sm-2" style="text-align: right;"><input type="number" name="' + m + '" max="' + main.nation.data.military[m].cap + '"></div><div class="col-sm-2" style="text-align: right;">' + main.nation.data.military[m].cap + '</div></div>';
             }
             return HTML;
         },
