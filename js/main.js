@@ -629,29 +629,9 @@ main.nation.init = function() {
             improve: 0
         };
         //Reset military caps
-        this.military = {
-            soldiers: {
-                cap: 0,
-            },
-            tanks: {
-                cap: 0,
-            },
-            aircraft: {
-                cap: 0,
-            },
-            ships: {
-                cap: 0,
-            },
-            spies: {
-                cap: 50,
-            },
-            missiles: {
-                cap: 0,
-            },
-            nukes: {
-                cap: 0,
-            }
-        };
+        for(var m in this.military){
+            this.military[m].cap = 0;
+        }
         this.infra = 0;
         this.avgInfra = 0;
         this.land = 0;
