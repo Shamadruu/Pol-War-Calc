@@ -1205,7 +1205,7 @@ main.display = {
                     HTML += '1/500 <img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
                 HTML += '</div><div class="col-sm-2" style="text-align: right;"><input type="number" name="' + m + '" max="' + main.nation.data.military[m].cap + '" value="' + main.nation.data.military[m].amount + '"></div><div class="col-sm-2" style="text-align: right;">' + main.nation.data.military[m].cap + '</div></div>';
-                HTML += '<div class="row totalCostHeaders"><div class="col-sm-6 header" style="text-align: center">Total Cost to Produce</div><div class="col-sm-3 header" style="text-align: center">Upkeep (Peace)</div><div class="col-sm-3 header" style="text-align: center">Upkeep (War)</div></div>';
+                HTML += '<div class="row totalCostHeaders"><div class="col-sm-6 header" style="text-align: center;  height: 1em;">Total Cost to Produce</div><div class="col-sm-3 header" style=" height: 1em;text-align: center">Upkeep (Peace)</div><div class="col-sm-3 header" style="text-align: center;  height: 1em;">Upkeep (War)</div></div>';
                 HTML += '<div class="row totalCost ' + m +  '"><div class="col-sm-6 np"><div class="container-fluid nb" style=font-size:12px><div class="row" style="text-align: right;">';
                 for(var r in main.nation.data.military[m].cost){
                     HTML += '<div class="col-sm-3">'  + (main.nation.data.military[m].cost[r] * main.nation.data.military[m].amount) + '<img src="https://politicsandwar.com/img/resources/' + r + '.png" title="' + r + '"></div>';
@@ -1224,15 +1224,15 @@ main.display = {
         },
         updateMili: function(){
             for(var m in main.nation.data.military){
-                var HTML = '<div class="col-sm-6 np"><div class="container-fluid nb" style=font-size:12px><div class="row" style="text-align: right;">';
+                var HTML = '<div class="col-sm-6 np" style="height: 1em;"><div class="container-fluid nb" style=font-size:12px><div class="row" style="text-align: right;">';
                 for(var r in main.nation.data.military[m].cost){
                     HTML += '<div class="col-sm-3">'  + (main.nation.data.military[m].cost[r] * main.nation.data.military[m].amount) + '<img src="https://politicsandwar.com/img/resources/' + r + '.png" title="' + r + '"></div>';
                 }
-                HTML += '</div></div></div><div class="col-sm-3" style="text-align: center;">$' + (main.nation.data.military[m].peaceUpkeep*main.nation.data.military[m].amount).toFixed(2);
+                HTML += '</div></div></div><div class="col-sm-3" style="text-align: center; height: 1em;">$' + (main.nation.data.military[m].peaceUpkeep*main.nation.data.military[m].amount).toFixed(2);
                 if(m == "soldiers"){
                     HTML += ' ' + (1/750 * main.nation.data.military[m].amount).toFixed(2) + '<img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
-                HTML += '</div><div class="col-sm-3" style="text-align: center;">$' + (main.nation.data.military[m].warUpkeep*main.nation.data.military[m].amount).toFixed(2);
+                HTML += '</div><div class="col-sm-3" style="text-align: center; height: 1em;>$' + (main.nation.data.military[m].warUpkeep*main.nation.data.military[m].amount).toFixed(2);
                 if(m == "soldiers"){
                     HTML += ' ' + (1/500 * main.nation.data.military[m].amount).toFixed(2) + '<img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
