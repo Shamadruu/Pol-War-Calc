@@ -46,7 +46,7 @@
 }
 
 .city > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div,
-#nation > div.container-fluid > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div {
+#nation > div.container-fluid > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div, #military > div.container-fluid > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div {
   background-color: #c5c5ed;
 }
 
@@ -69,7 +69,7 @@ nav div.container-fluid {
 }
 
 #cities .city-name,
-#nation .name {
+#nation .name, #military .name {
   background-color: #3c3cc3;
   color: white;
   text-align: center;
