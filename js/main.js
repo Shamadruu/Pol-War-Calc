@@ -1189,8 +1189,9 @@ main.display = {
     },
     military: {
         genDisplay : function(){
-            var HTML = '<div id="' + m + '"><div class="row"><div class="col-sm-12 buffer"></div></div><div class="row"><div class="col-sm-2 header">Name</div><div class="col-sm-3 header">Cost</div><div class="col-sm-3 header" style="text-align: center;">Upkeep (Peace/War)</div><div class="col-sm-2 header" style="text-align: right;">Amount</div><div class="col-sm-2 header" style="text-align: right;">Cap</div></div>';
+            var HTML = '<div class="row"><div class="col-sm-2 header">Name</div><div class="col-sm-3 header">Cost</div><div class="col-sm-3 header" style="text-align: center;">Upkeep (Peace/War)</div><div class="col-sm-2 header" style="text-align: right;">Amount</div><div class="col-sm-2 header" style="text-align: right;">Cap</div></div>';
             for(var m in main.nation.data.military){
+                HTML += '<div id="' + m + '"><div class="row"><div class="col-sm-12 buffer"></div></div>';
                 HTML += '<div class="row ' + m + '"><div class="col-sm-2 header">' + main.nation.data.military[m].name + '</div><div class="col-sm-3 np"><div class="container-fluid nb" style=font-size:12px><div class=row>';
                 for(var r in main.nation.data.military[m].cost){
                     HTML += '<div class="col-sm-3">'  + main.nation.data.military[m].cost[r] + '<img src="https://politicsandwar.com/img/resources/' + r + '.png" title="' + r + '"></div>';
