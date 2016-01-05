@@ -170,3 +170,6 @@ div > div.col-sm-3 > input[type=checkbox] {
 .totalCost, .totalCostHeaders {
   height: 2em;
 }
+div.row > div.buffer {
+  background-color:#ccccff;
+}
