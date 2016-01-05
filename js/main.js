@@ -1220,7 +1220,7 @@ main.display = {
                 if(m == "soliders"){
                     HTML += '1/500 <img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px>';
                 }
-                HTML += '</div><div class="col-sm-3"><input type="number" name="' + m + '" max="' + main.nation.data.military[m].cap + '"></div><div class="col-sm-2 style="text-align: right;">' + main.nation.data.military[m].cap + '</div></div>';
+                HTML += '</div><div class="col-sm-2"><input type="number" name="' + m + '" max="' + main.nation.data.military[m].cap + '"></div><div class="col-sm-2" style="text-align: right;">' + main.nation.data.military[m].cap + '</div></div>';
             }
             return HTML;
         },
