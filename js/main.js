@@ -631,6 +631,9 @@ main.nation.init = function() {
         //Reset military caps
         for(var m in this.military){
             this.military[m].cap = 0;
+            if(m == "spies"){
+                this.military[m].cap = 50;
+            }
         }
         this.infra = 0;
         this.avgInfra = 0;
@@ -716,7 +719,7 @@ main.nation.init = function() {
                     this.revenue.food.cons += this.military[m].amount/500;
                 }
                 else{
-                   this.revenue.money.cons += this.military[m].amount/750;
+                   this.revenue.food.cons += this.military[m].amount/750;
                }
             }
         }
@@ -733,7 +736,7 @@ main.nation.init = function() {
         this.consumption = cons;
         var net = {};
         for (var r in this.revenue) {
-            net[r] = this.revenue[r].net;
+            net[r] = this.revenue[r].prod - this.revenue[r].cons;
         }
         this.netRevenue = net;
     };
