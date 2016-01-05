@@ -46,7 +46,7 @@
 }
 
 .city > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div,
-#nation > div.container-fluid > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div, #military > div.container-fluid > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div {
+#nation > div.container-fluid > div.container-fluid > div.row:nth-child(even):not(:first-of-type) > div, #military > div.container-fluid > div.container-fluid > div > div.row:nth-child(even):not(:first-of-type) > div {
   background-color: #c5c5ed;
 }
 
@@ -167,8 +167,8 @@ div > div.col-sm-3 > input[type=checkbox] {
 #nation > div {
   margin-bottom: 60px;
 }
-#miliMaster .totalCost > div, #miliMaster .totalCostHeaders > div, .totalCost, .totalCostHeaders{
-  height: 2em;
+#miliMaster > div.container-fluid > div.container-fluid > div > div.totalCost.row > div, #miliMaster > div.container-fluid > div.container-fluid > div > div.totalCostHeaders.row > div, .totalCost, .totalCostHeaders{
+  height: 1em;
 }
 div.row > div.buffer {
   height: 1em;
