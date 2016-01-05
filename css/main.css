@@ -167,10 +167,10 @@ div > div.col-sm-3 > input[type=checkbox] {
 #nation > div {
   margin-bottom: 60px;
 }
-.totalCost > div, .totalCostHeaders > div, .totalCost, .totalCostHeaders{
+#miliMaster .totalCost > div, #miliMaster .totalCostHeaders > div, .totalCost, .totalCostHeaders{
   height: 2em;
 }
 div.row > div.buffer {
-  height: 0.5em;
-  background-color:#ccccff;
+  height: 1em;
+  background-color:#9494b8;
 }
