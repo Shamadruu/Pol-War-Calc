@@ -724,6 +724,9 @@ main.nation.init = function() {
         }
         for(var r in this.revenue){
 			this.revenue[r].net = this.revenue[r].prod - this.revenue[r].cons;
+			if(this.revenue[r].net > 0){
+				this.revenue[r].net *= (1-main.nation.inputData.taxRate);
+			}
 		}
     };
     main.nation.data.City = function() {
@@ -981,12 +984,7 @@ main.nation.init = function() {
         this.popDensity = this.pop / this.land;
         this.revenue.food.cons += this.pop / 1000;
         this.revenue.money.prod += this.avgIncome * this.pop * (1 + (main.nation.inputData.colorBonus/100));
-        for (var r in this.revenue) {
-            this.revenue[r].net = this.revenue[r].prod - this.revenue[r].cons;
-			if(this.revenue[r].net > 0){
-				this.revenue[r].net *= (1-main.nation.inputData.taxRate);
-			}
-        }
+        
     };
     main.nation.data.cities.push(new main.nation.data.City());
     main.nation.data.update();
@@ -1005,14 +1003,14 @@ main.display = {
         });
         $("#nationConfig").on("change", "input", function() {
             if ($(this).attr("id") == "allianceTaxRate") {
-                if (Number($(this).val()) <= 100 && Number($(this).val()) > 0) {
+                if (Number($(this).val()) <= 100 && Number($(this).val()) >= 0) {
                     main.nation.inputData.taxRate = Number($(this).val()) / 100;
                 } else if (Number($(this).val()) > 100) {
                     main.nation.inputData.taxRate = 1;
                     $(this).val(100);
                 } else {
-                    main.nation.inputData.taxRate = 0.01;
-                    $(this).val(1);
+                    main.nation.inputData.taxRate = 0;
+                    $(this).val(0);
                 }
             } else if ($(this).attr("id") == "nationBonus") {
                 if (Number($(this).val()) >= 0) {
