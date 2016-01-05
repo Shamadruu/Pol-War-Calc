@@ -980,7 +980,7 @@ main.nation.init = function() {
         }
         this.popDensity = this.pop / this.land;
         this.revenue.food.cons += this.pop / 1000;
-        this.revenue.money.prod += this.avgIncome * this.pop * (1 + main.nation.inputData.colorBonus);
+        this.revenue.money.prod += this.avgIncome * this.pop * (1 + (main.nation.inputData.colorBonus/100));
         for (var r in this.revenue) {
             this.revenue[r].net = this.revenue[r].prod - this.revenue[r].cons;
 			if(this.revenue[r].net > 0){
