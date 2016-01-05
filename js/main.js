@@ -984,7 +984,7 @@ main.nation.init = function() {
         for (var r in this.revenue) {
             this.revenue[r].net = this.revenue[r].prod - this.revenue[r].cons;
 			if(this.revenue[r].net > 0){
-				this.revenue[r].net *= (1-main.nation.inputData.taxrate);
+				this.revenue[r].net *= (1-main.nation.inputData.taxRate);
 			}
         }
     };
