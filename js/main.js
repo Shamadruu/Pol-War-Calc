@@ -1268,7 +1268,9 @@ main.update = function() {
     main.load = function() {
         main.nation.data.cities = main.local.load("cities");
         main.nation.inputData = main.local.load("inputData");
-        main.nation.data.military = main.local.load("military");
+        if(main.local.load("military").soldiers.name !== undefined){
+            main.nation.data.military = main.local.load("military");
+        }
     },
     main.saveLoop = function() {
         setInterval(main.save, 30000);
