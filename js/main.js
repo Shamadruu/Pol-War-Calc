@@ -1119,6 +1119,10 @@ main.display = {
                 main.nation.data.military[$(this).attr("name")].amount = 0;
             }
         });
+        //Modal
+        $("#expandedCity").on("show.bs.modal", function(){
+        	$(this).html(main.display.nation.updateExpandedCityInfo());	
+        });
     },
     nation: {
         genNationConfig: function() {
@@ -1148,6 +1152,15 @@ main.display = {
                 HTML += '<div class="row" style="text-align: right;"><div class="col-sm-2 header" style="text-align: left;">' + c.displayName + '</div><div class="col-sm-1">' + c.infra + '</div><div class="col-sm-1">' + c.land + '</div><div class="col-sm-1">' + c.slotsUsed + '/' + c.slots + '</div><div class="col-sm-2">' + c.pop + '</div><div class="col-sm-2">$' + c.revenue.money.net.toFixed(2) + '</div><div class="col-sm-3"><div class="col-sm-3 np" style="width: 100%; text-align: right"><div class="container-fluid nb" style=font-size:12px><div class=row><div class="col-sm-3 nb np">' + c.revenue.coal.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/coal.png title=Coal style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.oil.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/oil.png title=oil style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.uranium.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/uranium.png title=Uranium style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.lead.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/lead.png title=Lead style=width:12px;height:12px></div></div><div class=row><div class="col-sm-3 nb np">' + c.revenue.iron.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/iron.png title=Iron style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.bauxite.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/bauxite.png title=Bauxite style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.gasoline.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/gasoline.png title=Gasoline style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.munitions.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/munitions.png title=Munitions style=width:12px;height:12px></div></div><div class=row><div class="col-sm-3 nb np">' + c.revenue.steel.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/steel.png title=Steel style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.aluminum.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/aluminum.png title=Aluminum style=width:12px;height:12px></div><div class="col-sm-6 nb np">' + c.revenue.food.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px></div></div></div></div></div></div>';
             }
             return HTML;
+        },
+        updateExpandedCityInfo: function(){
+        	var HTML = '<thead><tr><th>Property</th><th colspan="' + main.nation.data.cities.length + '"></th></tr><</thead><tbody>'
+        	for(var i=0;i< main.nation.data.cities.length;i++){
+        		
+        	}
+        	
+        	HTML += '</tbody><tfoot><tr><th>Property</th><th colspan="' + main.nation.data.cities.length + '"></th></tr><</tfoot>'
+        	return HTML;
         }
     },
     city: {
@@ -1185,6 +1198,7 @@ main.display = {
                 $(this).find("div.row.net").html('<div class="col-sm-3 header">Net Revenue</div><div class="col-sm-3 np"><div class="container-fluid nb" style=font-size:12px><div class=row><div class="col-sm-3 nb np">' + c.revenue.coal.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/coal.png title=Coal style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.oil.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/oil.png title=oil style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.uranium.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/uranium.png title=Uranium style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.lead.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/lead.png title=Lead style=width:12px;height:12px></div></div><div class=row><div class="col-sm-3 nb np">' + c.revenue.iron.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/iron.png title=Iron style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.bauxite.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/bauxite.png title=Bauxite style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.gasoline.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/gasoline.png title=Gasoline style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.munitions.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/munitions.png title=Munitions style=width:12px;height:12px></div></div><div class=row><div class="col-sm-3 nb np">' + c.revenue.steel.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/steel.png title=Steel style=width:12px;height:12px></div><div class="col-sm-3 nb np">' + c.revenue.aluminum.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/aluminum.png title=Aluminum style=width:12px;height:12px></div><div class="col-sm-6 nb np">' + c.revenue.food.net.toFixed(2) + '<img src=https://politicsandwar.com/img/resources/food.png title=Food style=width:12px;height:12px></div></div><div class="col-sm-6"></div>');
             });
         },
+        
     },
     military: {
         genDisplay : function(){
