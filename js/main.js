@@ -10,7 +10,7 @@ var main = {
             localStorage.setItem(name, "");
         },
         load: function(name) {
-        	if(JSON.parse(localStorage.getItem(name) !== null && JSON.parse(localStorage.getItem(name) !== undefined){
+        	if(JSON.parse(localStorage.getItem(name)) !== null && JSON.parse(localStorage.getItem(name)) !== undefined){
 	            var obj = JSON.parse(localStorage.getItem(name));
 	            if (name == "cities") {
 	                for (var i = 0; i < obj.length; i++) {
