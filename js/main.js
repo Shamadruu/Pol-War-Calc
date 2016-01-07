@@ -996,6 +996,9 @@ main.nation.init = function() {
         this.crime += (Math.pow((103 - this.commerce), 2) + this.pop) / 111111;
         this.crime = ((this.crime > 100 || this.crime < 0) ? (Math.round(this.crime / 100) * 100) : (this.crime));
         this.pollToll = (this.pollution * 0.05);
+        if(this.pollToll < 0){
+        	this.pollToll = 0;
+        }
         this.disease += (((Math.pow(this.popDensity, 2) * 0.01) - 25) / 100) + (this.pop / 100000) + this.pollToll;
         this.disease = ((this.disease > 100 || this.disease < 0) ? (Math.round(this.disease / 100) * 100) : (this.disease));
         if (this.disease > 100) {
