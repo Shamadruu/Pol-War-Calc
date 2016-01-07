@@ -11,6 +11,7 @@
 </head>
 
 <body>
+  <!-- Navbar -->
   <nav class="navbar navbar-default" id="navbar">
     <div class="container-fluid">
       <div>
@@ -22,7 +23,26 @@
       </div>
     </div>
   </nav>
-
+  <!-- Expanded City Modal -->
+  <div id="expandedCity" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Modal Header</h4>
+			</div>
+			<div class="modal-body">
+				<table id="expandedTable"></table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	
+	</div>
+  </div>
+  
+  <!-- Tab content -->
   <div class="tab-content">
     <div class="tab-pane fade in active" id="nation">
       <div class="container-fluid col-sm-10 col-sm-offset-1" id="nationConfig">
@@ -52,7 +72,7 @@
           <div class="container-fluid col-sm-10 col-sm-offset-1" id="cityOver">
         <div class=row>
           <div class="col-sm-12 header name">
-            City Overview<span class="glyphicon glyphicon-minus pointer toggle" style=color:#000;zoom:1.25;float:right title="Maximize or minimize this city.">
+            <span class="glyphicon glyphicon-fullscreen pointer" style="color:#000;zoom:1.25;float:left" data-toggle="modal" data-target="#expandedCity"></span>City Overview<span class="glyphicon glyphicon-minus pointer toggle" style=color:#000;zoom:1.25;float:right title="Maximize or minimize this city.">
           </div></div>
               <div class="container-fluid"></div>
             </div>
