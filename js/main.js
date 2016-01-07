@@ -10,18 +10,42 @@ var main = {
             localStorage.setItem(name, "");
         },
         load: function(name) {
-            var obj = JSON.parse(localStorage.getItem(name));
-            if (name == "cities") {
-                for (var i = 0; i < obj.length; i++) {
-                    var x = obj[i];
-                    Object.defineProperties(x, {
-                        "update": {
-                            value: main.nation.data.City.prototype.update
-                        }
-                    });
-                }
-            }
-            return obj;
+        	if(JSON.parse(localStorage.getItem(name) !== null && JSON.parse(localStorage.getItem(name) !== undefined){
+	            var obj = JSON.parse(localStorage.getItem(name));
+	            if (name == "cities") {
+	                for (var i = 0; i < obj.length; i++) {
+	                    var x = obj[i];
+	                    Object.defineProperties(x, {
+	                        "update": {
+	                            value: main.nation.data.City.prototype.update
+	                        }
+	                    });
+	                }
+	            }
+	            return obj;
+	        }
+	        else{
+	        	switch(name){
+	        		case "cities":
+	        			if(main.nation.data.cities === undefined || main.nation.data.cities === null){
+	        				main.nation.init();
+	        			}
+	        			return main.nation.data.cities;
+	        			break;
+        			case "inputData":
+        				if(main.nation.inputData === undefined || main.nation.inputData == null){
+        					main.nation.init();
+        				}
+        				return main.nation.inputData;
+        				break;
+    				case "military":
+						if(main.nation.data.military === undefined || main.nation.data.military === null){
+        					main.nation.init();
+        				}
+        				return main.nation.data.military;
+        				break;
+	        	}
+	        }
         }
     }
 }
@@ -1236,7 +1260,6 @@ main.display.init = function() {
     $("#nationOver div.container-fluid").append(main.display.nation.genNationOverview());
     $("#cityOver div.container-fluid").append(main.display.nation.genCityOverview());
     $("#miliMaster div.container-fluid").append(main.display.military.genDisplay());
-    delete main.display.init;
 }
 main.update = function() {
         setInterval(function() {
