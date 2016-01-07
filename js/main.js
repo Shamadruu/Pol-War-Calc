@@ -1121,7 +1121,7 @@ main.display = {
         });
         //Modal
         $("#expandedCity").on("show.bs.modal", function(){
-        	$(this).html(main.display.nation.updateExpandedCityInfo());	
+        	$("#expandedTable").html(main.display.nation.updateExpandedCityInfo());	
         });
     },
     nation: {
