@@ -1154,12 +1154,18 @@ main.display = {
             return HTML;
         },
         updateExpandedCityInfo: function(){
-        	var HTML = '<thead><tr><th>Property</th><th colspan="' + main.nation.data.cities.length + '">Cities</th></tr><</thead><tbody>'
-        	for(var i=0;i< main.nation.data.cities.length;i++){
-        		
-        	}
+        	var HTML = '<!-- The resemblance to the Politics & War "City Manager" screen is purposeful. -->';
+        	//HTML += '<colgroup><col span="1" style="text-align: left; font-weight: 800; background-color: #000099; color: white;"><col style="text-align: right; color: black; background-color: #d9d9d9"> </colgroup>';
+        	HTML += '<thead><tr><th>&nbsp</th></tr></thead><tbody>';
         	
-        	HTML += '</tbody><tfoot><tr><th>Property</th><th colspan="' + main.nation.data.cities.length + '">Cities</th></tr><</tfoot>'
+        	
+        	/*HTML += '<tr><th scope="name">Name</th>';
+        	for(var i=0;i< main.nation.data.cities.length;i++){
+        		HTML += '<td class="cell-bold"';
+        	}
+        	HTML += '</tr>';*/
+        	
+        	HTML += '</tbody><tfoot><tr><th>&nbsp</th></tr></tfoot>';
         	return HTML;
         }
     },
