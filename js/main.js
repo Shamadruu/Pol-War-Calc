@@ -1154,12 +1154,12 @@ main.display = {
             return HTML;
         },
         updateExpandedCityInfo: function(){
-        	var HTML = '<thead><tr><th>Property</th><th colspan="' + main.nation.data.cities.length + '"></th></tr><</thead><tbody>'
+        	var HTML = '<thead><tr><th>Property</th><th colspan="' + main.nation.data.cities.length + '">Cities</th></tr><</thead><tbody>'
         	for(var i=0;i< main.nation.data.cities.length;i++){
         		
         	}
         	
-        	HTML += '</tbody><tfoot><tr><th>Property</th><th colspan="' + main.nation.data.cities.length + '"></th></tr><</tfoot>'
+        	HTML += '</tbody><tfoot><tr><th>Property</th><th colspan="' + main.nation.data.cities.length + '">Cities</th></tr><</tfoot>'
         	return HTML;
         }
     },
