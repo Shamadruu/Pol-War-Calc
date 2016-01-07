@@ -161,3 +161,7 @@ div > div.col-sm-3 > input[type=checkbox] {
 #nation > div {
   margin-bottom: 60px;
 }
+#expandedCity thead, #expandedCity tfoot{
+  background-color:#1a1aff;
+  color: white;
+}
