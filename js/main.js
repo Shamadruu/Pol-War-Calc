@@ -1,3 +1,4 @@
+//Politics & War Calculator - Version 0.5 - Shamadruu
 //(function() {
 var main = {
     display: {},
