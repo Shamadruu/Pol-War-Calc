@@ -814,6 +814,11 @@ main.nation.init = function() {
         this.powerSupply = 0;
         this.commerce = 0;
         this.avgIncome = 0;
+        this.cityCost = {
+        	steel: 0,
+        	aluminum: 0,
+        	money: 0,
+	};
         this.catCost = {
             power: 0,
             res: 0,
@@ -902,6 +907,7 @@ main.nation.init = function() {
         };
         
         for (var x in this.buildings) {
+       	    
             if (x == "power") {
                 for (var y in this.buildings.power) {
                     this.slotsUsed += this.buildings.power[y];
@@ -920,6 +926,9 @@ main.nation.init = function() {
                                 this.catCost.power += this.buildings.power[y] * main.nation.data.buildings.power[y].cons[r];
                             }
                         }
+                        for(var r in main.nation.data.buildings[x][y].cost){
+       	    			this.cityCost[r] += main.nation.data.buildings[x][y].cost[r] * this.buildings[x][y];
+       			}
                     }
                 }
                 if (this.powerSupply >= this.infra) {
@@ -928,6 +937,9 @@ main.nation.init = function() {
             } else {
                 for (var y in this.buildings[x]) {
                     this.slotsUsed += this.buildings[x][y];
+                    for(var r in main.nation.data.buildings[x][y].cost){
+       	    			this.cityCost[r] += main.nation.data.buildings[x][y].cost[r] * this.buildings[x][y];
+       		    }
                     for (var r in main.nation.data.buildings[x][y].prod) {
                         if (r !== "food") {
                             this.revenue[r].prod += main.nation.data.buildings[x][y].prod[r] * this.buildings[x][y];
@@ -1139,8 +1151,12 @@ main.display = {
                 if ((inc - 1) % 2 == 0 && inc != 1) {
                     HTML += '</div><div class="row">';
                 }
-                HTML += '<div class="col-sm-3 header">' + main.nation.inputData.projects[p].name + '</div><div class="col-sm-3"><input type="checkbox" name="' + p + '"></div>';
-                inc++;
+                HTML += '<div class="col-sm-3 header">' + main.nation.inputData.projects[p].name + '</div><div class="col-sm-3"><input type="checkbox" name="' + p + '" ';
+		if(main.nation.inputData.projects[p].value === true){
+		   HTML += 'checked';
+		}
+		HTML +='></div>';
+        	inc++;
             }
             return HTML;
         },
