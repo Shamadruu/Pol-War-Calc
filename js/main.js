@@ -774,9 +774,7 @@ main.nation.init = function() {
                   this.catCost.power += this.buildings.power[y] * main.nation.data.buildings.power[y].cons[r];
                 }
               }
-              for(var r in main.nation.data.buildings.power[y].cost){
-                this.cost[r] += main.nation.data.buildings.power[y].cost[r] * this.buildings.power[y];
-              }
+              
             }
           }
           if (this.powerSupply >= this.infra) {
@@ -821,6 +819,9 @@ main.nation.init = function() {
               }
             }
           }
+          for(var r in main.nation.data.buildings.[x]][y].cost){
+                this.cost[r] += main.nation.data.buildings.[x][y].cost[r] * this.buildings.[x][y];
+              }
         }
       }
 
