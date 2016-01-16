@@ -1302,7 +1302,7 @@ main.display.init = function() {
     $("#cityOver div.container-fluid").append(main.display.nation.genCityOverview());
     $("#miliMaster div.container-fluid").append(main.display.military.genDisplay());
 }
-main.update = setInterval(function() {main.nation.data.update(); main.display.updateDisplay();}, 250);
+main.update = setInterval(function() {main.nation.data.update(); main.display.updateDisplay();}, 500);
     main.save = function() {
         main.local.create("cities", main.nation.data.cities);
         main.local.create("inputData", main.nation.inputData);
@@ -1323,6 +1323,5 @@ main.load();
 main.nation.data.update();
 main.display.init();
 main.saveLoop();
-main.update();
 //}());
 //The Obfuscation!
