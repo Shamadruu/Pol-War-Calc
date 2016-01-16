@@ -1142,7 +1142,7 @@ main.display = {
     },
     nation: {
         genNationConfig: function() {
-            var HTML = '<div class="row"><div class="col-sm-3 header">Alliance Tax Rate</div><div class="col-sm-3"><input id="allianceTaxRate" name="tax" type="number" min="1" max="100" value="' + (main.nation.inputData.taxRate * 100).toFixed(2) + '">%</div><div class="col-sm-3 header">Total Income Bonus</div><div class="col-sm-3"><input id="nationBonus" name="bonus" type="number" min="0" max="100" value="' + main.nation.inputData.colorBonus + '">%</div></div><div class="row"><div class="col-sm-3 header">War? </div><div class="col-sm-3"><input type="checkbox" name="war" id="war"></div><div class="col-sm-3 header">Starving?</div><div class="col-sm-3"><input type="checkbox" name="starve" id="starve"></input></div></div>';
+            var HTML = '<div class="row"><div class="col-sm-3 header">Alliance Tax Rate</div><div class="col-sm-3"><input id="allianceTaxRate" name="tax" type="number" min="0" max="100" value="' + (main.nation.inputData.taxRate * 100).toFixed(2) + '">%</div><div class="col-sm-3 header">Total Income Bonus</div><div class="col-sm-3"><input id="nationBonus" name="bonus" type="number" min="0" max="100" value="' + main.nation.inputData.colorBonus + '">%</div></div><div class="row"><div class="col-sm-3 header">War? </div><div class="col-sm-3"><input type="checkbox" name="war" id="war"></div><div class="col-sm-3 header">Starving?</div><div class="col-sm-3"><input type="checkbox" name="starve" id="starve"></input></div></div>';
             return HTML;
         },
         genProjects: function() {
