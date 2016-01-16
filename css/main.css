@@ -174,3 +174,7 @@ div.row > div.buffer {
   height: 1em;
   background-color:#9494b8;
 }
+.column-small {
+  text-align: center;
+  font-size: 10px;
+}
