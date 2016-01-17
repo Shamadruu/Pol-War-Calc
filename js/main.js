@@ -1025,7 +1025,7 @@ main.nation.init = function() {
         this.cityCost += this.infra%100 * ((Math.pow((Math.floor(this.infra/100) - 10 ), 1.95)/100) + 300);
         for(var i=Math.floor(this.land/500); i > 0; i--){ this.cityCost += 500 * ((Math.pow(((500*i) - 20 ), 1.95)/500) + 50); }
         this.cityCost += this.land/500 *((Math.pow((Math.floor(this.land/500) - 20 ), 1.95)/500) + 50);
-        console.log(his.cityCost);
+        console.log(this.cityCost);
         this.cityCost += (50000 * Math.pow((this.id-2), 3)) + (150000 * (this.id-1)) + 75000;
         
         
