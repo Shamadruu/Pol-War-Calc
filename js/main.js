@@ -1022,9 +1022,9 @@ main.nation.init = function() {
         this.revenue.money.prod += this.avgIncome * this.pop * (1 + (main.nation.inputData.colorBonus/100));
         
         for(var i=Math.floor(this.infra/100); i > 0; i--){ this.cityCost += 100 * ((Math.pow(((100*i) - 10 ), 1.95)/100) + 300); }
-        this.cityCost += this.infra%100 * ((Math.pow((Math.floor(this.infra/100) - 10 ), 1.95)/100) + 300);
+        this.cityCost += (this.infra%100) * ((Math.pow((Math.floor(this.infra/100)*100) - 10 , 1.95)/100) + 300);
         for(var i=Math.floor(this.land/500); i > 0; i--){ this.cityCost += 500 * ((Math.pow(((500*i) - 20 ), 1.95)/500) + 50); }
-        this.cityCost += this.land/500 *((Math.pow((Math.floor(this.land/500) - 20 ), 1.95)/500) + 50);
+        this.cityCost += (this.land%500) *((Math.pow((Math.floor(this.land/500)*500)- 20, 2)/500) + 50);
         this.cityCost += (50000 * Math.pow((this.id-2), 3)) + (150000 * (this.id-1)) + 75000;
         
         
