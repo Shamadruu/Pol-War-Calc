@@ -815,11 +815,7 @@ main.nation.init = function() {
         this.powerSupply = 0;
         this.commerce = 0;
         this.avgIncome = 0;
-        this.cityCost = {
-        	steel: 0,
-        	aluminum: 0,
-        	money: 0,
-	};
+        this.cityCost = 0;
         this.catCost = {
             power: 0,
             res: 0,
