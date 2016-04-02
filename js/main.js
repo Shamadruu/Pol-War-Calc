@@ -649,7 +649,7 @@ var Nation = function(){
 		this.cities = [];
 		
 		for(var p in arguments[0].builtProjects){
-			this.projects[p].built = true;
+			this.projects[arguments[0].builtProjects[p]].built = true;
 		}
 		
 		for(var m in arguments[0].military){
@@ -959,6 +959,8 @@ Nation.prototype.update = function(){
 	}
 	
 	this.revenue.money.net *= (1-this.taxRate);
+	this.score = (this.infra / 40) + ((this.ci - 1) * 50) + (this.military.soldiers.amount * 0.0005) + (this.military.tanks.amount * 0.05) + (this.military.aircraft.amount * 0.5) + (this.military.ships.amount * 2) + (this.military.missiles.amount * 5) + (this.military.nukes.amount * 15) + (this.projectsBuilt * 20);
+	
 }
 Nation.prototype.updateHTML = function(){
 	var nation = $("#nationStatus");
@@ -967,7 +969,7 @@ Nation.prototype.updateHTML = function(){
 	$(nation).find(".cities").html(format(this.cityCount));
 	$(nation).find(".infraCost").html(format(this.infraCost) + "<img src='images/money.png'>");
 	$(nation).find(".improve").html(this.slotsUsed + "/" + this.slots + " slots");
-	$(nation).find(".power").html(this.powered + "");
+	$(nation).find(".score").html(format(this.score));
 	$(nation).find(".population").html(format(this.population)+ " people");
 	$(nation).find(".avgPopulation").html(format(this.avgPopulation) + " people");
 	$(nation).find(".disease").html(format(this.disease) +"%");
