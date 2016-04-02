@@ -1514,6 +1514,11 @@ $("#config").on("change", "select", function(){
 	val = val.join("");
 	switch(name){
 		case "continent":
+			for(var c in nation.cities){
+				for(var b in nation.continent.buildingsAllowed){
+					nation.cities[c].buildings[b].amount = 0;
+				}
+			}
 			nation.continent = nation.continents[val];
 			for(var i=0;i<nation.cities.length;i++){
 				$("#" + nation.cities[i].id).find(".improvements tbody tr").each(function(index){
@@ -1524,6 +1529,7 @@ $("#config").on("change", "select", function(){
 					$(cell).append(input);
 					$(input).attr("name", nation.continent.buildingsAllowed[index].key);
 					$(input).find("input").attr("max", nation.continent.buildingsAllowed[index].cap);
+					$(input).find("input").val(0);
 				});
 			}
 			break;
