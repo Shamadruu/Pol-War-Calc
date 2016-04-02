@@ -4,6 +4,7 @@
 ***************/
 //Version Number
 var version = 1;
+var counter = 0;
 //Read-Only buildings data
 var buildings = {
 	coalPlant: {
@@ -634,6 +635,7 @@ var Nation = function(){
 		this.starvationStatus = false;
 		this.taxRate = 0.05;
 		this.incomeBonus = 0.05;
+		
 	}
 	else if(arguments[0] !== undefined){
 		this.military = (JSON.parse(JSON.stringify(military)));
@@ -657,6 +659,7 @@ var Nation = function(){
 		for(var i=0;i<arguments[0].cities.length;i++){
 			this.cities.push(new City(arguments[0].cities[i], this));
 		}
+		
 	}
 	
 }
@@ -1318,6 +1321,7 @@ City.prototype.handleBuildingChange =function(b, diff){
 ***FUNCTIONS****
 ***************/
 var save = function(obj){
+	//console.log("TEST");
 	if(!(obj instanceof Nation)){
 		return;
 	}
@@ -1382,7 +1386,7 @@ var load = function(){
 	}
 }
 var init = function(){
-	nation = Nation(load());
+	nation = new Nation(load());
 	if(nation === undefined || Object.keys(nation).length === 0) {
 		nation = new Nation();
 		nation.createCity();
@@ -1407,6 +1411,11 @@ var update = function(){
 	
 	nation.update();
 	nation.updateHTML();
+	
+	counter++;
+	if(counter%10 === 0){
+		save(nation);
+	}
 }
 var throttleEvent = function(func, interval){
 	var last = 0;
@@ -1576,5 +1585,5 @@ var nation;
 init();
 update();
 var updateInterval = setInterval(update,500);
-var saveInterval = setInterval(save(nation), 5000);
+//var saveInterval = setInterval(save(nation), 5000);
 }());
