@@ -1296,7 +1296,7 @@ City.prototype.update = function(){
 	if(this.nation.domesticPolicy === "openMarkets") this.revenue.money.production *= 1.01;
 	
 	this.revenue.money.production *= (1+this.nation.incomeBonus);
-	this.revenue.money.production *= (1-this.nation.taxRate);
+	
 	
 	if(this.powered)
 	
@@ -1305,6 +1305,7 @@ City.prototype.update = function(){
 		this.revenue[r].net = this.revenue[r].production - this.revenue[r].consumption;
 		
 	}
+	this.revenue.money.net *= (1-this.nation.taxRate);
 };
 City.prototype.handleBuildingChange =function(b, diff){
 	b.amount += diff;
