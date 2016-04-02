@@ -955,7 +955,7 @@ Nation.prototype.update = function(){
 		this.revenue[r].net = this.revenue[r].production - this.revenue[r].consumption;
 	}
 	
-	this.revenue.money.net *= (1-this.nation.taxRate);
+	this.revenue.money.net *= (1-this.taxRate);
 }
 Nation.prototype.updateHTML = function(){
 	var nation = $("#nationStatus");
