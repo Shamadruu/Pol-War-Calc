@@ -1516,7 +1516,9 @@ $("#config").on("change", "select", function(){
 		case "continent":
 			for(var c in nation.cities){
 				for(var b in nation.continent.buildingsAllowed){
-					nation.cities[c].buildings[b].amount = 0;
+					var building = nation.continent.buildingsAllowed[b].key;
+					
+					nation.cities[c].buildings[building].amount = 0;
 				}
 			}
 			nation.continent = nation.continents[val];
@@ -1570,5 +1572,5 @@ var nation;
 init();
 update();
 var updateInterval = setInterval(update,500);
-var saveInterval = setInterval(save(nation), 10000);
+var saveInterval = setInterval(save(nation), 5000);
 }());
