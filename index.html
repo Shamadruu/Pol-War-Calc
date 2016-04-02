@@ -1,94 +1,837 @@
 <html>
 
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="lib/jquery.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/slate.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
 
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-default" id="navbar">
-    <div class="container-fluid">
-      <div>
-        <ul class="nav nav-tabs nav-justified" id="navbar-tabs">
-          <li class="active"><a data-toggle="tab" href="#nation">Nation</a></li>
-          <li><a data-toggle="tab" href="#cities">Cities</a></li>
-          <!--<li><a data-toggle="tab" href="#military">Military</a></li>-->
+
+    <div id="main">
+        <ul class="nav nav-tabs nav-justified">
+
+            <li class="active"><a data-toggle="tab" href="#manage-nation">Manage Nation</a>
+            </li>
+            <li><a data-toggle="tab" href="#manage-cities">Manage Cities</a>
+            </li>
+            <li><a data-toggle="tab" href="#manage-military">Manage Military</a>
+            </li>
+            <li><a data-toggle="tab" href="#detailed-view">Detailed View</a>
+            </li>
         </ul>
-      </div>
     </div>
-  </nav>
-  <!-- Expanded City Modal -->
-  <div id="expandedCity" class="modal fade" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Modal Header</h4>
-			</div>
-			<div class="modal-body">
-				<table id="expandedTable" class="table table-hover table-reflow"></table>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	
-	</div>
-  </div>
-  
-  <!-- Tab content -->
-  <div class="tab-content">
-    <div class="tab-pane fade in active" id="nation">
-      <div class="container-fluid col-sm-10 col-sm-offset-1" id="nationConfig">
-        <div class=row>
-          <div class="col-sm-12 header name">
-            Nation Configuration<span class="glyphicon glyphicon-minus pointer toggle" style=color:#000;zoom:1.25;float:right title="Maximize or minimize this city.">
-          </div></div>
-              <div class="container-fluid"></div>
-          </div>
-        
-      <div class="container-fluid col-sm-10 col-sm-offset-1" id="nationOver">
-        <div class=row>
-          <div class="col-sm-12 header name">
-            National Overview<span class="glyphicon glyphicon-minus pointer toggle" style=color:#000;zoom:1.25;float:right title="Maximize or minimize this city.">
-          </div></div>
-              <div class="container-fluid">
-  
-            </div>      
-          </div>
 
-            <div class="container-fluid col-sm-10 col-sm-offset-1" id="projectsConfig">
-        <div class=row>
-          <div class="col-sm-12 header name">
-            Projects<span class="glyphicon glyphicon-minus pointer toggle" style=color:#000;zoom:1.25;float:right title="Maximize or minimize this city.">
-          </div></div>
-              <div class="container-fluid"></div></div>
-          <div class="container-fluid col-sm-10 col-sm-offset-1" id="cityOver">
-        <div class=row>
-          <div class="col-sm-12 header name">
-            <span class="glyphicon glyphicon-fullscreen pointer" style="color:#000;zoom:1.25;float:left" data-toggle="modal" data-target="#expandedCity"></span>City Overview<span class="glyphicon glyphicon-minus pointer toggle" style=color:#000;zoom:1.25;float:right title="Maximize or minimize this city.">
-          </div></div>
-              <div class="container-fluid"></div>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="manage-nation">
+
+            <div class="section nation" id="config">
+                <div class="section-heading">
+                    <h4>Configure Nation</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+
+                <div class="section-body">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-sm-3 header">Alliance Tax Rate</div>
+                            <div class="col-sm-3 input">
+                                <input name="allianceTax" type="number" min="0" max="100" value="5">%</div>
+
+                            <div class="col-sm-3 header">Income Bonus</div>
+                            <div class="col-sm-3 input">
+                                <input name="incomeBonus" type="number" min="0" value="5">%</div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-3 header">War Status</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="warStatus">
+                            </div>
+
+                            <div class="col-sm-3 header">Starvation Status</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="starveStatus">
+                            </div>
+
+                        </div>
+						<div class="row">
+							<div class="col-sm-3 header">Continent</div>
+							<div class="col-sm-3 input">
+								<select name="continent">
+									<option name="northAmerica">North America <img src="images/coal.png"><img src="images/iron.png"><img src="images/uranium.png"> </option>
+									<option name="southAmerica">South America  <img src="images/oil.png"><img src="images/bauxite.png"><img src="images/lead.png"></option>
+									<option name="europe">Europe <img src="images/coal.png"><img src="images/iron.png"><img src="images/lead.png"></option>
+									<option name="africa">Africa <img src="images/oil.png"><img src="images/bauxite.png"><img src="images/uranium.png"></option>
+									<option name="asia">Asia <img src="images/oil.png"><img src="images/iron.png"><img src="images/uranium.png"></option>
+									<option name="australia">Australia <img src="images/coal.png"><img src="images/bauxite.png"><img src="images/lead.png"></option>
+								</select>
+							</div>
+							
+							<div class="col-sm-3 header">Force Power State</div>
+							<div class="col-sm-3 input">
+								<select name="power">
+									<option name="none">None</option>
+									<option name="off">Powered Off</option>
+									<option name="on">Powered On</option>
+									
+								</select>
+							</div>
+						</div>
+                        <div class="row">
+
+                            <div class="col-sm-3 header">Domestic Policy</div>
+                            <div class="col-sm-3 input">
+                                <select name="domesticPolicy">
+                                    <option value="manifestDestiny">Manifest Destiny</option>
+                                    <option value="openMarket">Open Market</option>
+                                    <option value="technologicalAdvancement">Technological Advancement</option>
+                                    <option value="imperialism">Imperialism</option>
+                                    <option value="urbanization">Urbanization</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 header">War Policy</div>
+                            <div class="col-sm-3 input">
+                                <select name="warPolicy">
+                                    <option value="attrition">Attrition</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="blitz">Blitzkrieg</option>
+                                    <option value="fortress">Fortress</option>
+                                    <option value="moneybags">Moneybags</option>
+                                    <option value="pirate">Pirate</option>
+                                    <option value="tactician">Tactician</option>
+                                    <option value="guardian">Guardian</option>
+                                    <option value="covert">Covert</option>
+                                    <option value="arcane">Arcane</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="section-footer"></div>
             </div>
-	  </div>
-    <div class="tab-pane fade" id="cities">
-      <div style="text-align: center; padding-bottom: 10px;"><span class="glyphicon glyphicon-plus pointer" style="color: #33cc33; zoom: 1.5;" title="Create a new city." id="create"></span><span class="glyphicon glyphicon-minus pointer" style="color: #ff3300; zoom: 1.5; "
-            title="Delete the last city in the list." id="delete"></span></div>
 
+            <div id="nationStatus" class="section nation">
+                <div class="section-heading">
+                    <h4>Nation Overview</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+                <div class="section-body">
+                    <div class="general">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-3 header">Infrastructure</div>
+                                <div class="col-sm-3 infra"></div>
+                                <div class="col-sm-3 header">Land</div>
+                                <div class="col-sm-3 land"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 header">Cities</div>
+                                <div class="col-sm-3 input cities"></div>
+                                <div class="col-sm-3 header">Infrastructure &amp; Land Cost</div>
+                                <div class="col-sm-3 infraCost"><img src="images/money.png">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 header">Total Improvements</div>
+                                <div class="col-sm-3 improve"></div>
+                                <div class="col-sm-3 header">Power Sufficiency</div>
+                                <div class="col-sm-3 power"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 header">Population</div>
+                                <div class="col-sm-3 population"></div>
+                                <div class="col-sm-3 header">Average Population</div>
+                                <div class="col-sm-3 avgPopulation"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 header">Average Disease</div>
+                                <div class="col-sm-3 disease"></div>
+                                <div class="col-sm-3 header">Average Crime</div>
+                                <div class="col-sm-3 crime"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 header">Pollution</div>
+                                <div class="col-sm-3 pollution"></div>
+                                <div class="col-sm-3 header">Average Pollution</div>
+                                <div class="col-sm-3 avgPollution"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 header">Average Commerce</div>
+                                <div class="col-sm-3 avgCommerce"></div>
+                                <div class="col-sm-3 header">Weighted Average Income</div>
+                                <div class="col-sm-3 avgIncome"><img src="images/money.png">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 header">Gross Revenue</div>
+                                <div class="col-sm-3 ns grossRevenue">
+                                    <div class="container-fluid resources">
+                                        <div class="row">
+                                            <div class="col-sm-3 coal"></div>
+                                            <div class="col-sm-3 oil"></div>
+                                            <div class="col-sm-3 uranium"></div>
+                                            <div class="col-sm-3 lead"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 iron"></div>
+                                            <div class="col-sm-3 bauxite"></div>
+                                            <div class="col-sm-3 gasoline"></div>
+                                            <div class="col-sm-3 munitions"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 steel"></div>
+                                            <div class="col-sm-3 aluminum"></div>
+                                            <div class="col-sm-3 food"></div>
+                                            <div class="col-sm-3 money"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 header">Net Revenue</div>
+                                <div class="col-sm-3 ns netRevenue">
+                                    <div class="container-fluid resources">
+                                        <div class="row">
+                                            <div class="col-sm-3 coal"></div>
+                                            <div class="col-sm-3 oil"></div>
+                                            <div class="col-sm-3 uranium"></div>
+                                            <div class="col-sm-3 lead"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 iron"></div>
+                                            <div class="col-sm-3 bauxite"></div>
+                                            <div class="col-sm-3 gasoline"></div>
+                                            <div class="col-sm-3 munitions"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 steel"></div>
+                                            <div class="col-sm-3 aluminum"></div>
+                                            <div class="col-sm-3 food"></div>
+                                            <div class="col-sm-3 money"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 header">Expenditures</div>
+                                <div class="col-sm-3 ns expenditures">
+                                    <div class="container-fluid resources">
+                                        <div class="row">
+                                            <div class="col-sm-3 coal"></div>
+                                            <div class="col-sm-3 oil"></div>
+                                            <div class="col-sm-3 uranium"></div>
+                                            <div class="col-sm-3 lead"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 iron"></div>
+                                            <div class="col-sm-3 bauxite"></div>
+                                            <div class="col-sm-3 gasoline"></div>
+                                            <div class="col-sm-3 munitions"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 steel"></div>
+                                            <div class="col-sm-3 aluminum"></div>
+                                            <div class="col-sm-3 food"></div>
+                                            <div class="col-sm-3 money"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 header">Nation Cost</div>
+                                <div class="col-sm-3 ns nationCost">
+                                    <div class="container-fluid resources">
+                                        <div class="row">
+                                            <div class="col-sm-3 coal"></div>
+                                            <div class="col-sm-3 oil"></div>
+                                            <div class="col-sm-3 uranium"></div>
+                                            <div class="col-sm-3 lead"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 iron"></div>
+                                            <div class="col-sm-3 bauxite"></div>
+                                            <div class="col-sm-3 gasoline"></div>
+                                            <div class="col-sm-3 munitions"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 steel"></div>
+                                            <div class="col-sm-3 aluminum"></div>
+                                            <div class="col-sm-3 food"></div>
+                                            <div class="col-sm-3 money"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-footer">
+
+                </div>
+            </div>
+
+            <div class="section nation" id="projects">
+                <div class="section-heading">
+                    <h4>Constructed Projects</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+
+                <div class="section-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3 header">Arms Stockpile</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="armsStockpile">
+                            </div>
+                            <div class="col-sm-3 header">Bauxiteworks</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="bauxiteworks">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 header">Center for Civil Engineering</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="civilEngineering">
+                            </div>
+                            <div class="col-sm-3 header">Center Intelligence Agency</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="cia">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 header">Emergency Gasoline Reserve</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="gasolineReserve">
+                            </div>
+                            <div class="col-sm-3 header">International Trade Center</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="tradeCenter">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 header">Iron Dome</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="ironDome">
+                            </div>
+                            <div class="col-sm-3 header">Ironworks</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="ironworks">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 header">Mass Irrigation</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="irrigation">
+                            </div>
+                            <div class="col-sm-3 header">Missile Launch Pad</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="launchPad">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 header">Nuclear Research Facility</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="nuclearResearch">
+                            </div>
+                            <div class="col-sm-3 header">Vital Defense System</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="vitalDefense">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 header">Uranium Enrichment Program</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="uraniumEnrichment">
+                            </div>
+                            <div class="col-sm-3 header">Propaganda Bureau</div>
+                            <div class="col-sm-3 input">
+                                <input type="checkbox" name="propaganda">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-footer">
+
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="manage-cities">
 
         </div>
-        <div class="tab-pane fade" id="military">
 
+        <div class="tab-pane fade" id="manage-military">
+            <div class="section unit" id="soldiers">
+                <div class="section-heading-sm">
+                    <h4>Soldiers</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+
+                <div class="section-body">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Units/Day</div>
+                            <div class="col-sm-3 header">Days to Cap</div>
+                            <div class="col-sm-3 header">Unit Amount</div>
+                            <div class="col-sm-3 header">Unit Cap</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3"><input name="soldiers" type="number" value="0" min="0" max="0" step="1"></div>
+                            <div class="col-sm-3">1000</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Cost Each</div>
+                            <div class="col-sm-3 header">Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Upkeep (War)</div>
+                            <div class="col-sm-3 header">Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">2 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3">1.25 <img src="images/money.png"> 1/750 <img src="images/food.png">
+                            </div>
+                            <div class="col-sm-3">1.88 <img src="images/money.png"> 1/500 <img src="images/food.png">
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Total Cost</div>
+                            <div class="col-sm-3 header">Total Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Total Upkeep (War)</div>
+                            <div class="col-sm-3 header">Total Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"><img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"><img src="images/money.png"> <img src="images/food.png">
+                            </div>
+                            <div class="col-sm-3"><img src="images/money.png"> <img src="images/food.png">
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="section-footer">
+
+                </div>
+            </div>
+
+            <div class="section unit" id="tanks">
+                <div class="section-heading-sm">
+                    <h4>Tanks</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+
+                <div class="section-body">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Units/Day</div>
+                            <div class="col-sm-3 header">Days to Cap</div>
+                            <div class="col-sm-3 header">Unit Amount</div>
+                            <div class="col-sm-3 header">Unit Cap</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3"><input name="tanks" type="number" value="0" min="0" max="0" step="1"></div>
+                            <div class="col-sm-3">1000</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Cost Each</div>
+                            <div class="col-sm-3 header">Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Upkeep (War)</div>
+                            <div class="col-sm-3 header">Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">60 <img src="images/money.png"> 1 <img src="images/steel.png">
+                            </div>
+                            <div class="col-sm-3">50 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3">75 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Total Cost</div>
+                            <div class="col-sm-3 header">Total Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Total Upkeep (War)</div>
+                            <div class="col-sm-3 header">Total Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"> <img src="images/money.png"> <img src="images/steel.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="section-footer">
+
+                </div>
+            </div>
+
+            <div class="section unit" id="aircraft">
+                <div class="section-heading-sm">
+                    <h4>Aircraft</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+
+                <div class="section-body">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Units/Day</div>
+                            <div class="col-sm-3 header">Days to Cap</div>
+                            <div class="col-sm-3 header">Unit Amount</div>
+                            <div class="col-sm-3 header">Unit Cap</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3"><input name="aircraft" type="number" value="0" min="0" max="0" step="1"></div>
+                            <div class="col-sm-3">1000</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Cost Each</div>
+                            <div class="col-sm-3 header">Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Upkeep (War)</div>
+                            <div class="col-sm-3 header">Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">4,000 <img src="images/money.png"> 3<img src="images/aluminum.png">
+                            </div>
+                            <div class="col-sm-3">500 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3">750 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Total Cost</div>
+                            <div class="col-sm-3 header">Total Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Total Upkeep (War)</div>
+                            <div class="col-sm-3 header">Total Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"> <img src="images/money.png"> <img src="images/aluminum.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="section-footer">
+
+                </div>
+            </div>
+            <div class="section unit" id="ships">
+                <div class="section-heading-sm">
+                    <h4>Ships</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+
+                <div class="section-body">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Units/Day</div>
+                            <div class="col-sm-3 header">Days to Cap</div>
+                            <div class="col-sm-3 header">Unit Amount</div>
+                            <div class="col-sm-3 header">Unit Cap</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3"><input name="ships" type="number" value="0" min="0" max="0" step="1"></div>
+                            <div class="col-sm-3">1000</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Cost Each</div>
+                            <div class="col-sm-3 header">Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Upkeep (War)</div>
+                            <div class="col-sm-3 header">Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">50,000 <img src="images/money.png"> 25 <img src="images/steel.png">
+                            </div>
+                            <div class="col-sm-3">3,750 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3">5626 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Total Cost</div>
+                            <div class="col-sm-3 header">Total Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Total Upkeep (War)</div>
+                            <div class="col-sm-3 header">Total Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"> <img src="images/money.png"> <img src="images/steel.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="section-footer">
+
+                </div>
+            </div>
+
+            <div class="section unit" id="spies">
+                <div class="section-heading-sm">
+                    <h4>Spies</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+
+                <div class="section-body">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Units/Day</div>
+                            <div class="col-sm-3 header">Days to Cap</div>
+                            <div class="col-sm-3 header">Unit Amount</div>
+                            <div class="col-sm-3 header">Unit Cap</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3"><input name="spies" type="number" value="0" min="0" max="0" step="1"></div>
+                            <div class="col-sm-3">1000</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Cost Each</div>
+                            <div class="col-sm-3 header">Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Upkeep (War)</div>
+                            <div class="col-sm-3 header">Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">50,000 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3">2,400 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3">2,400 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Total Cost</div>
+                            <div class="col-sm-3 header">Total Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Total Upkeep (War)</div>
+                            <div class="col-sm-3 header">Total Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="section-footer">
+
+                </div>
+            </div>
+
+            <div class="section unit" id="missiles">
+                <div class="section-heading-sm">
+                    <h4>Missiles</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+
+                <div class="section-body">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Units/Day</div>
+                            <div class="col-sm-3 header">Days to Cap</div>
+                            <div class="col-sm-3 header">Unit Amount</div>
+                            <div class="col-sm-3 header">Unit Cap</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3"><input name="missiles" type="number" value="0" min="0" max="0" step="1"></div>
+                            <div class="col-sm-3">1000</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Cost Each</div>
+                            <div class="col-sm-3 header">Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Upkeep (War)</div>
+                            <div class="col-sm-3 header">Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">150,000 <img src="images/money.png"> 75 <img src="images/munitions.png">
+                                <br> 75 <img src="images/gasoline.png"> 100 <img src="images/aluminum.png">
+                            </div>
+                            <div class="col-sm-3">21,000 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3">31,500 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Total Cost</div>
+                            <div class="col-sm-3 header">Total Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Total Upkeep (War)</div>
+                            <div class="col-sm-3 header">Total Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"> <img src="images/money.png"> <img src="images/munitions.png">
+                                <br> <img src="images/gasoline.png"> <img src="images/aluminum.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="section-footer">
+
+                </div>
+            </div>
+
+            <div class="section unit" id="nukes">
+                <div class="section-heading-sm">
+                    <h4>Nukes</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+
+                <div class="section-body">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Units/Day</div>
+                            <div class="col-sm-3 header">Days to Cap</div>
+                            <div class="col-sm-3 header">Unit Amount</div>
+                            <div class="col-sm-3 header">Unit Cap</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3">1000</div>
+                            <div class="col-sm-3"><input name="nukes" type="number" value="0" min="0" max="0" step="1"></div>
+                            <div class="col-sm-3">1000</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Cost Each</div>
+                            <div class="col-sm-3 header">Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Upkeep (War)</div>
+                            <div class="col-sm-3 header">Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">1,750,000 <img src="images/money.png"> 250 <img src="images/uranium.png">
+                                <br> 500 <img src="images/gasoline.png"> 750 <img src="images/aluminum.png">
+                            </div>
+                            <div class="col-sm-3">35,000 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3">52,500 <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 header">Total Cost</div>
+                            <div class="col-sm-3 header">Total Upkeep (Peace)</div>
+                            <div class="col-sm-3 header">Total Upkeep (War)</div>
+                            <div class="col-sm-3 header">Total Combat Cost</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"> <img src="images/money.png"> <img src="images/uranium.png">
+                                <br> <img src="images/gasoline.png"> <img src="images/aluminum.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"> <img src="images/money.png">
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="section-footer">
+
+                </div>
+            </div>
         </div>
+        <div class="tab-pane fade" id="detailed-view">
+            <div class="section">
+                <div class="section-heading-sm">
+                    <h4>Data</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
 
-      </div>
-        <script src="js/main.js"></script>
+                <div class="section-body">
+
+                </div>
+                <div class="section-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/main.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 
 </html>
