@@ -954,6 +954,8 @@ Nation.prototype.update = function(){
 	for(var r in this.revenue){
 		this.revenue[r].net = this.revenue[r].production - this.revenue[r].consumption;
 	}
+	
+	this.revenue.money.net *= (1-this.nation.taxRate);
 }
 Nation.prototype.updateHTML = function(){
 	var nation = $("#nationStatus");
@@ -1305,6 +1307,7 @@ City.prototype.update = function(){
 		this.revenue[r].net = this.revenue[r].production - this.revenue[r].consumption;
 		
 	}
+	
 	this.revenue.money.net *= (1-this.nation.taxRate);
 };
 City.prototype.handleBuildingChange =function(b, diff){
