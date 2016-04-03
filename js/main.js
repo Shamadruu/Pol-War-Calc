@@ -1,4 +1,4 @@
-(function(){
+//(function(){
 /***************
 ****GLOBAL*****
 ***************/
@@ -638,7 +638,7 @@ var Nation = function(){
 		
 	}
 	else if(arguments[0] !== undefined){
-		this.military = (JSON.parse(JSON.stringify(military)));
+		//this.military = (JSON.parse(JSON.stringify(military)));
 		this.continent = Nation.prototype.continents[arguments[0].continent];
 		this.domesticPolicy = arguments[0].domesticPolicy;
 		this.warPolicy = arguments[0].warPolicy;
@@ -1364,7 +1364,7 @@ var save = function(obj){
 		}
 	}
 	
-	for(var m in obj.military){
+	for(var m in military){
 		data.military[m] = obj.military[m].amount;
 	}
 	
@@ -1398,6 +1398,12 @@ var init = function(){
 	for(var i=0;i<nation.cities.length;i++){
 		$("#manage-cities").append(nation.cities[i].constructHTML());
 	}
+	
+	$("#config").find('[name="allianceTax"]').val((nation.taxRate * 100));
+	$("#config").find('[name="incomeBonus"]').val((nation.incomeBonus * 100));
+	$("#config").find('[name="continent"]').val(nation.continent.name);
+	$("#config").find('[name="domesticPolicy"]').val(nation.domesticPolicy);
+	$("#config").find('[name="warPolicy"]').val(nation.warPolicy);
 }
 var format = function(n){
 	if(isNaN(n)){
@@ -1545,8 +1551,8 @@ $("#config").on("change", "select", function(){
 					$(cell).text(nation.continent.buildingsAllowed[index].name);
 					$(cell).append(input);
 					$(input).attr("name", nation.continent.buildingsAllowed[index].key);
-					$(input).find("input").attr("max", nation.continent.buildingsAllowed[index].cap);
-					$(input).find("input").val(0);
+					$(input).attr("max", nation.continent.buildingsAllowed[index].cap);
+					$(input).val(0);
 				});
 			}
 			break;
@@ -1588,4 +1594,4 @@ init();
 update();
 var updateInterval = setInterval(update,500);
 //var saveInterval = setInterval(save(nation), 5000);
-}());
+//}());
