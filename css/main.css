@@ -97,6 +97,7 @@ hr {
 }
 .nation  div.container-fluid:not(.resources)  div.input input{
 	text-align: right;
+	width: 60%;
 }
 
 div.input input[type="checkbox"]{

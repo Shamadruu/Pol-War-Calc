@@ -1,9 +1,10 @@
-(function(){
+//(function(){
 /***************
 ****GLOBAL*****
 ***************/
 //Version Number
 var version = 1;
+var counter = 0;
 //Read-Only buildings data
 var buildings = {
 	coalPlant: {
@@ -632,22 +633,25 @@ var Nation = function(){
 		this.warPolicy = "attrition";
 		this.warStatus = false;
 		this.starvationStatus = false;
-		this.taxRate = 0.05;
+		this.monetaryTaxRate = 0.05;
+		this.resourceTaxRate = 0.05;
 		this.incomeBonus = 0.05;
+		
 	}
 	else if(arguments[0] !== undefined){
-		this.military = (JSON.parse(JSON.stringify(military)));
+		//this.military = (JSON.parse(JSON.stringify(military)));
 		this.continent = Nation.prototype.continents[arguments[0].continent];
 		this.domesticPolicy = arguments[0].domesticPolicy;
 		this.warPolicy = arguments[0].warPolicy;
 		this.warStatus = arguments[0].warStatus;
 		this.starvationStatus = arguments[0].starvationStatus;
-		this.taxRate = arguments[0].taxRate;
+		this.monetaryTaxRate = arguments[0].monetaryTaxRate | 0.05;
+		this.resourceTaxRate = arguments[0].resourceTaxRate | 0.05
 		this.incomeBonus = arguments[0].incomeBonus;
 		this.cities = [];
 		
 		for(var p in arguments[0].builtProjects){
-			this.projects[p].built = true;
+			this.projects[arguments[0].builtProjects[p]].built = true;
 		}
 		
 		for(var m in arguments[0].military){
@@ -657,6 +661,7 @@ var Nation = function(){
 		for(var i=0;i<arguments[0].cities.length;i++){
 			this.cities.push(new City(arguments[0].cities[i], this));
 		}
+		
 	}
 	
 }
@@ -953,7 +958,17 @@ Nation.prototype.update = function(){
 	
 	for(var r in this.revenue){
 		this.revenue[r].net = this.revenue[r].production - this.revenue[r].consumption;
+		if(r != "money"){
+			this.revenue[r].net *= (1-this.resourceTaxRate);
+		}
+		else{
+			this.revenue.money.net *= (1-this.monetaryTaxRate);
+		}
 	}
+	
+	
+	this.score = (this.infra / 40) + ((this.ci - 1) * 50) + (this.military.soldiers.amount * 0.0005) + (this.military.tanks.amount * 0.05) + (this.military.aircraft.amount * 0.5) + (this.military.ships.amount * 2) + (this.military.missiles.amount * 5) + (this.military.nukes.amount * 15) + (this.projectsBuilt * 20);
+	
 }
 Nation.prototype.updateHTML = function(){
 	var nation = $("#nationStatus");
@@ -962,7 +977,7 @@ Nation.prototype.updateHTML = function(){
 	$(nation).find(".cities").html(format(this.cityCount));
 	$(nation).find(".infraCost").html(format(this.infraCost) + "<img src='images/money.png'>");
 	$(nation).find(".improve").html(this.slotsUsed + "/" + this.slots + " slots");
-	$(nation).find(".power").html(this.powered + "");
+	$(nation).find(".score").html(format(this.score));
 	$(nation).find(".population").html(format(this.population)+ " people");
 	$(nation).find(".avgPopulation").html(format(this.avgPopulation) + " people");
 	$(nation).find(".disease").html(format(this.disease) +"%");
@@ -1296,24 +1311,85 @@ City.prototype.update = function(){
 	if(this.nation.domesticPolicy === "openMarkets") this.revenue.money.production *= 1.01;
 	
 	this.revenue.money.production *= (1+this.nation.incomeBonus);
-	this.revenue.money.production *= (1-this.nation.taxRate);
 	
-	if(this.powered)
+	
 	
 	for(var r in this.revenue){
 		if(this.nation.starvationStatus) this.revenue[r].production *= 2/3;
 		this.revenue[r].net = this.revenue[r].production - this.revenue[r].consumption;
-		
+
+		if(r != "money"){
+			this.revenue[r].net *= (1-this.nation.resourceTaxRate);
+		}
+		else{
+			this.revenue.money.net *= (1-this.nation.monetaryTaxRate);
+		}	
 	}
+	
 };
 City.prototype.handleBuildingChange =function(b, diff){
 	b.amount += diff;
 	this.slotsUsed += diff;
 }
+
+var Data = function(obj){
+	this.nation = obj;
+	this.data = {
+		age : {
+			name: "Age",
+			all: 0,
+			list: [],
+		},
+		infra : {
+			name: "Infrastructure",
+			all: 0,
+			list: [],
+		},
+		population: {
+			name: "Population",
+			all: 0,
+			list: [],
+		},
+		disease: {
+			name: "Disease",
+			all: 0,
+			list: [],
+		},
+		crime : {
+			name: "Crime",
+			all: 0,
+			list: [],
+		},
+		commerce: {
+			name: "Commerce",
+			all: 0,
+			list: [],
+		},
+		powered : {
+			name: "Powered",
+			all: 0,
+			list: [],
+		},
+		coalPlant : {
+			name: "Coal Plant",
+			all: 0,
+			list: [],
+		},
+		oilPlant : {
+			name: "Oil Plant",
+			all: 0,
+			list: [],
+		},
+	}
+	for(var i=0;i<obj.cities.length;i++){
+		
+	}
+};
 /***************
 ***FUNCTIONS****
 ***************/
 var save = function(obj){
+	//console.log("TEST");
 	if(!(obj instanceof Nation)){
 		return;
 	}
@@ -1322,7 +1398,8 @@ var save = function(obj){
 		cities: [],
 		domesticPolicy : obj.domesticPolicy,
 		warPolicy : obj.warPolicy,
-		taxRate : obj.taxRate,
+		monetaryTaxRate : obj.monetaryTaxRate,
+		resourceTaxRate: obj.resourceTaxRate,
 		warStatus: obj.warStatus,
 		starvationStatus: obj.starvationStatus,
 		incomeBonus: obj.incomeBonus,
@@ -1354,7 +1431,7 @@ var save = function(obj){
 		}
 	}
 	
-	for(var m in obj.military){
+	for(var m in military){
 		data.military[m] = obj.military[m].amount;
 	}
 	
@@ -1378,7 +1455,7 @@ var load = function(){
 	}
 }
 var init = function(){
-	nation = Nation(load());
+	nation = new Nation(load());
 	if(nation === undefined || Object.keys(nation).length === 0) {
 		nation = new Nation();
 		nation.createCity();
@@ -1388,6 +1465,12 @@ var init = function(){
 	for(var i=0;i<nation.cities.length;i++){
 		$("#manage-cities").append(nation.cities[i].constructHTML());
 	}
+	
+	$("#config").find('[name="allianceTax"]').val((nation.monetaryTaxRate * 100));
+	$("#config").find('[name="incomeBonus"]').val((nation.incomeBonus * 100));
+	$("#config").find('[name="continent"]').val(nation.continent.name);
+	$("#config").find('[name="domesticPolicy"]').val(nation.domesticPolicy);
+	$("#config").find('[name="warPolicy"]').val(nation.warPolicy);
 }
 var format = function(n){
 	if(isNaN(n)){
@@ -1403,6 +1486,11 @@ var update = function(){
 	
 	nation.update();
 	nation.updateHTML();
+	
+	counter++;
+	if(counter%10 === 0){
+		save(nation);
+	}
 }
 var throttleEvent = function(func, interval){
 	var last = 0;
@@ -1516,7 +1604,9 @@ $("#config").on("change", "select", function(){
 		case "continent":
 			for(var c in nation.cities){
 				for(var b in nation.continent.buildingsAllowed){
-					nation.cities[c].buildings[b].amount = 0;
+					var building = nation.continent.buildingsAllowed[b].key;
+					
+					nation.cities[c].buildings[building].amount = 0;
 				}
 			}
 			nation.continent = nation.continents[val];
@@ -1528,8 +1618,8 @@ $("#config").on("change", "select", function(){
 					$(cell).text(nation.continent.buildingsAllowed[index].name);
 					$(cell).append(input);
 					$(input).attr("name", nation.continent.buildingsAllowed[index].key);
-					$(input).find("input").attr("max", nation.continent.buildingsAllowed[index].cap);
-					$(input).find("input").val(0);
+					$(input).attr("max", nation.continent.buildingsAllowed[index].cap);
+					$(input).val(0);
 				});
 			}
 			break;
@@ -1554,9 +1644,13 @@ $("#projects").on("change", "input", function(){
 		nation.projects[name].built = true;
 	}
 });
-$("#config").on("change", "input[name='allianceTax']", function(){
+$("#config").on("change", "input[name='allianceMonetaryTax']", function(){
 	var val = Number($(this).val())/100;
-	nation.taxRate = val;
+	nation.monetaryTaxRate = val;
+});
+$("#config").on("change", "input[name='allianceResourceTax']", function(){
+	var val = Number($(this).val())/100;
+	nation.resourceTaxRate = val;
 });
 $("#config").on("change", "input[name='incomeBonus']", function(){
 	var val = Number($(this).val())/100;
@@ -1570,5 +1664,5 @@ var nation;
 init();
 update();
 var updateInterval = setInterval(update,500);
-var saveInterval = setInterval(save(nation), 10000);
-}());
+//var saveInterval = setInterval(save(nation), 5000);
+//}());
