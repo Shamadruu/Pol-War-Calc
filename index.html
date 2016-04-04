@@ -38,10 +38,16 @@
                     <div class="container-fluid">
                         <div class="row">
 
-                            <div class="col-sm-3 header">Alliance Tax Rate</div>
-                            <div class="col-sm-3 input">
-                                <input name="allianceTax" type="number" min="0" max="100" value="5">%</div>
-
+                            <div class="col-sm-2 header">Alliance Monetary Tax Rate</div>
+                            <div class="col-sm-1 input">
+                                <input name="allianceMonetaryTax" type="number" min="0" max="100" value="5">%
+							</div>
+							
+							<div class="col-sm-2 header">Alliance Resource Tax Rate</div>
+                            <div class="col-sm-1 input">
+                                <input name="allianceResourceTax" type="number" min="0" max="100" value="5">%
+							</div>
+							
                             <div class="col-sm-3 header">Income Bonus</div>
                             <div class="col-sm-3 input">
                                 <input name="incomeBonus" type="number" min="0" value="5">%</div>
@@ -91,7 +97,7 @@
                                 <select name="domesticPolicy">
                                     <option value="manifestDestiny">Manifest Destiny</option>
                                     <option value="openMarket">Open Market</option>
-                                    <option value="technologicaladvancement">Technological Advancement</option>
+                                    <option value="technologicalAdvancement">Technological Advancement</option>
                                     <option value="imperialism">Imperialism</option>
                                     <option value="urbanization">Urbanization</option>
                                 </select>
@@ -141,8 +147,8 @@
                             <div class="row">
                                 <div class="col-sm-3 header">Total Improvements</div>
                                 <div class="col-sm-3 improve"></div>
-                                <div class="col-sm-3 header">Power Sufficiency</div>
-                                <div class="col-sm-3 power"></div>
+                                <div class="col-sm-3 header">Nation Score</div>
+                                <div class="col-sm-3 score"></div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3 header">Population</div>

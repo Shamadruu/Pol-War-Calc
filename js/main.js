@@ -633,7 +633,8 @@ var Nation = function(){
 		this.warPolicy = "attrition";
 		this.warStatus = false;
 		this.starvationStatus = false;
-		this.taxRate = 0.05;
+		this.monetaryTaxRate = 0.05;
+		this.resourceTaxRate = 0.05;
 		this.incomeBonus = 0.05;
 		
 	}
@@ -644,7 +645,8 @@ var Nation = function(){
 		this.warPolicy = arguments[0].warPolicy;
 		this.warStatus = arguments[0].warStatus;
 		this.starvationStatus = arguments[0].starvationStatus;
-		this.taxRate = arguments[0].taxRate;
+		this.monetaryTaxRate = arguments[0].monetaryTaxRate | 0.05;
+		this.resourceTaxRate = arguments[0].resourceTaxRate | 0.05
 		this.incomeBonus = arguments[0].incomeBonus;
 		this.cities = [];
 		
@@ -956,9 +958,15 @@ Nation.prototype.update = function(){
 	
 	for(var r in this.revenue){
 		this.revenue[r].net = this.revenue[r].production - this.revenue[r].consumption;
+		if(r != "money"){
+			this.revenue[r].net *= (1-this.resourceTaxRate);
+		}
+		else{
+			this.revenue.money.net *= (1-this.monetaryTaxRate);
+		}
 	}
 	
-	this.revenue.money.net *= (1-this.taxRate);
+	
 	this.score = (this.infra / 40) + ((this.ci - 1) * 50) + (this.military.soldiers.amount * 0.0005) + (this.military.tanks.amount * 0.05) + (this.military.aircraft.amount * 0.5) + (this.military.ships.amount * 2) + (this.military.missiles.amount * 5) + (this.military.nukes.amount * 15) + (this.projectsBuilt * 20);
 	
 }
@@ -1305,20 +1313,78 @@ City.prototype.update = function(){
 	this.revenue.money.production *= (1+this.nation.incomeBonus);
 	
 	
-	if(this.powered)
 	
 	for(var r in this.revenue){
 		if(this.nation.starvationStatus) this.revenue[r].production *= 2/3;
 		this.revenue[r].net = this.revenue[r].production - this.revenue[r].consumption;
-		
+
+		if(r != "money"){
+			this.revenue[r].net *= (1-this.nation.resourceTaxRate);
+		}
+		else{
+			this.revenue.money.net *= (1-this.nation.monetaryTaxRate);
+		}	
 	}
 	
-	this.revenue.money.net *= (1-this.nation.taxRate);
 };
 City.prototype.handleBuildingChange =function(b, diff){
 	b.amount += diff;
 	this.slotsUsed += diff;
 }
+
+var Data = function(obj){
+	this.nation = obj;
+	this.data = {
+		age : {
+			name: "Age",
+			all: 0,
+			list: [],
+		},
+		infra : {
+			name: "Infrastructure",
+			all: 0,
+			list: [],
+		},
+		population: {
+			name: "Population",
+			all: 0,
+			list: [],
+		},
+		disease: {
+			name: "Disease",
+			all: 0,
+			list: [],
+		},
+		crime : {
+			name: "Crime",
+			all: 0,
+			list: [],
+		},
+		commerce: {
+			name: "Commerce",
+			all: 0,
+			list: [],
+		},
+		powered : {
+			name: "Powered",
+			all: 0,
+			list: [],
+		},
+		coalPlant : {
+			name: "Coal Plant",
+			all: 0,
+			list: [],
+		},
+		oilPlant : {
+			name: "Oil Plant",
+			all: 0,
+			list: [],
+		},
+	}
+	for(var i=0;i<obj.cities.length;i++){
+		
+	}
+};
 /***************
 ***FUNCTIONS****
 ***************/
@@ -1332,7 +1398,8 @@ var save = function(obj){
 		cities: [],
 		domesticPolicy : obj.domesticPolicy,
 		warPolicy : obj.warPolicy,
-		taxRate : obj.taxRate,
+		monetaryTaxRate : obj.monetaryTaxRate,
+		resourceTaxRate: obj.resourceTaxRate,
 		warStatus: obj.warStatus,
 		starvationStatus: obj.starvationStatus,
 		incomeBonus: obj.incomeBonus,
@@ -1399,7 +1466,7 @@ var init = function(){
 		$("#manage-cities").append(nation.cities[i].constructHTML());
 	}
 	
-	$("#config").find('[name="allianceTax"]').val((nation.taxRate * 100));
+	$("#config").find('[name="allianceTax"]').val((nation.monetaryTaxRate * 100));
 	$("#config").find('[name="incomeBonus"]').val((nation.incomeBonus * 100));
 	$("#config").find('[name="continent"]').val(nation.continent.name);
 	$("#config").find('[name="domesticPolicy"]').val(nation.domesticPolicy);
@@ -1577,9 +1644,13 @@ $("#projects").on("change", "input", function(){
 		nation.projects[name].built = true;
 	}
 });
-$("#config").on("change", "input[name='allianceTax']", function(){
+$("#config").on("change", "input[name='allianceMonetaryTax']", function(){
 	var val = Number($(this).val())/100;
-	nation.taxRate = val;
+	nation.monetaryTaxRate = val;
+});
+$("#config").on("change", "input[name='allianceResourceTax']", function(){
+	var val = Number($(this).val())/100;
+	nation.resourceTaxRate = val;
 });
 $("#config").on("change", "input[name='incomeBonus']", function(){
 	var val = Number($(this).val())/100;
