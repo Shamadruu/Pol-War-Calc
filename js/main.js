@@ -645,8 +645,8 @@ var Nation = function(){
 		this.warPolicy = arguments[0].warPolicy;
 		this.warStatus = arguments[0].warStatus;
 		this.starvationStatus = arguments[0].starvationStatus;
-		this.monetaryTaxRate = arguments[0].monetaryTaxRate | 0.05;
-		this.resourceTaxRate = arguments[0].resourceTaxRate | 0.05
+		this.monetaryTaxRate = arguments[0].monetaryTaxRate;
+		this.resourceTaxRate = arguments[0].resourceTaxRate;
 		this.incomeBonus = arguments[0].incomeBonus;
 		this.cities = [];
 		
@@ -660,6 +660,9 @@ var Nation = function(){
 		
 		for(var i=0;i<arguments[0].cities.length;i++){
 			this.cities.push(new City(arguments[0].cities[i], this));
+		}
+		for(var i=0;i<this.cities.length;i++){
+			this.cities[i].id = i;
 		}
 		
 	}
@@ -1388,8 +1391,145 @@ var Data = function(obj){
 /***************
 ***FUNCTIONS****
 ***************/
+var processNationJSON = function(nationData){
+	var nationAJAX = function(callback){
+		$.ajax({
+			url: 'http://www.politicsandwar.com/api/city/id=' + nationData.cityids[i],
+			success: callback	
+		});
+	}
+	var tempNation = {
+		builtProjects: [],
+		military: {},
+		cities: [],
+		continent: "",
+		domesticPolicy : "manifestDestiny",
+		warPolicy : "attrition",
+		warStatus: false,
+		starvationStatus: false,
+		monetaryTaxRate: 0.05,
+		resourceTaxRate: 0.05,
+		incomeBonus : 0.1,
+	};
+	
+	//Projects
+	if(nationData.armsstockpile == "1") tempNation.builtProjects.push("armsStockpile");
+	if(nationData.bauxiteworks == "1") tempNation.builtProjects.push("bauxiteworks");
+	if(nationData.cenciveng == "1") tempNation.builtProjects.push("civilEngineering");
+	if(nationData.cenintagncy == "1") tempNation.builtProjects.push("cia");
+	if(nationData.emgasreserve == "1") tempNation.builtProjects.push("gasolineReserve");
+	if(nationData.irondome == "1") tempNation.builtProjects.push("ironDome");
+	if(nationData.ironworks == "1") tempNation.builtProjects.push("ironworks");
+	if(nationData.massirrigation == "1") tempNation.builtProjects.push("irrigation");
+	if(nationData.missilelpad == "1") tempNation.builtProjects.push("launchPad");
+	if(nationData.propbureau == "1") tempNation.builtProjects.push("propaganda");
+	if(nationData.nuclearresfac == "1") tempNation.builtProjects.push("nuclearResearch");	
+	if(nationData.uraniumenrich == "1") tempNation.builtProjects.push("uraniumEnrichment");
+	if(nationData.vitaldefsys == "1") tempNation.builtProjects.push("vitalDefense");
+	
+	//Continent
+	for(var c in Nation.prototype.continents){
+		if(nationData.continent == Nation.prototype.continents[c].name){
+			tempNation.continent = Nation.prototype.continents[c].key;
+		}
+	}
+	
+	//Military
+	tempNation.military.aircraft = Number(nationData.aircraft);
+	tempNation.military.missiles = Number(nationData.missiles);
+	tempNation.military.nukes = Number(nationData.nukes);
+	tempNation.ships = Number(nationData.ships);
+	tempNation.soldiers = Number(nationData.soldiers);
+	tempNation.tanks = Number(nationData.tanks);
+	tempNation.spies = 0;
+	
+	//Cities
+	var citiesLeft = nationData.cityids.length; 
+	for(var i=0;i<nationData.cityids.length;i++){
+		nationAJAX(function(data){
+			if(data.error === undefined){
+				citiesLeft--;
+				tempNation.cities.push(processCityJSON(data));
+				
+			}
+		});
+	}
+	
+	var wait = function(){
+		if(citiesLeft > 0){
+			setTimeout(wait, 100);
+		}
+		else{
+			nation = new Nation(tempNation);
+			updateInterval = setInterval(update, 100);
+		}
+	}
+	wait();
+}
+var processCityJSON = function(cityData){
+	var tempCity = {
+		age : cityData.age,
+		infra : Number(cityData.infrastructure),
+		land : Number(cityData.land),
+		name : cityData.name,
+		id : 0,
+		buildings: {
+			airBase: Number(cityData.airforcebase),
+			aluminumRefinery: Number(cityData.aluminumrefinery),
+			bank: Number(cityData.bank),
+			barracks: Number(cityData.barracks),
+			bauxiteMine: Number(cityData.bauxitemine),
+			coalPlant : Number(cityData.coalpower),
+			coalMine : Number(cityData.coalmine),
+			drydock: Number(cityData.drydock),
+			factory: Number(cityData.factory),
+			farm: Number(cityData.farm),
+			hospital: Number(cityData.hospital),
+			ironMine: Number(cityData.ironmine),
+			leadMine: Number(cityData.leadmine),
+			munitionsFactory: Number(cityData.munitionsfactory),
+			nuclearPlant: Number(cityData.nuclearpower),
+			oilPlant : Number(cityData.oilpower),
+			oilRefinery : Number(cityData.oilrefinery),
+			oilWell : Number(cityData.oilwell),
+			police: Number(cityData.policestation),
+			recycling: Number(cityData.recyclingcenter),
+			mall: Number(cityData.shoppingmall),
+			stadium: Number(cityData.stadium),
+			steelMill: Number(cityData.steelmill),
+			subway : Number(cityData.subway),
+			market : Number(cityData.supermarket),
+			uraniumMine : Number(cityData.uraniummine),
+			windPlant : Number(cityData.windpower)
+		}
+	};
+	return tempCity;
+}
+var getNation = function(id){
+	clearInterval(updateInterval);
+	$.post('http://www.politicsandwar.com/api/nation/id=' + id, function(data){
+			if(data.error !== undefined){
+				alert("Invalid Nation ID");
+			}
+			else {
+				processNationJSON(data);
+			}
+	});
+}
+var getCity = function(id){
+	$.post('http://www.politicsandwar.com/api/city/id=' + id, function(data){
+		if(data.error !== undefined) {
+			alert("Invalid City ID");
+		}
+		else{
+			var newCity = processCityJSON(data);
+			nation.cities.push(new City(newCity, nation));
+			$("#manage-cities").append(nation.cities[nation.cities.length-1].constructHTML());
+		}
+		
+	});
+}
 var save = function(obj){
-	//console.log("TEST");
 	if(!(obj instanceof Nation)){
 		return;
 	}
@@ -1435,7 +1575,7 @@ var save = function(obj){
 		data.military[m] = obj.military[m].amount;
 	}
 	
-	localStorage.setItem("data", btoa(JSON.stringify(data)));
+	localStorage.setItem("data", btoa(JSON.stringify(data).replace(/[^\x00-\x7F]/g, "")));
 };
 var load = function(){
 	var data = localStorage.getItem("data");
@@ -1466,7 +1606,8 @@ var init = function(){
 		$("#manage-cities").append(nation.cities[i].constructHTML());
 	}
 	
-	$("#config").find('[name="allianceTax"]').val((nation.monetaryTaxRate * 100));
+	$("#config").find('[name="allianceMonetaryTax"]').val((nation.monetaryTaxRate * 100));
+	$("#config").find('[name="allianceResourceTax"]').val((nation.resourceTaxRate * 100));
 	$("#config").find('[name="incomeBonus"]').val((nation.incomeBonus * 100));
 	$("#config").find('[name="continent"]').val(nation.continent.name);
 	$("#config").find('[name="domesticPolicy"]').val(nation.domesticPolicy);
@@ -1663,6 +1804,7 @@ $("#config").on("change", "input[name='incomeBonus']", function(){
 var nation;
 init();
 update();
+
 var updateInterval = setInterval(update,500);
 //var saveInterval = setInterval(save(nation), 5000);
 //}());
