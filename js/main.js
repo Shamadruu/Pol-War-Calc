@@ -761,7 +761,7 @@ Nation.prototype.projects = {
 			aluminum: 2500,
 			steel: 2500,
 			gasoline: 5000,
-			money: 4500000
+			money: 45000000
 		}
 	},
 	ironDome: {
