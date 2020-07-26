@@ -1636,7 +1636,6 @@ $("button.delete").on("click", function(){
 $("#manage-cities").on("change", ".city .general input", function(){
 	var city = nation.cities[$(this).parents().eq(5).attr("id"
 	)];
-	console.log(city);
 	var type = $(this).attr("name");
 	var val;
 	if(type !== "age"){
@@ -1660,6 +1659,7 @@ $("#manage-cities").on("change", ".city .improvements input", function(e){
 	e.stopImmediatePropagation();
 	var city = nation.cities[$(this).parents().eq(6).attr("id"
 	)];
+	console.log(city);
 	var building = city.buildings[$(this).attr("name")];
 	var val = ~~Number($(this).val());
 	if(val < 0){
