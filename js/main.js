@@ -144,7 +144,7 @@ var buildings = {
 		consumption: {
 			money: 1600,
 		},
-		pollution: 6
+		pollution: 12
 	},
 	oilWell: {
 		name: "Oil Well",
