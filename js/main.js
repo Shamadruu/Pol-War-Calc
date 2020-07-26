@@ -1380,7 +1380,7 @@ City.prototype.update = function(){
 	if (this.disease > 100) {
 		this.disease = 100;
 	}
-	this.population = Math.round((this.population - (this.disease * this.infra) - (10 * this.crime * this.infra) + 25)*(1 + (this.age/3000)));
+	this.population = Math.round((this.population - (this.disease * this.infra) - (10 * this.crime * this.infra) + 25)*(1 + (this.age/(3000/64))));
 	if (this.population < 0) {
 		this.population = 0;
 	}
