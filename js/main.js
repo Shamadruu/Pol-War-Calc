@@ -1383,7 +1383,7 @@ City.prototype.update = function(){
 	if (this.disease > 100) {
 		this.disease = 100;
 	}
-	this.population = Math.round((this.population - (this.disease * this.infra) - (10 * this.crime * this.infra) + 25)*(1 + (this.age/(3000/64))));
+	this.population = Math.round((this.population - (this.disease * this.infra) - (10 * this.crime * this.infra) + 25)*(1 + Math.log(this.age/15)));
 	if (this.population < 0) {
 		this.population = 0;
 	}
@@ -1633,6 +1633,7 @@ $("button.delete").on("click", function(){
 $("#manage-cities").on("change", ".city .general input", function(){
 	var city = nation.cities[$(this).parents().eq(5).attr("id"
 	)];
+	console.log(city);
 	var type = $(this).attr("name");
 	var val;
 	if(type !== "age"){
