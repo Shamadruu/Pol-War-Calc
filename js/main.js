@@ -1378,12 +1378,16 @@ City.prototype.update = function(){
 	if(this.pollutionEffect < 0){
 		this.pollutionEffect = 0;
 	}
+	if(this.pollution < 0){
+		this.pollution = 0;
+	}
 	this.disease += (((Math.pow(this.populationDensity, 2) * 0.01) - 25) / 100) + (this.population / 100000) + this.pollutionEffect;
 	this.disease = ((this.disease > 100 || this.disease < 0) ? (Math.round(this.disease / 100) * 100) : (this.disease));
 	if (this.disease > 100) {
 		this.disease = 100;
 	}
-	this.population = Math.round((this.population - (this.disease * this.infra * 10) - (10 * this.crime * this.infra) - 25)*(1 + Math.log(this.age/15)));
+	this.population = Math.round((this.population - (this.disease * this.infra) - (10 * this.crime * this.infra) - 25)*(1 + Math.log(this.age/15)));
+	console.log(this.population);
 	if (this.population < 0) {
 		this.population = 0;
 	}
