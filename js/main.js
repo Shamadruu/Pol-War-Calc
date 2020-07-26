@@ -1387,7 +1387,6 @@ City.prototype.update = function(){
 		this.disease = 100;
 	}
 	this.population = Math.round((this.population - (10*this.disease * this.infra) - (10 * this.crime * this.infra) - 25)*(1 + Math.log(this.age)/15));
-	console.log(this.population);
 	if (this.population < 0) {
 		this.population = 0;
 	}
