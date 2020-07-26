@@ -712,7 +712,7 @@ Nation.prototype.continents = {
 		key: "antarctica",
 		name: "Antarctica",
 		resources: ["coal", "oil", "uranium"],
-		buildingsAllowed: [buildings.coalMine, buildings.bauxiteMine, buildings.leadMine, buildings.farm]
+		buildingsAllowed: [buildings.coalMine, buildings.oilWell, buildings.uraniumMine, buildings.farm]
 	}
 };
 Nation.prototype.projects = {
@@ -1010,7 +1010,7 @@ Nation.prototype.update = function(){
 	}
 	
 	this.avgIncome /= this.population;
-	this.projectSlots = ~~(this.infra/5000)
+	this.projectSlots = Math.ceil(this.infra/5000)
 	this.projectsBuilt = 0;
 	
 	for(var m in this.military){
@@ -1302,6 +1302,9 @@ City.prototype.update = function(){
 				else if(b.key == "oilRefiner" || b.key == "steelMill" || b.key=="munitionsFactory" || b.key == "aluminumRefinery"){
 					this.revenue[r].production *= 1 + (.125 * (b.amount-1));
 				}
+			}
+			if(this.continent == "antartica" && r == "food"){
+				this.revenue[r].production /= 2;
 			}
 		}
 		
