@@ -2,8 +2,6 @@
 /***************
 ****GLOBAL*****
 ***************/
-//Version Number
-var version = 1;
 var counter = 0;
 //Read-Only buildings data
 var buildings = {
@@ -12,7 +10,7 @@ var buildings = {
 		key: "coalPlant",
 		amount: 0,
 		cost: {
-			money: 500
+			money: 5000
 		},
 		powerSupply: 500,
 		powerInterval: 100,
@@ -24,6 +22,7 @@ var buildings = {
 	},
 	oilPlant: {
 		name: "Oil Plant",
+		key: "oilPlant",
 		amount: 0,
 		cost: {
 			money: 7000
@@ -71,55 +70,55 @@ var buildings = {
 		name: "Coal Mine",
 		key: "coalMine",
 		amount: 0,
-		cap: 6,
+		cap: 10,
 		cost: {
 			money: 1000,
 		},
 		production: {
-			coal: 6
+			coal: 3
 		},
 		consumption: {
 			money: 400,
 		},
-		pollution: 6
+		pollution: 12
 	},
 	ironMine: {
 		name: "Iron Mine",
 		key: "ironMine",
 		amount: 0, 
-		cap: 3,
+		cap: 10,
 		cost: {
 			money: 9500,
 		},
 		production: {
-			iron: 6
+			iron: 3
 		},
 		consumption: {
 			money: 1600,
 		},
-		pollution: 6
+		pollution: 12
 	},
 	leadMine: {
 		name: "Lead Mine",
 		key: "leadMine",
 		amount: 0, 
-		cap: 5,
+		cap: 10,
 		cost: {
 			money: 7500,
 		},
 		production: {
-			lead: 9
+			lead: 3
 		},
 		consumption: {
 			money: 1500,
 		},
-		pollution: 6
+		pollution: 12
 	},
 	uraniumMine: {
 		name: "Uranium Mine",
 		key: "uraniumMine",
 		amount: 0, 
-		cap: 2,
+		cap: 10,
 		cost: {
 			money: 25000,
 		},
@@ -129,18 +128,18 @@ var buildings = {
 		consumption: {
 			money: 5000,
 		},
-		pollution: 10
+		pollution: 12
 	},
 	bauxiteMine: {
 		name: "Bauxite Mine",
 		key: "bauxiteMine",
 		amount: 0, 
-		cap: 3,
+		cap: 10,
 		cost: {
 			money: 9500,
 		},
 		production: {
-			bauxite: 6
+			bauxite: 3
 		},
 		consumption: {
 			money: 1600,
@@ -151,23 +150,23 @@ var buildings = {
 		name: "Oil Well",
 		key: "oilWell",
 		amount: 0, 
-		cap: 6,
+		cap: 10,
 		cost: {
 			money: 1500,
 		},
 		production: {
-			oil: 9
+			oil: 3
 		},
 		consumption: {
 			money: 600,
 		},
-		pollution: 6
+		pollution: 12
 	},
 	farm: {
 		name: "Farm",
 		key: "farm",
 		amount: 0, 
-		cap: 8,
+		cap: 20,
 		cost: {
 			money: 1000,
 		},
@@ -177,13 +176,13 @@ var buildings = {
 		consumption: {
 			money: 300,
 		},
-		pollution: 1
+		pollution: 2
 	},
 	oilRefinery: {
 		name: "Oil Refinery",
 		key: "oilRefinery",
 		amount: 0, 
-		cap: 3,
+		cap: 5,
 		cost: {
 			money: 45000
 		},
@@ -194,13 +193,13 @@ var buildings = {
 			money: 4000,
 			oil: 3
 		},
-		pollution: 16
+		pollution: 32
 	},
 	steelMill: {
 		name: "Steel Mill",
 		key: "steelMill",
 		amount: 0, 
-		cap: 3,
+		cap: 5,
 		cost: {
 			money: 45000
 		},
@@ -212,13 +211,13 @@ var buildings = {
 			coal: 3,
 			iron: 3
 		},
-		pollution: 20
+		pollution: 40
 	},
 	munitionsFactory: {
 		name: "Munitions Factory",
 		key: "munitionsFactory",
 		amount: 0, 
-		cap: 3,
+		cap: 5,
 		cost: {
 			money: 35000
 		},
@@ -229,13 +228,13 @@ var buildings = {
 			money: 3500,
 			lead: 6
 		},
-		pollution: 16
+		pollution: 32
 	},
 	aluminumRefinery: {
 		name: "Aluminum Refinery",
 		key: "aluminumRefinery",
 		amount: 0, 
-		cap: 3,
+		cap: 5,
 		cost: {
 			money: 30000
 		},
@@ -246,7 +245,7 @@ var buildings = {
 			money: 2500,
 			bauxite: 3
 		},
-		pollution: 20
+		pollution: 40
 	},
 	police: {
 		name: "Police Station",
@@ -258,7 +257,7 @@ var buildings = {
 			steel: 20
 		},
 		consumption: {
-			money: 4000,
+			money: 750,
 		},
 		pollution: 1,
 		crime: -2.5
@@ -305,26 +304,26 @@ var buildings = {
 			money: 3250,
 		},
 		pollution: -45,
-		commerce: 7
+		commerce: 8
 	},
 	market: {
 		name: "Supermarket",
 		key: "market",
 		amount: 0, 
-		cap: 5,
+		cap: 6,
 		cost: {
 			money: 5000
 		},
 		consumption: {
 			money: 600
 		},
-		commerce: 4
+		commerce: 3
 	},
 	bank: {
 		name: "Bank",
 		key: "bank",
 		amount: 0, 
-		cap: 4,
+		cap: 5,
 		cost: {
 			money: 15000,
 			steel: 5,
@@ -333,13 +332,13 @@ var buildings = {
 		consumption: {
 			money: 1800
 		},
-		commerce: 7
+		commerce: 5
 	},
 	mall: {
 		name: "Shopping Mall",
 		key: "mall",
 		amount: 0, 
-		cap: 3,
+		cap: 4,
 		cost: {
 			money: 45000,
 			steel: 20,
@@ -349,13 +348,13 @@ var buildings = {
 			money: 5400
 		},
 		pollution: 2,
-		commerce: 12,
+		commerce: 9,
 	},
 	stadium: {
 		name: "Stadium",
 		key: "stadium",
 		amount: 0, 
-		cap: 2,
+		cap: 3,
 		cost: {
 			money: 100000,
 			steel: 40,
@@ -365,7 +364,7 @@ var buildings = {
 			money: 12150
 		},
 		pollution: 5,
-		commerce: 18
+		commerce: 12
 	},
 	barracks: {
 		name: "Barracks",
@@ -405,7 +404,7 @@ var buildings = {
 		},
 		recruitment: 3,
 		military: {
-			aircraft: 18
+			aircraft: 15
 		}
 	},
 	drydock: {
@@ -494,7 +493,7 @@ var military = {
 		cap: 0,
 		amount: 0,
 		cost: {
-			money: 2
+			money: 5
 		},
 		combatCost: {
 			munitions: 1/5000,
@@ -535,7 +534,7 @@ var military = {
 		amount: 0,
 		cost: {
 			money: 4000,
-			aluminum: 3
+			aluminum: 5
 		},
 		combatCost: {
 			munitions: 1/4,
@@ -555,7 +554,7 @@ var military = {
 		amount: 0,
 		cost: {
 			money: 50000,
-			steel: 25
+			steel: 30
 		},
 		combatCost: {
 			munitions: 3,
@@ -645,8 +644,8 @@ var Nation = function(){
 		this.warPolicy = arguments[0].warPolicy;
 		this.warStatus = arguments[0].warStatus;
 		this.starvationStatus = arguments[0].starvationStatus;
-		this.monetaryTaxRate = arguments[0].monetaryTaxRate;
-		this.resourceTaxRate = arguments[0].resourceTaxRate;
+		this.monetaryTaxRate = arguments[0].monetaryTaxRate | 0.05;
+		this.resourceTaxRate = arguments[0].resourceTaxRate | 0.05
 		this.incomeBonus = arguments[0].incomeBonus;
 		this.cities = [];
 		
@@ -660,9 +659,6 @@ var Nation = function(){
 		
 		for(var i=0;i<arguments[0].cities.length;i++){
 			this.cities.push(new City(arguments[0].cities[i], this));
-		}
-		for(var i=0;i<this.cities.length;i++){
-			this.cities[i].id = i;
 		}
 		
 	}
@@ -711,9 +707,25 @@ Nation.prototype.continents = {
 		name: "Australia",
 		resources: ["coal", "bauxite", "lead"],
 		buildingsAllowed: [buildings.coalMine, buildings.bauxiteMine, buildings.leadMine, buildings.farm]
+	},
+	antarctica: {
+		key: "antarctica",
+		name: "Antarctica",
+		resources: ["coal", "oil", "uranium"],
+		buildingsAllowed: [buildings.coalMine, buildings.bauxiteMine, buildings.leadMine, buildings.farm]
 	}
 };
 Nation.prototype.projects = {
+	advancedCivilEngineering : {
+		built: false,
+		cost: {
+			uranium: 10000,
+			aluminum: 40000,
+			steel: 20000,
+			munitions: 20000,
+			food: 2500000
+		}
+	},
 	armsStockpile : {
 		built: false, 
 		cost: {
@@ -739,6 +751,17 @@ Nation.prototype.projects = {
 			money: 3000000
 		}
 	},
+	cityPlanning : {
+		built: false,
+		cost: {
+			coal: 10000,
+			oil: 10000,
+			aluminum: 20000,
+			munitions: 10000,
+			gasoline: 10000,
+			food: 1000000
+		}
+	},
 	cia: {
 		built: false, 
 		cost: {
@@ -747,6 +770,16 @@ Nation.prototype.projects = {
 			money: 5000000
 		}
 	},
+	greenTechnologies : {
+		built: false,
+		cost: {
+			iron: 10000,
+			steel: 10000,
+			aluminum: 10000,
+			food: 250000,
+			money: 100000000
+		}
+	}
 	gasolineReserve: {
 		built: false, 
 		cost: {
@@ -761,7 +794,7 @@ Nation.prototype.projects = {
 			aluminum: 2500,
 			steel: 2500,
 			gasoline: 5000,
-			money: 45000000
+			money: 4500000
 		}
 	},
 	ironDome: {
@@ -797,6 +830,18 @@ Nation.prototype.projects = {
 			money: 8000000
 		}
 	},
+	moonLanding : {
+		built: false,
+		cost: {
+			oil: 5000,
+			munitions: 5000,
+			gasoline: 5000,
+			steel: 5000,
+			aluminum: 5000,
+			uranium: 10000,
+			money: 5000000
+		}
+	},
 	nuclearResearch : {
 		built: false,
 		cost: {
@@ -805,11 +850,61 @@ Nation.prototype.projects = {
 			money: 50000000
 		}
 	},
+	pirateEconomy: {
+		built: false,
+		cost: {
+			aluminum: 10000,
+			munitions: 10000,
+			gasoline: 10000,
+			steel: 10000,
+			money: 25000000
+		}
+	},
 	propaganda: {
 		built: false, 
 		cost: {
 			aluminum: 1500,
 			money: 15000000
+		}
+	},
+	recycling: {
+		built: false,
+		cost: {
+			food: 100000,
+			money: 1000000
+		}
+	},
+	spaceProgram : {
+		built: false,
+		cost: {
+			uranium: 20000,
+			oil: 20000,
+			iron: 10000,
+			gasoline: 5000,
+			steel: 1000,
+			aluminum: 1000,
+			money: 40000000
+		}
+	},
+	spySattelite : {
+		built: false,
+		cost: {
+			oil: 10000,
+			iron: 10000,
+			lead: 10000,
+			bauxite: 10000,
+			uranium: 10000,
+			money: 20000000,
+		}
+	},
+	teleSattelite: {
+		built: false,
+		cost: {
+			uranium: 10000,
+			iron: 10000,
+			oil: 10000,
+			aluminum: 10000,
+			money: 300000000
 		}
 	},
 	uraniumEnrichment: {
@@ -1116,7 +1211,7 @@ City.prototype.constructHTML = function(){
 
 	$(element).find(".general .container-fluid").append('<div class="row"><div class="col-sm-3 header">Infrastructure</div><div class="col-sm-3 input infra"><input name="infra" type="number" min=100 step=50 value="' + this.infra + '"> </div><div class="col-sm-3 header">Land</div><div class="col-sm-3 input land"><input name="land" type="number" min=100 step=50 value="' + this.land + '"> </div></div><div class="row"><div class="col-sm-3 header">Age</div><div class="col-sm-3 input age"><input name="age" type="number" min=0 step=1 value="' + this.age + '"> days </div><div class="col-sm-3 header">Infrastructure & Land Cost</div><div class="col-sm-3 infraCost">  </div></div><div class="row"><div class="col-sm-3 header">Improvements</div><div class="col-sm-3 improve">Plhdr </div><div class="col-sm-3 header">Power Sufficiency</div><div class="col-sm-3 power">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Population</div><div class="col-sm-3 population">Plhdr </div><div class="col-sm-3 header">Population Density</div><div class="col-sm-3 populationDensity">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Disease</div><div class="col-sm-3 disease">Plhdr </div><div class="col-sm-3 header">Crime</div><div class="col-sm-3 crime">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Pollution</div><div class="col-sm-3 pollution">Plhdr </div><div class="col-sm-3 header">Disease From Pollution</div><div class="col-sm-3 pollutionEffect">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Commerce</div><div class="col-sm-3 commerce">Plhdr </div><div class="col-sm-3 header">Average Income</div><div class="col-sm-3 avgIncome">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Gross Revenue</div><div class="col-sm-3 ns grossRevenue"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div><div class="col-sm-3 header">Net Revenue</div><div class="col-sm-3 ns netRevenue"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div></div><div class="row"><div class="col-sm-3 header">Expenditures</div><div class="col-sm-3 ns expenditures"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div><div class="col-sm-3 header">City Cost</div><div class="col-sm-3 ns cityCost"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div></div>');
 	
-	$(element).find(".improvements").append('<table><thead><tr><th>Power</th><th>Resources</th><th>Manufacturing</th><th>Civil</th><th>Commerce</th><th>Military</th></tr></thead><tbody><tr><td class="coalPlant">Coal Plant<input type="number" name="coalPlant" min=0 step=1 value=' + this.buildings.coalPlant.amount + '></td><td class="'+ this.nation.continent.buildingsAllowed[0].key + '">' +this.nation.continent.buildingsAllowed[0].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[0].key + '" max='+ this.nation.continent.buildingsAllowed[0].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[0].key].amount + '"></td><td class="oilRefinery">Oil Refinery<input type="number" name="oilRefinery" max=3 min=0 step=1 value="' + this.buildings.oilRefinery.amount + '"></td><td class="police">Police Station<input type="number" name="police" max=5 min=0 step=1 value="' + this.buildings.police.amount + '"></td><td class="market">Market<input type="number" name="market" max=5 min=0 step=1 value="' + this.buildings.market.amount + '"><td class="barracks">Barracks<input type="number" name="barracks" max=5 min=0 step=1 value="' + this.buildings.barracks.amount + '"></td></tr><tr><td class="oilPlant">Oil Plant<input type="number" name="oilPlant" min=0 step=1 value="' + this.buildings.oilPlant.amount + '"></td><td class="'+ this.nation.continent.buildingsAllowed[1].key + '">' + this.nation.continent.buildingsAllowed[1].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[1].key + '" max='+ this.nation.continent.buildingsAllowed[1].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[1].key].amount + '"></td><td class="steelMill">Steel Mill<input type="number" name="steelMill" max=3 min=0 step=1 value="' + this.buildings.steelMill.amount + '"></td><td class="hospital">Hospital<input type="number" name="hospital" max=5 min=0 step=1 value="' + this.buildings.hospital.amount + '"></td><td class="bank">Bank<input type="number" name="bank" max=4 min=0 step=1 value="' + this.buildings.bank.amount + '"></td><td class="factory">Factory<input type="number" name="factory" max=5 min=0 step=1 value="' + this.buildings.factory.amount + '"></td></tr><tr><td class="nuclearPlant">Nuclear Plant<input type="number" name="nuclearPlant" min=0 step=1 value="' + this.buildings.nuclearPlant.amount + '"></td><td class="'+ this.nation.continent.buildingsAllowed[2].key + '">' + this.nation.continent.buildingsAllowed[2].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[2].key + '" max='+ this.nation.continent.buildingsAllowed[2].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[2].key].amount + '"></td><td class="aluminumRefinery">Aluminum Refinery<input type="number" name="aluminumRefinery" max=3 min=0 step=1 value="' + this.buildings.aluminumRefinery.amount + '"></td><td class="recycling">Recycling Center<input type="number" name="recycling" max=3 min=0 step=1 value="' + this.buildings.recycling.amount + '"></td><td class="mall">Mall<input type="number" name="mall" max=3 min=0 step=1 value="' + this.buildings.mall.amount + '"></td><td class="airBase">Air Force Base<input type="number" name="airBase" max=5 min=0 step=1 value="' + this.buildings.airBase.amount + '"></td></tr><tr><td class="windPlant">Wind Plant<input type="number" name="windPlant" min=' + this.buildings.windPlant.amount + ' step=1 value="0"></td><td class="farm">Farm<input type="number" name="farm" max=8 min=0 step=1 value="' + this.buildings.farm.amount + '"></td><td class="munitionsFactory">Munitions Factory<input type="number" name="munitionsFactory" max=3 min=0 step=1 value="' + this.buildings.munitionsFactory.amount + '"></td><td class="subway">Subway<input type="number" name="subway" max=1 min=0 step=1 value="' + this.buildings.subway.amount + '"></td><td class="stadium">Stadium<input type="number" name="stadium" max=2 min=0 step=1 value="' + this.buildings.stadium.amount + '"></td><td class="drydock">Drydock<input type="number" name="drydock" max=3 min=0 step=1 value="' + this.buildings.drydock.amount + '"></td></tr></tbody></table>')
+	$(element).find(".improvements").append('<table><thead><tr><th>Power</th><th>Resources</th><th>Manufacturing</th><th>Civil</th><th>Commerce</th><th>Military</th></tr></thead><tbody><tr><td class="coalPlant">Coal Plant<input type="number" name="coalPlant" min=0 step=1 value=' + this.buildings.coalPlant.amount + '></td><td class="'+ this.nation.continent.buildingsAllowed[0].key + '">' +this.nation.continent.buildingsAllowed[0].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[0].key + '" max='+ this.nation.continent.buildingsAllowed[0].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[0].key].amount + '"></td><td class="oilRefinery">Oil Refinery<input type="number" name="oilRefinery" max='+ this.buildings.oilRefinery.cap + ' min=0 step=1 value="' + this.buildings.oilRefinery.amount + '"></td><td class="police">Police Station<input type="number" name="police" max='+ this.buildings.police.cap + ' min=0 step=1 value="' + this.buildings.police.amount + '"></td><td class="market">Market<input type="number" name="market" max='+ this.buildings.market.cap + ' min=0 step=1 value="' + this.buildings.market.amount + '"><td class="barracks">Barracks<input type="number" name="barracks" max=5 min=0 step=1 value="' + this.buildings.barracks.amount + '"></td></tr><tr><td class="oilPlant">Oil Plant<input type="number" name="oilPlant" min=0 step=1 value="' + this.buildings.oilPlant.amount + '"></td><td class="'+ this.nation.continent.buildingsAllowed[1].key + '">' + this.nation.continent.buildingsAllowed[1].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[1].key + '" max='+ this.nation.continent.buildingsAllowed[1].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[1].key].amount + '"></td><td class="steelMill">Steel Mill<input type="number" name="steelMill" max=' + this.buildings.steelMill.cap + ' min=0 step=1 value="' + this.buildings.steelMill.amount + '"></td><td class="hospital">Hospital<input type="number" name="hospital" max=' + this.buildings.hospital.cap + ' min=0 step=1 value="' + this.buildings.hospital.amount + '"></td><td class="bank">Bank<input type="number" name="bank" max=' + this.buildings.bank.cap + ' min=0 step=1 value="' + this.buildings.bank.amount + '"></td><td class="factory">Factory<input type="number" name="factory" max=' + this.buildings.factory.cap + ' min=0 step=1 value="' + this.buildings.factory.amount + '"></td></tr><tr><td class="nuclearPlant">Nuclear Plant<input type="number" name="nuclearPlant" min=0 step=1 value="' + this.buildings.nuclearPlant.amount + '"></td><td class="'+ this.nation.continent.buildingsAllowed[2].key + '">' + this.nation.continent.buildingsAllowed[2].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[2].key + '" max='+ this.nation.continent.buildingsAllowed[2].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[2].key].amount + '"></td><td class="aluminumRefinery">Aluminum Refinery<input type="number" name="aluminumRefinery" max='+ this.buildings.aluminumRefinery.cap + ' min=0 step=1 value="' + this.buildings.aluminumRefinery.amount + '"></td><td class="recycling">Recycling Center<input type="number" name="recycling" max='+ this.buildings.recycling.cap + ' min=0 step=1 value="' + this.buildings.recycling.amount + '"></td><td class="mall">Mall<input type="number" name="mall" max='+ this.buildings.mall.cap + ' min=0 step=1 value="' + this.buildings.mall.amount + '"></td><td class="airBase">Air Force Base<input type="number" name="airBase" max='+ this.buildings.airBase.cap + ' min=0 step=1 value="' + this.buildings.airBase.amount + '"></td></tr><tr><td class="windPlant">Wind Plant<input type="number" name="windPlant" min=' + this.buildings.windPlant.amount + ' step=1 value="0"></td><td class="farm">Farm<input type="number" name="farm" max='+ this.buildings.farm.cap + ' min=0 step=1 value="' + this.buildings.farm.amount + '"></td><td class="munitionsFactory">Munitions Factory<input type="number" name="munitionsFactory" max='+ this.buildings.munitionsFactory.cap + ' min=0 step=1 value="' + this.buildings.munitionsFactory.amount + '"></td><td class="subway">Subway<input type="number" name="subway" max='+ this.buildings.subway.cap + ' min=0 step=1 value="' + this.buildings.subway.amount + '"></td><td class="stadium">Stadium<input type="number" name="stadium" max='+ this.buildings.stadium.cap + ' min=0 step=1 value="' + this.buildings.stadium.amount + '"></td><td class="drydock">Drydock<input type="number" name="drydock" max='+ this.buildings.drydock.cap + ' min=0 step=1 value="' + this.buildings.drydock.amount + '"></td></tr></tbody></table>')
 	
 	return element;
 };
@@ -1197,6 +1292,16 @@ City.prototype.update = function(){
 			}
 			for(var r in b.production){
 				this.revenue[r].production += b.production[r] * b.amount; 
+				//new bonuses
+				if(b.key == "oilWell" || b.key == "coalMine" || b.key=="bauxiteMine" || b.key=="uraniumMine" || b.key == "leadMine" && b.amount > 0){
+					this.revenue[r].production *= 1 + (.05555 * (b.amount-1));
+				}
+				else if(b.key == "farm" && b.amount > 0){
+					this.revenue[r].production *= 1 + (.0263 * (b.amount-1));
+				}
+				else if(b.key == "oilRefiner" || b.key == "steelMill" || b.key=="munitionsFactory" || b.key == "aluminumRefinery"){
+					this.revenue[r].production *= 1 + (.125 * (b.amount-1));
+				}
 			}
 		}
 		
@@ -1391,145 +1496,8 @@ var Data = function(obj){
 /***************
 ***FUNCTIONS****
 ***************/
-var processNationJSON = function(nationData){
-	var nationAJAX = function(callback){
-		$.ajax({
-			url: 'http://www.politicsandwar.com/api/city/id=' + nationData.cityids[i],
-			success: callback	
-		});
-	}
-	var tempNation = {
-		builtProjects: [],
-		military: {},
-		cities: [],
-		continent: "",
-		domesticPolicy : "manifestDestiny",
-		warPolicy : "attrition",
-		warStatus: false,
-		starvationStatus: false,
-		monetaryTaxRate: 0.05,
-		resourceTaxRate: 0.05,
-		incomeBonus : 0.1,
-	};
-	
-	//Projects
-	if(nationData.armsstockpile == "1") tempNation.builtProjects.push("armsStockpile");
-	if(nationData.bauxiteworks == "1") tempNation.builtProjects.push("bauxiteworks");
-	if(nationData.cenciveng == "1") tempNation.builtProjects.push("civilEngineering");
-	if(nationData.cenintagncy == "1") tempNation.builtProjects.push("cia");
-	if(nationData.emgasreserve == "1") tempNation.builtProjects.push("gasolineReserve");
-	if(nationData.irondome == "1") tempNation.builtProjects.push("ironDome");
-	if(nationData.ironworks == "1") tempNation.builtProjects.push("ironworks");
-	if(nationData.massirrigation == "1") tempNation.builtProjects.push("irrigation");
-	if(nationData.missilelpad == "1") tempNation.builtProjects.push("launchPad");
-	if(nationData.propbureau == "1") tempNation.builtProjects.push("propaganda");
-	if(nationData.nuclearresfac == "1") tempNation.builtProjects.push("nuclearResearch");	
-	if(nationData.uraniumenrich == "1") tempNation.builtProjects.push("uraniumEnrichment");
-	if(nationData.vitaldefsys == "1") tempNation.builtProjects.push("vitalDefense");
-	
-	//Continent
-	for(var c in Nation.prototype.continents){
-		if(nationData.continent == Nation.prototype.continents[c].name){
-			tempNation.continent = Nation.prototype.continents[c].key;
-		}
-	}
-	
-	//Military
-	tempNation.military.aircraft = Number(nationData.aircraft);
-	tempNation.military.missiles = Number(nationData.missiles);
-	tempNation.military.nukes = Number(nationData.nukes);
-	tempNation.ships = Number(nationData.ships);
-	tempNation.soldiers = Number(nationData.soldiers);
-	tempNation.tanks = Number(nationData.tanks);
-	tempNation.spies = 0;
-	
-	//Cities
-	var citiesLeft = nationData.cityids.length; 
-	for(var i=0;i<nationData.cityids.length;i++){
-		nationAJAX(function(data){
-			if(data.error === undefined){
-				citiesLeft--;
-				tempNation.cities.push(processCityJSON(data));
-				
-			}
-		});
-	}
-	
-	var wait = function(){
-		if(citiesLeft > 0){
-			setTimeout(wait, 100);
-		}
-		else{
-			nation = new Nation(tempNation);
-			updateInterval = setInterval(update, 100);
-		}
-	}
-	wait();
-}
-var processCityJSON = function(cityData){
-	var tempCity = {
-		age : cityData.age,
-		infra : Number(cityData.infrastructure),
-		land : Number(cityData.land),
-		name : cityData.name,
-		id : 0,
-		buildings: {
-			airBase: Number(cityData.airforcebase),
-			aluminumRefinery: Number(cityData.aluminumrefinery),
-			bank: Number(cityData.bank),
-			barracks: Number(cityData.barracks),
-			bauxiteMine: Number(cityData.bauxitemine),
-			coalPlant : Number(cityData.coalpower),
-			coalMine : Number(cityData.coalmine),
-			drydock: Number(cityData.drydock),
-			factory: Number(cityData.factory),
-			farm: Number(cityData.farm),
-			hospital: Number(cityData.hospital),
-			ironMine: Number(cityData.ironmine),
-			leadMine: Number(cityData.leadmine),
-			munitionsFactory: Number(cityData.munitionsfactory),
-			nuclearPlant: Number(cityData.nuclearpower),
-			oilPlant : Number(cityData.oilpower),
-			oilRefinery : Number(cityData.oilrefinery),
-			oilWell : Number(cityData.oilwell),
-			police: Number(cityData.policestation),
-			recycling: Number(cityData.recyclingcenter),
-			mall: Number(cityData.shoppingmall),
-			stadium: Number(cityData.stadium),
-			steelMill: Number(cityData.steelmill),
-			subway : Number(cityData.subway),
-			market : Number(cityData.supermarket),
-			uraniumMine : Number(cityData.uraniummine),
-			windPlant : Number(cityData.windpower)
-		}
-	};
-	return tempCity;
-}
-var getNation = function(id){
-	clearInterval(updateInterval);
-	$.post('http://www.politicsandwar.com/api/nation/id=' + id, function(data){
-			if(data.error !== undefined){
-				alert("Invalid Nation ID");
-			}
-			else {
-				processNationJSON(data);
-			}
-	});
-}
-var getCity = function(id){
-	$.post('http://www.politicsandwar.com/api/city/id=' + id, function(data){
-		if(data.error !== undefined) {
-			alert("Invalid City ID");
-		}
-		else{
-			var newCity = processCityJSON(data);
-			nation.cities.push(new City(newCity, nation));
-			$("#manage-cities").append(nation.cities[nation.cities.length-1].constructHTML());
-		}
-		
-	});
-}
 var save = function(obj){
+	//console.log("TEST");
 	if(!(obj instanceof Nation)){
 		return;
 	}
@@ -1575,7 +1543,7 @@ var save = function(obj){
 		data.military[m] = obj.military[m].amount;
 	}
 	
-	localStorage.setItem("data", btoa(JSON.stringify(data).replace(/[^\x00-\x7F]/g, "")));
+	localStorage.setItem("data", btoa(JSON.stringify(data)));
 };
 var load = function(){
 	var data = localStorage.getItem("data");
@@ -1606,8 +1574,7 @@ var init = function(){
 		$("#manage-cities").append(nation.cities[i].constructHTML());
 	}
 	
-	$("#config").find('[name="allianceMonetaryTax"]').val((nation.monetaryTaxRate * 100));
-	$("#config").find('[name="allianceResourceTax"]').val((nation.resourceTaxRate * 100));
+	$("#config").find('[name="allianceTax"]').val((nation.monetaryTaxRate * 100));
 	$("#config").find('[name="incomeBonus"]').val((nation.incomeBonus * 100));
 	$("#config").find('[name="continent"]').val(nation.continent.name);
 	$("#config").find('[name="domesticPolicy"]').val(nation.domesticPolicy);
@@ -1804,7 +1771,5 @@ $("#config").on("change", "input[name='incomeBonus']", function(){
 var nation;
 init();
 update();
-
 var updateInterval = setInterval(update,500);
 //var saveInterval = setInterval(save(nation), 5000);
-//}());
