@@ -779,7 +779,7 @@ Nation.prototype.projects = {
 			food: 250000,
 			money: 100000000
 		}
-	}
+	},
 	gasolineReserve: {
 		built: false, 
 		cost: {
