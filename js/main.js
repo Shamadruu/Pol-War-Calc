@@ -625,6 +625,11 @@ var military = {
 
 /***NATION***/
 var Nation = function(){
+	this.buildings = (JSON.parse(JSON.stringify(buildings)));
+
+	this.revenue = (JSON.parse(JSON.stringify(revenue)));
+
+	this.military = (JSON.parse(JSON.stringify(military)));
 	if(arguments.length === 0){
 		this.cities = [];
 		this.continent = this.continents["northAmerica"];
@@ -662,11 +667,7 @@ var Nation = function(){
 		}
 		
 	}
-	this.buildings = (JSON.parse(JSON.stringify(buildings)));
 
-	this.revenue = (JSON.parse(JSON.stringify(revenue)));
-
-	this.military = (JSON.parse(JSON.stringify(military)));
 }
 
 
@@ -1165,6 +1166,11 @@ Nation.prototype.createCity = function(){
 }
 /***City***/
 var City = function(){
+	this.buildings = (JSON.parse(JSON.stringify(buildings)));
+
+	this.revenue = (JSON.parse(JSON.stringify(revenue)));
+
+	this.military = (JSON.parse(JSON.stringify(military)));
 	//Normal case
 	if(arguments[0] instanceof Nation){
 		this.id = nation.cities.length;
@@ -1188,11 +1194,7 @@ var City = function(){
 		
 		this.nation = arguments[1];
 	}
-	this.buildings = (JSON.parse(JSON.stringify(buildings)));
-
-	this.revenue = (JSON.parse(JSON.stringify(revenue)));
-
-	this.military = (JSON.parse(JSON.stringify(military)));
+	
 };
 
 City.prototype.constructHTML = function(){
