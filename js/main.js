@@ -1503,7 +1503,7 @@
 	***FUNCTIONS****
 	***************/
 	var save = function(obj){
-		//console.log("TEST");
+		console.log("SAVING!");
 		if(!(obj instanceof Nation)){
 			return;
 		}
