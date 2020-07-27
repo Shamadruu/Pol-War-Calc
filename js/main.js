@@ -1801,4 +1801,4 @@
 	init();
 	update();
 	//var updateInterval = setInterval(update,500);
-	//var saveInterval = setInterval(save(nation), 5000);
+	var saveInterval = setInterval(save(nation), 5000);
