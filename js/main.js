@@ -1206,7 +1206,7 @@
 		
 		$(element).find(".section-heading").append('<h4><input name="cityName" type="text" value="' + this.name + '"></h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>'); 
 		
-		$(element).find(".section-footer").append('<button class="clone">CLONE</button><button class="delete">DELETE</button>');
+		$(element).find(".section-footer").append('<button class="import">IMPORT</button><button class="export">EXPORT</button><button class="clone">CLONE</button><button class="delete">DELETE</button>');
 		
 		$(element).find(".section-body").append('<div class="general"><div class="container-fluid"></div></div><div class="improvements"><div><h2>Improvements</h1></div></div>');
 
@@ -1600,11 +1600,6 @@
 		
 		nation.update();
 		nation.updateHTML();
-		
-		counter++;
-		if(counter%10 === 0){
-			save(nation);
-		}
 	}
 	var throttleEvent = function(func, interval){
 		var last = 0;
@@ -1649,10 +1644,7 @@
 		}
 		city[type] = val;
 		$(this).val(val);
-		city.update();
-		nation.update();
-		city.updateHTML();
-		nation.updateHTML();
+		update();
 	});
 	$("#manage-cities").on("change", ".city .section-heading h4 input", function(){
 		var city = nation.cities[$(".city .section-heading input").parents().eq(2).attr("id")];
@@ -1678,10 +1670,7 @@
 			city.handleBuildingChange(building, val - building.amount);
 			$(this).val(val);
 		}
-		city.update();
-		nation.update();
-		city.updateHTML();
-		nation.updateHTML();
+		update();
 	});
 	$("#manage-cities").on("click", ".delete", function(){
 		if(nation.cities.length === 1){
@@ -1693,8 +1682,7 @@
 		for(var i=city.id; i<nation.cities.length;i++){
 			nation.cities[i].id--;
 		}
-		nation.update();
-		nation.updateHTML();
+		update();
 	});
 
 	$("#manage-cities").on("click", ".clone", function(){
@@ -1704,8 +1692,7 @@
 		nation.cities[newID].name = "City " + (newID+1);
 		nation.cities[newID].id = newID;
 		$("#manage-cities").append(nation.cities[newID].constructHTML());
-		nation.update();
-		nation.updateHTML();
+		update();
 	});
 
 	$("#manage-military").on("change", "input", function(){
@@ -1717,8 +1704,7 @@
 		
 		unit.amount = val;
 		$(this).val(val);
-		nation.update();
-		nation.updateHTML();
+		update();
 	});
 
 	$("#config").on("change", "select", function(){
@@ -1771,26 +1757,22 @@
 		else{
 			nation.projects[name].built = true;
 		}
-		nation.update();
-		nation.updateHTML();
+		update();
 	});
 	$("#config").on("change", "input[name='allianceMonetaryTax']", function(){
 		var val = Number($(this).val())/100;
 		nation.monetaryTaxRate = val;
-		nation.update();
-		nation.updateHTML();
+		update();
 	});
 	$("#config").on("change", "input[name='allianceResourceTax']", function(){
 		var val = Number($(this).val())/100;
 		nation.resourceTaxRate = val;
-		nation.update();
-		nation.updateHTML();
+		update();
 	});
 	$("#config").on("change", "input[name='incomeBonus']", function(){
 		var val = Number($(this).val())/100;
 		nation.incomeBonus = val;
-		nation.update();
-		nation.updateHTML();
+		update();
 	});
 	/***************
 	*****START*****
