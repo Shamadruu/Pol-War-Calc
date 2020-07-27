@@ -1269,7 +1269,6 @@ City.prototype.update = function(){
 		food: 0,
 		money: 0
 	};
-	console.log(
 	this.revenue = (JSON.parse(JSON.stringify(revenue)));
 	this.military = (JSON.parse(JSON.stringify(military)));
 	
