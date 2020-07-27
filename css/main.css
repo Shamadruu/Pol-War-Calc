@@ -147,7 +147,7 @@ span.minimize {
 .delete, .clone, .import, .export {
 	width: 5em;
 	position: relative;
-	left: 85%;
+	left: 75%;
 	margin-right: 1em;
 	color: #8c8c8c;
 	background-color: #23262a;
