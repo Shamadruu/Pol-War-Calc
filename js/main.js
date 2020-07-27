@@ -32,7 +32,7 @@
 		}
 		else if(arguments[0] !== undefined){
 			//this.military = (JSON.parse(JSON.stringify(military)));
-			this.continent = Nation.prototype.continents[arguments[0].continent];
+			this.continent = continents[arguments[0].continent];
 			this.domesticPolicy = arguments[0].domesticPolicy;
 			this.warPolicy = arguments[0].warPolicy;
 			this.warStatus = arguments[0].warStatus;
