@@ -144,7 +144,7 @@ span.minimize {
 	float: right;
 	text-align: center;
 }
-.delete, .clone {
+.delete, .clone, .import, .export {
 	width: 5em;
 	position: relative;
 	left: 85%;
@@ -191,73 +191,73 @@ div.container-fluid.resources  div{
 	font-size: 1em;
 	margin: 0px;
 }
-div.container-fluid.resources  div.coal::after{
+.coal::after{
 	content: url('../images/coal.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.oil::after{
+.oil::after{
 	content: url('../images/oil.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.uranium::after{
+.uranium::after{
 	content: url('../images/uranium.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.lead::after{
+.lead::after{
 	content: url('../images/lead.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.iron::after{
+.iron::after{
 	content: url('../images/iron.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.bauxite::after{
+.bauxite::after{
 	content: url('../images/bauxite.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.gasoline::after{
+.gasoline::after{
 	content: url('../images/gasoline.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.munitions::after{
+.munitions::after{
 	content: url('../images/munitions.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.steel::after{
+.steel::after{
 	content: url('../images/steel.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.aluminum::after{
+.aluminum::after{
 	content: url('../images/aluminum.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.food::after{
+.food::after{
 	content: url('../images/food.png');
 	width: 1vmin;
 	height: 1vmin;
 	float: right;
 }
-div.container-fluid.resources  div.money::after{
+.money::after{
 	content: url('../images/money.png');
 	width: 1vmin;
 	height: 1vmin;
