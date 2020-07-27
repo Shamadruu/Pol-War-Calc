@@ -1759,8 +1759,7 @@
 			default:
 				break;
 		}
-		nation.update();
-		nation.updateHTML();
+		update();
 	});
 
 	$("#projects").on("change", "input", function(){
