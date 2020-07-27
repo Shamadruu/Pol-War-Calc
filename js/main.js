@@ -1418,11 +1418,11 @@
 		
 		
 		if(this.id !== 0){
-			var cost = cityCosts[id+1]
+			var cost = cityCosts[this.id+1]
 			
 			if(this.nation.domesticPolicy === "manifestDestiny") cost *= .95;
-			if(this.nation.projects.cityPlanning.built && id > 10) cost -= 50000000;
-			if(this.nation.projects.advancedCityPlanning.built && id > 15) cost -= 100000000;
+			if(this.nation.projects.cityPlanning.built && this.id > 10) cost -= 50000000;
+			if(this.nation.projects.advancedCityPlanning.built && this.id > 15) cost -= 100000000;
 			
 			this.cityCost.money += cost;
 		}
