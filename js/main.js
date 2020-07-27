@@ -959,8 +959,8 @@ Nation.prototype.update = function(){
 		money: 0
 	};
 	
-	this.buildings = (JSON.parse(JSON.stringify(Nation.prototype.buildings)));
-	this.revenue = (JSON.parse(JSON.stringify(Nation.prototype.revenue)));
+	this.buildings = (JSON.parse(JSON.stringify(.buildings)));
+	this.revenue = (JSON.parse(JSON.stringify(revenue)));
 	
 	this.tempMilitary = {};
 	
@@ -968,7 +968,7 @@ Nation.prototype.update = function(){
 		this.tempMilitary[m] = this.military[m].amount;
 	}
 	
-	this.military = (JSON.parse(JSON.stringify(Nation.prototype.military)));
+	this.military = (JSON.parse(JSON.stringify(military)));
 	
 	for(var i=0;i<this.cities.length;i++){
 		var city = this.cities[i];
