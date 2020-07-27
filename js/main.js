@@ -1442,6 +1442,7 @@ City.prototype.update = function(){
 	
 };
 City.prototype.handleBuildingChange =function(b, diff){
+	console.log(b);
 	b.amount += diff;
 	this.slotsUsed += diff;
 }
