@@ -719,7 +719,7 @@
 		}
 	};
 	Nation.prototype.projects = {
-		advancedCivilEngineering : {
+		advancedCityPlanning : {
 			built: false,
 			cost: {
 				uranium: 10000,
