@@ -959,7 +959,7 @@ Nation.prototype.update = function(){
 		money: 0
 	};
 	
-	this.buildings = (JSON.parse(JSON.stringify(.buildings)));
+	this.buildings = (JSON.parse(JSON.stringify(buildings)));
 	this.revenue = (JSON.parse(JSON.stringify(revenue)));
 	
 	this.tempMilitary = {};
