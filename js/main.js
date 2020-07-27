@@ -662,14 +662,14 @@ var Nation = function(){
 		}
 		
 	}
-	
+	this.buildings = (JSON.parse(JSON.stringify(buildings)));
+
+	this.revenue = (JSON.parse(JSON.stringify(revenue)));
+
+	this.military = (JSON.parse(JSON.stringify(military)));
 }
 
-Nation.prototype.buildings = (JSON.parse(JSON.stringify(buildings)));
 
-Nation.prototype.revenue = (JSON.parse(JSON.stringify(revenue)));
-
-Nation.prototype.military = (JSON.parse(JSON.stringify(military)));
 
 Nation.prototype.continents = {
 	northAmerica: {
@@ -1188,13 +1188,12 @@ var City = function(){
 		
 		this.nation = arguments[1];
 	}
+	this.buildings = (JSON.parse(JSON.stringify(buildings)));
+
+	this.revenue = (JSON.parse(JSON.stringify(revenue)));
+
+	this.military = (JSON.parse(JSON.stringify(military)));
 };
-
-City.prototype.buildings = (JSON.parse(JSON.stringify(buildings)));
-
-City.prototype.revenue = (JSON.parse(JSON.stringify(revenue)));
-
-City.prototype.military = (JSON.parse(JSON.stringify(military)));
 
 City.prototype.constructHTML = function(){
 	var element = $('<div></div>').attr({"id": this.id, "class" : "section city"}); 
