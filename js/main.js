@@ -1649,6 +1649,8 @@
 		}
 		city[type] = val;
 		$(this).val(val);
+		city.update();
+		nation.update();
 	});
 	$("#manage-cities").on("change", ".city .section-heading h4 input", function(){
 		var city = nation.cities[$(".city .section-heading input").parents().eq(2).attr("id")];
@@ -1674,6 +1676,8 @@
 			city.handleBuildingChange(building, val - building.amount);
 			$(this).val(val);
 		}
+		city.update();
+		nation.update();
 	});
 	$("#manage-cities").on("click", ".delete", function(){
 		if(nation.cities.length === 1){
@@ -1705,6 +1709,7 @@
 		
 		unit.amount = val;
 		$(this).val(val);
+		nation.update();
 	});
 
 	$("#config").on("change", "select", function(){
@@ -1745,6 +1750,7 @@
 			default:
 				break;
 		}
+		nation.update();
 	});
 
 	$("#projects").on("change", "input", function(){
@@ -1756,18 +1762,22 @@
 		else{
 			nation.projects[name].built = true;
 		}
+		nation.update();
 	});
 	$("#config").on("change", "input[name='allianceMonetaryTax']", function(){
 		var val = Number($(this).val())/100;
 		nation.monetaryTaxRate = val;
+		nation.update();
 	});
 	$("#config").on("change", "input[name='allianceResourceTax']", function(){
 		var val = Number($(this).val())/100;
 		nation.resourceTaxRate = val;
+		nation.update();
 	});
 	$("#config").on("change", "input[name='incomeBonus']", function(){
 		var val = Number($(this).val())/100;
 		nation.incomeBonus = val;
+		nation.update();
 	});
 	/***************
 	*****START*****
@@ -1776,5 +1786,5 @@
 	var nation;
 	init();
 	update();
-	var updateInterval = setInterval(update,500);
+	//var updateInterval = setInterval(update,500);
 	//var saveInterval = setInterval(save(nation), 5000);
