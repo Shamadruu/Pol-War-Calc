@@ -1651,6 +1651,8 @@
 		$(this).val(val);
 		city.update();
 		nation.update();
+		city.updateHTML();
+		nation.updateHTML();
 	});
 	$("#manage-cities").on("change", ".city .section-heading h4 input", function(){
 		var city = nation.cities[$(".city .section-heading input").parents().eq(2).attr("id")];
@@ -1678,6 +1680,8 @@
 		}
 		city.update();
 		nation.update();
+		city.updateHTML();
+		nation.updateHTML();
 	});
 	$("#manage-cities").on("click", ".delete", function(){
 		if(nation.cities.length === 1){
@@ -1689,6 +1693,8 @@
 		for(var i=city.id; i<nation.cities.length;i++){
 			nation.cities[i].id--;
 		}
+		nation.update();
+		nation.updateHTML();
 	});
 
 	$("#manage-cities").on("click", ".clone", function(){
@@ -1698,6 +1704,8 @@
 		nation.cities[newID].name = "City " + (newID+1);
 		nation.cities[newID].id = newID;
 		$("#manage-cities").append(nation.cities[newID].constructHTML());
+		nation.update();
+		nation.updateHTML();
 	});
 
 	$("#manage-military").on("change", "input", function(){
@@ -1710,6 +1718,7 @@
 		unit.amount = val;
 		$(this).val(val);
 		nation.update();
+		nation.updateHTML();
 	});
 
 	$("#config").on("change", "select", function(){
@@ -1751,6 +1760,7 @@
 				break;
 		}
 		nation.update();
+		nation.updateHTML();
 	});
 
 	$("#projects").on("change", "input", function(){
@@ -1763,21 +1773,25 @@
 			nation.projects[name].built = true;
 		}
 		nation.update();
+		nation.updateHTML();
 	});
 	$("#config").on("change", "input[name='allianceMonetaryTax']", function(){
 		var val = Number($(this).val())/100;
 		nation.monetaryTaxRate = val;
 		nation.update();
+		nation.updateHTML();
 	});
 	$("#config").on("change", "input[name='allianceResourceTax']", function(){
 		var val = Number($(this).val())/100;
 		nation.resourceTaxRate = val;
 		nation.update();
+		nation.updateHTML();
 	});
 	$("#config").on("change", "input[name='incomeBonus']", function(){
 		var val = Number($(this).val())/100;
 		nation.incomeBonus = val;
 		nation.update();
+		nation.updateHTML();
 	});
 	/***************
 	*****START*****
