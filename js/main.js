@@ -1269,9 +1269,9 @@ City.prototype.update = function(){
 		food: 0,
 		money: 0
 	};
-	
-	this.revenue = (JSON.parse(JSON.stringify(City.prototype.revenue)));
-	this.military = (JSON.parse(JSON.stringify(City.prototype.military)));
+	console.log(
+	this.revenue = (JSON.parse(JSON.stringify(revenue)));
+	this.military = (JSON.parse(JSON.stringify(military)));
 	
 	//Update Buildings
 	for(var building in this.buildings){
