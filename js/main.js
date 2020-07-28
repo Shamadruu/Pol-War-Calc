@@ -13,7 +13,7 @@
 	/***NATION***/
 	var Nation = function(){
 		//set some defaults
-		
+		this.timestamp = Date.now();
 		this.buildings = (JSON.parse(JSON.stringify(buildings)));
 
 		this.revenue = (JSON.parse(JSON.stringify(revenue)));
@@ -26,6 +26,8 @@
 		this.nationID = "";
 		this.color = "gray";
 		this.colorBonus = 0;
+		this.data = {};
+		
 		if(arguments.length === 0 || arguments[0] == undefined){
 			this.cities = [];
 			this.continent = this.continents["northAmerica"];
@@ -33,9 +35,9 @@
 			this.warPolicy = "attrition";
 			this.warStatus = false;
 			this.starvationStatus = false;
-			this.monetaryTaxRate = 0.05;
-			this.resourceTaxRate = 0.05;
-			this.incomeBonus = 0.05;
+			this.monetaryTaxRate = 0.0;
+			this.resourceTaxRate = 0.0;
+			this.incomeBonus = 0.0;
 			
 		}
 		else if(arguments[0] !== undefined){
@@ -49,14 +51,9 @@
 			this.resourceTaxRate = arguments[0].resourceTaxRate | 0
 			this.incomeBonus = arguments[0].incomeBonus;
 			this.cities = [];
-			
-			for(var p in arguments[0].builtProjects){
-				this.projects[arguments[0].builtProjects[p]].built = true;
-			}
-			
-			for(var m in arguments[0].military){
-				this.military[m].amount = arguments[0].military[m].amount;
-			}
+			this.projects = arguments[0].projects||projects;
+			this.military = arguments[0].military||military;
+			this.score = arguments[0].score||0;
 			
 			for(var i=0;i<arguments[0].cities.length;i++){
 				this.cities.push(new City(arguments[0].cities[i], this));
@@ -185,8 +182,8 @@
 				}
 			}
 		}
-		if(this.projects.cia.built) this.military.spies.cap = 60;
-		if(this.projects.propaganda.built){
+		if(this.projects.intagncy.built) this.military.spies.cap = 60;
+		if(this.projects.propbureau.built){
 			this.military.soldiers.daily *= 1.1;
 			this.military.tanks.daily *= 1.1;
 			this.military.aircraft.daily *= 1.1;
@@ -205,7 +202,7 @@
 		;
 		
 		
-		this.score = (this.infra / 40) + ((this.ci - 1) * 50) + (this.military.soldiers.amount * 0.0005) + (this.military.tanks.amount * 0.05) + (this.military.aircraft.amount * 0.5) + (this.military.ships.amount * 2) + (this.military.missiles.amount * 5) + (this.military.nukes.amount * 15) + (this.projectsBuilt * 20);
+		//this.score = (this.infra / 40) + ((this.ci - 1) * 50) + (this.military.soldiers.amount * 0.0005) + (this.military.tanks.amount * 0.05) + (this.military.aircraft.amount * 0.5) + (this.military.ships.amount * 2) + (this.military.missiles.amount * 5) + (this.military.nukes.amount * 15) + (this.projectsBuilt * 20);
 		
 	}
 	Nation.prototype.updateHTML = function(){
@@ -311,6 +308,7 @@
 
 		this.military = (JSON.parse(JSON.stringify(military)));
 		this.cityID = "";
+		this.timestamp = Date.now();
 		//Normal case
 		if(arguments[0] instanceof Nation){
 			this.id = nation.cities.length;
@@ -465,7 +463,7 @@
 		}
 		
 		//Account for projects
-		if(this.nation.projects.armsStockpile.built) {
+		if(this.nation.projects.armsstockpile.built) {
 			this.revenue.munitions.production *= 1.34; 
 			this.revenue.lead.consumption *= 1.34
 		}
@@ -475,12 +473,12 @@
 			this.revenue.bauxite.consumption *= 1.36;
 		}
 		
-		if(this.nation.projects.gasolineReserve.built) {
+		if(this.nation.projects.emgasreserve.built) {
 			this.revenue.gasoline.production *= 2;
 			this.revenue.oil.consumption *= 2;
 		}
 		
-		if(this.nation.projects.uraniumEnrichment.built){
+		if(this.nation.projects.uraniumenrich.built){
 			this.revenue.uranium.production *= 2;
 		}
 		
@@ -490,14 +488,14 @@
 			this.revenue.coal.consumption *= 1.36;
 		}
 		
-		if(this.nation.projects.tradeCenter.built){
+		if(this.nation.projects.inttradecenter.built){
 			if(this.commerce > 115) this.commerce = 115;
 		}
 		else{
 			if(this.commerce > 100) this.commerce = 100;
 		}
 		
-		if(this.nation.projects.irrigation.built) {
+		if(this.nation.projects.massirrigation.built) {
 			this.revenue.food.production = this.buildings.imp_farm.amount * 12 * this.land/250;
 		}
 		else{
@@ -549,10 +547,10 @@
 			this.infraCost += 500 * ((Math.pow(((500*i) - 20 ), 1.95)/500) + 50); 
 		}
 		this.infraCost += (this.land%500) *((Math.pow((Math.floor(this.land/500)*500)- 20, 2)/500) + 50);
-		if(this.nation.projects.civilEngineering.built && this.nation.domesticPolicy === "urbanization"){
+		if(this.nation.projects.cenciveng.built && this.nation.domesticPolicy === "urbanization"){
 			this.infraCost *= 0.90;
 		}
-		else if(this.nation.projects.civilEngineering.built){
+		else if(this.nation.projects.cenciveng.built){
 			this.infraCost *= 0.95;
 		}
 		else if(this.nation.domesticPolicy === "urbanization"){
@@ -564,8 +562,8 @@
 			var cost = cityCosts[this.id+1]
 			
 			if(this.nation.domesticPolicy === "manifestDestiny") cost *= .95;
-			if(this.nation.projects.cityPlanning.built && this.id > 10) cost -= 50000000;
-			if(this.nation.projects.advancedCityPlanning.built && this.id > 15) cost -= 100000000;
+			if(this.nation.projects.city_planning.built && this.id > 10) cost -= 50000000;
+			if(this.nation.projects.adv_city_planning.built && this.id > 15) cost -= 100000000;
 			
 			this.cityCost.money += cost;
 		}
@@ -617,8 +615,10 @@
 			starvationStatus: obj.starvationStatus,
 			incomeBonus: obj.incomeBonus,
 			continent: obj.continent.key,
-			builtProjects: [],
-			military: {}
+			timestamp: obj.timestamp,
+			projects: obj.projects,
+			military: obj.military,
+			score: obj.score
 		};
 		
 		for(var i=0;i<obj.cities.length;i++){
@@ -631,20 +631,13 @@
 				city.land = ref.land;
 				city.age = ref.age;
 				city.buildings = ref.buildings;
+				city.timestamp = ref.timestamp;
+				city.data = ref.data;
 				//console.log(ref.buildings);
 				data.cities.push(city);
 			}
 		}
 		
-		for(var p in obj.projects){
-			if(obj.projects[p].built){
-				data.builtProjects.push(p);
-			}
-		}
-		
-		for(var m in military){
-			data.military[m] = obj.military[m].amount;
-		}
 		data.cleared = true;
 		
 		localStorage.setItem("data", btoa(JSON.stringify(data)));
@@ -714,7 +707,7 @@
 		}
 		return (Math.round(n*100)/100).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 	}
-	var update = function(){
+	var update = function(n){
 		for(var i=nation.cities.length-1;i>=0;i--){
 			nation.cities[i].update();
 			nation.cities[i].updateHTML();
@@ -736,7 +729,7 @@
 	}
 	var loadCityFromAJAX = function([args], n, i, l){
 		var data = arguments[0][0];
-		console.log(data);
+		//console.log(data);
 		var city = new City(n);
 		city.cityID = data.cityid;
 		city.id = i;
@@ -744,36 +737,10 @@
 		city.infra = Number(data.infrastructure);
 		city.land = Number(data.land);
 		city.age = Number(data.age);
-		
-		
 		//handle buildings
-		city.buildings.imp_coalpower.amount = ~~data.imp_coalpower;
-		city.buildings.imp_oilpower.amount = ~~data.imp_oilpower;
-		city.buildings.imp_nuclearpower.amount = ~~data.imp_nuclearpower;
-		city.buildings.imp_windpower.amount = ~~data.imp_windpower;
-		city.buildings.imp_coalmine.amount = ~~data.imp_coalmine;
-		city.buildings.imp_ironmine.amount = ~~data.imp_ironmine;
-		city.buildings.imp_leadmine.amount = ~~data.imp_leadmine;
-		city.buildings.imp_uramine.amount = ~~data.imp_uramine;
-		city.buildings.imp_bauxitemine.amount = ~~data.imp_bauxitemine;
-		city.buildings.imp_oilwell.amount = ~~data.imp_oilwell;
-		city.buildings.imp_farm.amount = ~~data.imp_farm;
-		city.buildings.imp_gasrefinery.amount = ~~data.imp_gasrefinery;
-		city.buildings.imp_steelmill.amount = ~~data.imp_steelmill;
-		city.buildings.imp_munitionsfactory.amount = ~~data.imp_munitionsfactory;
-		city.buildings.imp_aluminumrefinery.amount = ~~data.imp_aluminumrefinery;
-		city.buildings.imp_policestation.amount = ~~data.imp_policestation;
-		city.buildings.imp_hospital.amount = ~~data.imp_hospital;
-		city.buildings.imp_recyclingcenter.amount = ~~data.imp_recyclingcenter;
-		city.buildings.imp_subway.amount = ~~data.imp_subway;
-		city.buildings.imp_supermarket.amount = ~~data.imp_supermarket;
-		city.buildings.imp_bank.amount = ~~data.imp_bank;
-		city.buildings.imp_mall.amount = ~~data.imp_mall;
-		city.buildings.imp_stadium.amount = ~~data.imp_stadium;
-		city.buildings.imp_barracks.amount = ~~data.imp_barracks;
-		city.buildings.imp_factory.amount = ~~data.imp_factory;
-		city.buildings.imp_hangar.amount = ~~data.imp_hangar;
-		city.buildings.imp_drydock.amount = ~~data.imp_drydock;
+		for(var b in city.buildings){
+			city.buildings[b].amount = ~~data[b]
+		}
 		
 		n.cities[i] = city;
 		city.update();
@@ -786,9 +753,15 @@
 	}
 	var loadNationFromAJAX = function(data){
 		nation = new Nation();
+		
+		if(data.cityids == undefined){
+			console.log(data);
+			return;
+		}
+		
 		nation.id = data.nationid;
 		nation.color = data.color;
-		//console.log(data);
+		nation.score = data.score;
 		switch (data.continent){
 			case "Africa":
 				nation.continent = continents.africa;
@@ -870,6 +843,14 @@
 		var index = 0;
 		for(index=0;index<data.cityids.length;index++){
 			importCity(data.cityids[index], nation, index, data.cityids.length);
+		}
+		for(var p in nation.projects){
+			if(data[p] == "0"){
+				nation.projects[p].built = false;
+			}
+			else if(data[p] == "1"){
+				nation.projects[p].built = true;
+			}
 		}
 		
 	}

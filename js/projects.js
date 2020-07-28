@@ -1,6 +1,7 @@
 //Read-only project data
 	var  projects = {
-		advancedCityPlanning : {
+		adv_city_planning : {
+			name: "Advanced City Planning",
 			built: false,
 			cost: {
 				uranium: 10000,
@@ -10,7 +11,8 @@
 				food: 2500000
 			}
 		},
-		armsStockpile : {
+		armsstockpile : {
+			name: "Arms Stockpile",
 			built: false, 
 			cost: {
 				aluminum: 125,
@@ -19,6 +21,7 @@
 			}
 		},
 		bauxiteworks: {
+			name: "Bauxiteworks",
 			built: false, 
 			cost: {
 				steel: 750,
@@ -26,7 +29,8 @@
 				money: 5000000
 			}
 		},
-		civilEngineering: {
+		cenciveng: {
+			name: "Center for Civil Engineering",
 			built: false, 
 			cost: {
 				oil: 1000,
@@ -35,7 +39,8 @@
 				money: 3000000
 			}
 		},
-		cityPlanning : {
+		city_planning : {
+			name: "City Planning",
 			built: false,
 			cost: {
 				coal: 10000,
@@ -46,7 +51,8 @@
 				food: 1000000
 			}
 		},
-		cia: {
+		intagncy: {
+			name: "Intelligence Agency",
 			built: false, 
 			cost: {
 				steel: 500,
@@ -54,7 +60,8 @@
 				money: 5000000
 			}
 		},
-		greenTechnologies : {
+		green_technologies : {
+			name: "Green Technologies",
 			built: false,
 			cost: {
 				iron: 10000,
@@ -64,7 +71,8 @@
 				money: 100000000
 			}
 		},
-		gasolineReserve: {
+		emgasreserve: {
+			name: "Emergency Gas Reservve",
 			built: false, 
 			cost: {
 				aluminum: 125,
@@ -72,7 +80,8 @@
 				money: 4000000
 			}
 		},
-		tradeCenter: {
+		inttradecenter: {
+			name: "International Trade Center",
 			built: false, 
 			cost: {
 				aluminum: 2500,
@@ -81,7 +90,8 @@
 				money: 4500000
 			}
 		},
-		ironDome: {
+		irondome: {
+			name: "Iron Dome",
 			built: false,
 			cost: {
 				aluminum: 500,
@@ -91,6 +101,7 @@
 			}
 		},
 		ironworks: {
+			name: "Ironworks",
 			built: false, 
 			cost: {
 				aluminum: 750,
@@ -98,7 +109,8 @@
 				money: 5000000
 			}
 		},
-		irrigation: {
+		massirrigation: {
+			name: "Mass Irrigation",
 			built: false, 
 			cost: {
 				steel: 500,
@@ -106,7 +118,8 @@
 				money: 3000000
 			}
 		},
-		launchPad: {
+		missilelpad: {
+			name: "Missile Launch Pad",
 			built: false, 
 			cost: {
 				steel: 1000,
@@ -114,7 +127,8 @@
 				money: 8000000
 			}
 		},
-		moonLanding : {
+		moon_landing : {
+			name: "Moon Landing",
 			built: false,
 			cost: {
 				oil: 5000,
@@ -126,7 +140,8 @@
 				money: 5000000
 			}
 		},
-		nuclearResearch : {
+		nuclearresfac : {
+			name: "Nuclear Research Facility",
 			built: false,
 			cost: {
 				steel: 1000,
@@ -134,7 +149,8 @@
 				money: 50000000
 			}
 		},
-		pirateEconomy: {
+		pirate_economy: {
+			name: "Pirate Economy",
 			built: false,
 			cost: {
 				aluminum: 10000,
@@ -144,21 +160,24 @@
 				money: 25000000
 			}
 		},
-		propaganda: {
+		propbureau: {
+			name: "Propaganda Bureau",
 			built: false, 
 			cost: {
 				aluminum: 1500,
 				money: 15000000
 			}
 		},
-		imp_subway: {
+		recycling_initiative: {
+			name: "Recycling Initiative",
 			built: false,
 			cost: {
 				food: 100000,
-				money: 1000000
+				money: 10000000
 			}
 		},
-		spaceProgram : {
+		space_program : {
+			name: "Space Program",
 			built: false,
 			cost: {
 				uranium: 20000,
@@ -170,7 +189,8 @@
 				money: 40000000
 			}
 		},
-		spySattelite : {
+		spy_satellite : {
+			name: "Spy Satellite",
 			built: false,
 			cost: {
 				oil: 10000,
@@ -181,7 +201,8 @@
 				money: 20000000,
 			}
 		},
-		teleSattelite: {
+		telecommunications_satellite: {
+			name: "Telecommunications Satellite",
 			built: false,
 			cost: {
 				uranium: 10000,
@@ -191,7 +212,8 @@
 				money: 300000000
 			}
 		},
-		uraniumEnrichment: {
+		uraniumenrich: {
+			name: "Uranium Enrichment Program",
 			built: false, 
 			cost: {
 				aluminum: 1000,
@@ -200,7 +222,8 @@
 				money: 21000000
 			}
 		},
-		vitalDefense: {
+		vitaldefsys: {
+			name: "Vital Defense System",
 			built: false, 
 			cost: {
 				steel: 3000,
