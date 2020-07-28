@@ -645,6 +645,7 @@
 		for(var m in military){
 			data.military[m] = obj.military[m].amount;
 		}
+		data.cleared = true;
 		
 		localStorage.setItem("data", btoa(JSON.stringify(data)));
 	};
@@ -667,7 +668,16 @@
 				data = undefined;
 			}
 			finally {
-				if(data !== undefined) return  JSON.parse(atob(data));
+				
+				if(data !== undefined){
+					var obj = JSON.parse(atob(data))
+					if(!obj.cleared){
+						data = undefined;
+					}
+					else{
+						return  obj;
+					}
+				}
 			}
 		}
 	}
