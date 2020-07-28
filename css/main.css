@@ -100,12 +100,18 @@ hr {
 	width: 70%;
 }
 
+.nation  div.container-fluid:not(.resources)  div.input input{
+	text-align: right;
+	width: 70%;
+}
+
+
 div.input input[type="checkbox"]{
-	zoom: 1.5;
+	transform: scale(1.5);
 }
 span.minimize {
 	float: right;
-	zoom: 1.25;
+	transform: scale(2);
 	cursor: pointer;
 }
 

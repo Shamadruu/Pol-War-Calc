@@ -206,6 +206,20 @@
 		//this.score = (this.infra / 40) + ((this.ci - 1) * 50) + (this.military.soldiers.amount * 0.0005) + (this.military.tanks.amount * 0.05) + (this.military.aircraft.amount * 0.5) + (this.military.ships.amount * 2) + (this.military.missiles.amount * 5) + (this.military.nukes.amount * 15) + (this.projectsBuilt * 20);
 		
 	}
+	Nation.prototype.constructHTML = function(){
+		var projectsContainer = $("#projects > .section-body > .container-fluid");
+		var counter = 0;
+		for(var p in this.projects){
+			var project = this.projects[p];
+			if(counter%2 == 0){
+				//add a row
+				projectsContainer.append('<div class="row"></div>');
+			}
+			var row = projectsContainer.find(".row:last");
+			row.append('<div class="col-sm-3 header">'  + project.name +'</div><div class="col-sm-3 input"><input checked="' + project.built + '" type="checkbox" name="' + p  + '"></div>');
+			counter++;
+		}
+	}
 	Nation.prototype.updateHTML = function(){
 		var nation = $("#nationStatus");
 		$(nation).find(".infra").html(format(this.infra));
@@ -441,9 +455,6 @@
 						this.revenue[r].production *= 1 + (.125 * (b.amount-1));
 					}
 				}
-				if(this.continent == "antartica" && r == "food"){
-					this.revenue[r].production /= 2;
-				}
 			}
 			
 			for(var r in b.cost){
@@ -566,6 +577,8 @@
 			if(this.nation.projects.city_planning.built && this.id > 10) cost -= 50000000;
 			if(this.nation.projects.adv_city_planning.built && this.id > 15) cost -= 100000000;
 			
+			if(!isNaN(cost)) cost = 0;
+			
 			this.cityCost.money += cost;
 		}
 		
@@ -579,6 +592,10 @@
 		
 		
 		for(var r in this.revenue){
+			if(this.nation.continent.key == "antarctica" && r == "food"){
+				this.revenue[r].production /= 2;
+				//console.log(this.revenue[r].production);
+			}
 			if(this.nation.starvationStatus) this.revenue[r].production *= 2/3;
 			this.revenue[r].net = this.revenue[r].production - this.revenue[r].consumption;
 
@@ -677,6 +694,7 @@
 	}
 	var clearHTML = function(){
 		$("#manage-cities").html("");
+		$("#projects > .section-body > .container-fluid").html("");
 	}
 	var init = function(){
 		nation = new Nation(load());
@@ -693,6 +711,7 @@
 		for(var i=0;i<nation.cities.length;i++){
 			$("#manage-cities").append(nation.cities[i].constructHTML());
 		}
+		nation.constructHTML();
 		
 		nation_import_id = $("#nation_id").val();
 		$("#config").find('[name="allianceTax"]').val((nation.monetaryTaxRate * 100));
