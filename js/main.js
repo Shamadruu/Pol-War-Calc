@@ -5,6 +5,7 @@
 	var counter = 0;
 	var api_key = "";
 	var nation_import_id = "";
+	var nationList = [];
 	
 	/***************
 	****OBJECTS*****
@@ -755,7 +756,7 @@
 		nation = new Nation();
 		
 		if(data.cityids == undefined){
-			console.log(data);
+			logResponse(data);
 			return;
 		}
 		
