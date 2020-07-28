@@ -3,6 +3,8 @@
 	****GLOBAL*****
 	***************/
 	var counter = 0;
+	var api_key = "";
+	var nation_import_id = "";
 	
 	/***************
 	****OBJECTS*****
@@ -10,15 +12,21 @@
 
 	/***NATION***/
 	var Nation = function(){
+		//set some defaults
+		
 		this.buildings = (JSON.parse(JSON.stringify(buildings)));
 
 		this.revenue = (JSON.parse(JSON.stringify(revenue)));
 		this.projects = (JSON.parse(JSON.stringify(projects)));
 		
+		
 		this.military = (JSON.parse(JSON.stringify(military)));
 		this.continents = (JSON.parse(JSON.stringify(continents)));
 		
-		if(arguments.length === 0){
+		this.nationID = "";
+		this.color = "gray";
+		this.colorBonus = 0;
+		if(arguments.length === 0 || arguments[0] == undefined){
 			this.cities = [];
 			this.continent = this.continents["northAmerica"];
 			this.domesticPolicy = "manifestDestiny";
@@ -37,8 +45,8 @@
 			this.warPolicy = arguments[0].warPolicy;
 			this.warStatus = arguments[0].warStatus;
 			this.starvationStatus = arguments[0].starvationStatus;
-			this.monetaryTaxRate = arguments[0].monetaryTaxRate | 0.05;
-			this.resourceTaxRate = arguments[0].resourceTaxRate | 0.05
+			this.monetaryTaxRate = arguments[0].monetaryTaxRate | 0;
+			this.resourceTaxRate = arguments[0].resourceTaxRate | 0
 			this.incomeBonus = arguments[0].incomeBonus;
 			this.cities = [];
 			
@@ -184,7 +192,7 @@
 			this.military.aircraft.daily *= 1.1;
 			this.military.ships.daily *= 1.1;
 		}
-		
+		this.revenue.money.production += ~~this.colorBonus
 		for(var r in this.revenue){
 			this.revenue[r].net = this.revenue[r].production - this.revenue[r].consumption;
 			if(r != "money"){
@@ -194,6 +202,7 @@
 				this.revenue.money.net *= (1-this.monetaryTaxRate);
 			}
 		}
+		;
 		
 		
 		this.score = (this.infra / 40) + ((this.ci - 1) * 50) + (this.military.soldiers.amount * 0.0005) + (this.military.tanks.amount * 0.05) + (this.military.aircraft.amount * 0.5) + (this.military.ships.amount * 2) + (this.military.missiles.amount * 5) + (this.military.nukes.amount * 15) + (this.projectsBuilt * 20);
@@ -301,6 +310,7 @@
 		this.revenue = (JSON.parse(JSON.stringify(revenue)));
 
 		this.military = (JSON.parse(JSON.stringify(military)));
+		this.cityID = "";
 		//Normal case
 		if(arguments[0] instanceof Nation){
 			this.id = nation.cities.length;
@@ -318,9 +328,7 @@
 			this.land = arguments[0].land;
 			this.age = arguments[0].age;
 			
-			for(var b in arguments[0].buildings){
-				this.buildings[b].amount = arguments[0].buildings[b];
-			}
+			this.buildings = arguments[0].buildings;
 			
 			this.nation = arguments[1];
 		}
@@ -340,9 +348,9 @@
 		
 		$(element).find(".section-body").append('<div class="general"><div class="container-fluid"></div></div><div class="improvements"><div><h2>Improvements</h1></div></div>');
 
-		$(element).find(".general .container-fluid").append('<div class="row"><div class="col-sm-3 header">Infrastructure</div><div class="col-sm-3 input infra"><input name="infra" type="number" min=100 step=50 value="' + this.infra + '"> </div><div class="col-sm-3 header">Land</div><div class="col-sm-3 input land"><input name="land" type="number" min=100 step=50 value="' + this.land + '"> </div></div><div class="row"><div class="col-sm-3 header">Age</div><div class="col-sm-3 input age"><input name="age" type="number" min=0 step=1 value="' + this.age + '"> days </div><div class="col-sm-3 header">Infrastructure & Land Cost</div><div class="col-sm-3 infraCost">  </div></div><div class="row"><div class="col-sm-3 header">Improvements</div><div class="col-sm-3 improve">Plhdr </div><div class="col-sm-3 header">Power Sufficiency</div><div class="col-sm-3 power">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Population</div><div class="col-sm-3 population">Plhdr </div><div class="col-sm-3 header">Population Density</div><div class="col-sm-3 populationDensity">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Disease</div><div class="col-sm-3 disease">Plhdr </div><div class="col-sm-3 header">Crime</div><div class="col-sm-3 crime">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Pollution</div><div class="col-sm-3 pollution">Plhdr </div><div class="col-sm-3 header">Disease From Pollution</div><div class="col-sm-3 pollutionEffect">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Commerce</div><div class="col-sm-3 commerce">Plhdr </div><div class="col-sm-3 header">Average Income</div><div class="col-sm-3 avgIncome">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Gross Revenue</div><div class="col-sm-3 ns grossRevenue"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div><div class="col-sm-3 header">Net Revenue</div><div class="col-sm-3 ns netRevenue"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div></div><div class="row"><div class="col-sm-3 header">Expenditures</div><div class="col-sm-3 ns expenditures"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div><div class="col-sm-3 header">City Cost</div><div class="col-sm-3 ns cityCost"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div></div>');
+		$(element).find(".general .container-fluid").append('<div class="row"><div class="col-sm-3 header">Infrastructure</div><div class="col-sm-3 input infra"><input name="infra" type="number" min=100 step=50 value="' + this.infra + '"> </div><div class="col-sm-3 header">Land</div><div class="col-sm-3 input land"><input name="land" type="number" min=100 step=50 value="' + this.land + '"> </div></div><div class="row"><div class="col-sm-3 header">Age</div><div class="col-sm-3 input age"><input name="age" type="number" min=0 step=1 value="' + this.age + '"> days </div><div class="col-sm-3 header">Infrastructure & Land Cost</div><div class="col-sm-3 infraCost">  </div></div><div class="row"><div class="col-sm-3 header">Improvements</div><div class="col-sm-3 improve">Plhdr </div><div class="col-sm-3 header">Power Sufficiency</div><div class="col-sm-3 power">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Population</div><div class="col-sm-3 population">Plhdr </div><div class="col-sm-3 header">Population Density</div><div class="col-sm-3 populationDensity">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Disease</div><div class="col-sm-3 disease">Plhdr </div><div class="col-sm-3 header">Crime</div><div class="col-sm-3 crime">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Pop Lost to Disease</div><div class="col-sm-3 popdisease">Plhdr </div><div class="col-sm-3 header">Pop Lost to Crime</div><div class="col-sm-3 popCrime">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Pollution</div><div class="col-sm-3 pollution">Plhdr </div><div class="col-sm-3 header">Disease From Pollution</div><div class="col-sm-3 pollutionEffect">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Commerce</div><div class="col-sm-3 commerce">Plhdr </div><div class="col-sm-3 header">Average Income</div><div class="col-sm-3 avgIncome">Plhdr </div></div><div class="row"><div class="col-sm-3 header">Gross Revenue</div><div class="col-sm-3 ns grossRevenue"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div><div class="col-sm-3 header">Net Revenue</div><div class="col-sm-3 ns netRevenue"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div></div><div class="row"><div class="col-sm-3 header">Expenditures</div><div class="col-sm-3 ns expenditures"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div><div class="col-sm-3 header">City Cost</div><div class="col-sm-3 ns cityCost"><div class="container-fluid resources"><div class="row"><div class="col-sm-3 coal">1,000,000</div><div class="col-sm-3 oil">1,000,000</div><div class="col-sm-3 uranium">1,000,000</div><div class="col-sm-3 lead">1,000,000</div></div><div class="row"><div class="col-sm-3 iron">1,000,000</div><div class="col-sm-3 bauxite">1,000,000</div><div class="col-sm-3 gasoline">1,000,000</div><div class="col-sm-3 munitions">1,000,000</div></div><div class="row"><div class="col-sm-3 steel">1,000,000</div><div class="col-sm-3 aluminum">1,000,000</div><div class="col-sm-3 food">1,000,000</div><div class="col-sm-3 money">1,000,000</div></div></div></div></div>');
 		
-		$(element).find(".improvements").append('<table><thead><tr><th>Power</th><th>Resources</th><th>Manufacturing</th><th>Civil</th><th>Commerce</th><th>Military</th></tr></thead><tbody><tr><td class="coalPlant">Coal Plant<input type="number" name="coalPlant" min=0 step=1 value=' + this.buildings.coalPlant.amount + '></td><td class="'+ this.nation.continent.buildingsAllowed[0].key + '">' +this.nation.continent.buildingsAllowed[0].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[0].key + '" max='+ this.nation.continent.buildingsAllowed[0].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[0].key].amount + '"></td><td class="oilRefinery">Oil Refinery<input type="number" name="oilRefinery" max='+ this.buildings.oilRefinery.cap + ' min=0 step=1 value="' + this.buildings.oilRefinery.amount + '"></td><td class="police">Police Station<input type="number" name="police" max='+ this.buildings.police.cap + ' min=0 step=1 value="' + this.buildings.police.amount + '"></td><td class="market">Market<input type="number" name="market" max='+ this.buildings.market.cap + ' min=0 step=1 value="' + this.buildings.market.amount + '"><td class="barracks">Barracks<input type="number" name="barracks" max=5 min=0 step=1 value="' + this.buildings.barracks.amount + '"></td></tr><tr><td class="oilPlant">Oil Plant<input type="number" name="oilPlant" min=0 step=1 value="' + this.buildings.oilPlant.amount + '"></td><td class="'+ this.nation.continent.buildingsAllowed[1].key + '">' + this.nation.continent.buildingsAllowed[1].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[1].key + '" max='+ this.nation.continent.buildingsAllowed[1].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[1].key].amount + '"></td><td class="steelMill">Steel Mill<input type="number" name="steelMill" max=' + this.buildings.steelMill.cap + ' min=0 step=1 value="' + this.buildings.steelMill.amount + '"></td><td class="hospital">Hospital<input type="number" name="hospital" max=' + this.buildings.hospital.cap + ' min=0 step=1 value="' + this.buildings.hospital.amount + '"></td><td class="bank">Bank<input type="number" name="bank" max=' + this.buildings.bank.cap + ' min=0 step=1 value="' + this.buildings.bank.amount + '"></td><td class="factory">Factory<input type="number" name="factory" max=' + this.buildings.factory.cap + ' min=0 step=1 value="' + this.buildings.factory.amount + '"></td></tr><tr><td class="nuclearPlant">Nuclear Plant<input type="number" name="nuclearPlant" min=0 step=1 value="' + this.buildings.nuclearPlant.amount + '"></td><td class="'+ this.nation.continent.buildingsAllowed[2].key + '">' + this.nation.continent.buildingsAllowed[2].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[2].key + '" max='+ this.nation.continent.buildingsAllowed[2].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[2].key].amount + '"></td><td class="aluminumRefinery">Aluminum Refinery<input type="number" name="aluminumRefinery" max='+ this.buildings.aluminumRefinery.cap + ' min=0 step=1 value="' + this.buildings.aluminumRefinery.amount + '"></td><td class="recycling">Recycling Center<input type="number" name="recycling" max='+ this.buildings.recycling.cap + ' min=0 step=1 value="' + this.buildings.recycling.amount + '"></td><td class="mall">Mall<input type="number" name="mall" max='+ this.buildings.mall.cap + ' min=0 step=1 value="' + this.buildings.mall.amount + '"></td><td class="airBase">Air Force Base<input type="number" name="airBase" max='+ this.buildings.airBase.cap + ' min=0 step=1 value="' + this.buildings.airBase.amount + '"></td></tr><tr><td class="windPlant">Wind Plant<input type="number" name="windPlant" min=' + this.buildings.windPlant.amount + ' step=1 value="0"></td><td class="farm">Farm<input type="number" name="farm" max='+ this.buildings.farm.cap + ' min=0 step=1 value="' + this.buildings.farm.amount + '"></td><td class="munitionsFactory">Munitions Factory<input type="number" name="munitionsFactory" max='+ this.buildings.munitionsFactory.cap + ' min=0 step=1 value="' + this.buildings.munitionsFactory.amount + '"></td><td class="subway">Subway<input type="number" name="subway" max='+ this.buildings.subway.cap + ' min=0 step=1 value="' + this.buildings.subway.amount + '"></td><td class="stadium">Stadium<input type="number" name="stadium" max='+ this.buildings.stadium.cap + ' min=0 step=1 value="' + this.buildings.stadium.amount + '"></td><td class="drydock">Drydock<input type="number" name="drydock" max='+ this.buildings.drydock.cap + ' min=0 step=1 value="' + this.buildings.drydock.amount + '"></td></tr></tbody></table>')
+		$(element).find(".improvements").append('<table><thead><tr><th>Power</th><th>Resources</th><th>Manufacturing</th><th>Civil</th><th>Commerce</th><th>Military</th></tr></thead><tbody><tr><td class="imp_coalpower">Coal Plant<input type="number" name="imp_coalpower" min=0 step=1 value=' + this.buildings.imp_coalpower.amount + '></td><td class="'+ this.nation.continent.buildingsAllowed[0].key + '">' +this.nation.continent.buildingsAllowed[0].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[0].key + '" max='+ this.nation.continent.buildingsAllowed[0].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[0].key].amount + '"></td><td class="imp_gasrefinery">Oil Refinery<input type="number" name="imp_gasrefinery" max='+ this.buildings.imp_gasrefinery.cap + ' min=0 step=1 value="' + this.buildings.imp_gasrefinery.amount + '"></td><td class="imp_policestation">Police Station<input type="number" name="imp_policestation" max='+ this.buildings.imp_policestation.cap + ' min=0 step=1 value="' + this.buildings.imp_policestation.amount + '"></td><td class="imp_supermarket">Market<input type="number" name="imp_supermarket" max='+ this.buildings.imp_supermarket.cap + ' min=0 step=1 value="' + this.buildings.imp_supermarket.amount + '"><td class="imp_barracks">Barracks<input type="number" name="imp_barracks" max=5 min=0 step=1 value="' + this.buildings.imp_barracks.amount + '"></td></tr><tr><td class="imp_oilpower">Oil Plant<input type="number" name="imp_oilpower" min=0 step=1 value="' + this.buildings.imp_oilpower.amount + '"></td><td class="'+ this.nation.continent.buildingsAllowed[1].key + '">' + this.nation.continent.buildingsAllowed[1].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[1].key + '" max='+ this.nation.continent.buildingsAllowed[1].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[1].key].amount + '"></td><td class="imp_steelmill">Steel Mill<input type="number" name="imp_steelmill" max=' + this.buildings.imp_steelmill.cap + ' min=0 step=1 value="' + this.buildings.imp_steelmill.amount + '"></td><td class="imp_hospital">Hospital<input type="number" name="imp_hospital" max=' + this.buildings.imp_hospital.cap + ' min=0 step=1 value="' + this.buildings.imp_hospital.amount + '"></td><td class="imp_bank">Bank<input type="number" name="imp_bank" max=' + this.buildings.imp_bank.cap + ' min=0 step=1 value="' + this.buildings.imp_bank.amount + '"></td><td class="imp_factory">Factory<input type="number" name="imp_factory" max=' + this.buildings.imp_factory.cap + ' min=0 step=1 value="' + this.buildings.imp_factory.amount + '"></td></tr><tr><td class="imp_nuclearpower">Nuclear Plant<input type="number" name="imp_nuclearpower" min=0 step=1 value="' + this.buildings.imp_nuclearpower.amount + '"></td><td class="'+ this.nation.continent.buildingsAllowed[2].key + '">' + this.nation.continent.buildingsAllowed[2].name + '<input type="number" name="' + this.nation.continent.buildingsAllowed[2].key + '" max='+ this.nation.continent.buildingsAllowed[2].cap + ' min=0 step=1 value="' + this.buildings[this.nation.continent.buildingsAllowed[2].key].amount + '"></td><td class="imp_aluminumrefinery">Aluminum Refinery<input type="number" name="imp_aluminumrefinery" max='+ this.buildings.imp_aluminumrefinery.cap + ' min=0 step=1 value="' + this.buildings.imp_aluminumrefinery.amount + '"></td><td class="imp_recyclingcenter">Recycling Center<input type="number" name="imp_recyclingcenter" max='+ this.buildings.imp_recyclingcenter.cap + ' min=0 step=1 value="' + this.buildings.imp_recyclingcenter.amount + '"></td><td class="imp_mall">Mall<input type="number" name="imp_mall" max='+ this.buildings.imp_mall.cap + ' min=0 step=1 value="' + this.buildings.imp_mall.amount + '"></td><td class="imp_hangar">Air Force Base<input type="number" name="imp_hangar" max='+ this.buildings.imp_hangar.cap + ' min=0 step=1 value="' + this.buildings.imp_hangar.amount + '"></td></tr><tr><td class="imp_windpower">Wind Plant<input type="number" name="imp_windpower" min=' + this.buildings.imp_windpower.amount + ' step=1 value="0"></td><td class="imp_farm">Farm<input type="number" name="imp_farm" max='+ this.buildings.imp_farm.cap + ' min=0 step=1 value="' + this.buildings.imp_farm.amount + '"></td><td class="imp_munitionsfactory">Munitions Factory<input type="number" name="imp_munitionsfactory" max='+ this.buildings.imp_munitionsfactory.cap + ' min=0 step=1 value="' + this.buildings.imp_munitionsfactory.amount + '"></td><td class="imp_subway">Subway<input type="number" name="imp_subway" max='+ this.buildings.imp_subway.cap + ' min=0 step=1 value="' + this.buildings.imp_subway.amount + '"></td><td class="imp_stadium">Stadium<input type="number" name="imp_stadium" max='+ this.buildings.imp_stadium.cap + ' min=0 step=1 value="' + this.buildings.imp_stadium.amount + '"></td><td class="imp_drydock">Drydock<input type="number" name="imp_drydock" max='+ this.buildings.imp_drydock.cap + ' min=0 step=1 value="' + this.buildings.imp_drydock.amount + '"></td></tr></tbody></table>')
 		
 		return element;
 	};
@@ -355,6 +363,8 @@
 		$(city).find(".populationDensity").html(format(this.populationDensity) + " people/sq. mi");
 		$(city).find(".disease").html(format(this.disease) +"%");
 		$(city).find(".crime").html(format(this.crime) +"%");
+		$(city).find(".popDisease").html(format(this.popLostDisease));
+		$(city).find(".popCrime").html(format(this.popLostCrime));
 		$(city).find(".pollution").html(this.pollution);
 		$(city).find(".pollutionEffect").html(format(this.pollutionEffect) + "%");
 		$(city).find(".commerce").html(format(this.commerce) + "%");
@@ -405,7 +415,6 @@
 		//Update Buildings
 		for(var building in this.buildings){
 			var b = this.buildings[building];
-			
 			if(b.powerSupply) {
 				this.powerSupply += b.powerSupply*b.amount;
 			}
@@ -423,13 +432,13 @@
 				for(var r in b.production){
 					this.revenue[r].production += b.production[r] * b.amount; 
 					//new bonuses
-					if(b.key == "oilWell" || b.key == "coalMine" || b.key=="bauxiteMine" || b.key=="uraniumMine" || b.key == "leadMine" && b.amount > 0){
+					if(b.key == "imp_oilwell" || b.key == "imp_coalmine" || b.key=="imp_bauxitemine" || b.key=="imp_uramine" || b.key == "imp_leadmine" && b.amount > 0){
 						this.revenue[r].production *= 1 + (.05555 * (b.amount-1));
 					}
-					else if(b.key == "farm" && b.amount > 0){
+					else if(b.key == "imp_farm" && b.amount > 0){
 						this.revenue[r].production *= 1 + (.0263 * (b.amount-1));
 					}
-					else if(b.key == "oilRefiner" || b.key == "steelMill" || b.key=="munitionsFactory" || b.key == "aluminumRefinery"){
+					else if(b.key == "oilRefiner" || b.key == "imp_steelmill" || b.key=="imp_munitionsfactory" || b.key == "imp_aluminumrefinery"){
 						this.revenue[r].production *= 1 + (.125 * (b.amount-1));
 					}
 				}
@@ -489,10 +498,10 @@
 		}
 		
 		if(this.nation.projects.irrigation.built) {
-			this.revenue.food.production = this.buildings.farm.amount * 12 * this.land/250;
+			this.revenue.food.production = this.buildings.imp_farm.amount * 12 * this.land/250;
 		}
 		else{
-			this.revenue.food.production = this.buildings.farm.amount * this.land/25;
+			this.revenue.food.production = this.buildings.imp_farm.amount * this.land/25;
 		}
 		
 		if(this.powerSupply >= this.infra){
@@ -500,9 +509,9 @@
 		}
 		
 		this.avgIncome = 0.725 * ((this.commerce / 50)+1);
-		this.population = this.infra * 100;
-		this.populationDensity = this.population / this.land
-		this.crime += (Math.pow((103 - this.commerce), 2) + this.population) / 111111;
+		this.basePop = this.infra * 100;
+		this.populationDensity = this.basePop / this.land
+		this.crime += (Math.pow((103 - this.commerce), 2) + this.basePop) / 111111;
 		this.crime = ((this.crime > 100 || this.crime < 0) ? (Math.round(this.crime / 100) * 100) : (this.crime));
 		this.pollutionEffect = (this.pollution * 0.05);
 		if(this.pollutionEffect < 0){
@@ -511,12 +520,18 @@
 		if(this.pollution < 0){
 			this.pollution = 0;
 		}
-		this.disease += (((Math.pow(this.populationDensity, 2) * 0.01) - 25) / 100) + (this.population / 100000) + this.pollutionEffect;
+		this.disease += (((Math.pow(this.populationDensity, 2) * 0.01) - 25) / 100) + (this.basePop / 100000) + this.pollutionEffect;
 		this.disease = ((this.disease > 100 || this.disease < 0) ? (Math.round(this.disease / 100) * 100) : (this.disease));
 		if (this.disease > 100) {
 			this.disease = 100;
 		}
-		this.population = Math.round((this.population - (this.disease * this.infra/10) - (10 * this.crime * this.infra) - 25)*(1 + Math.log(this.age+1)/15));
+		this.popLostCrime = (10 * this.crime * this.infra) - 25;
+		this.popLostDisease = (this.disease * this.infra);
+		this.ageFactor = (1 + Math.log(this.age)/15);
+		if(!isFinite(this.ageFactor)){
+			this.ageFactor = 1;
+		}
+		this.population = Math.round((this.basePop - (Math.max(this.popLostDisease,0) + Math.max(this.popLostCrime,0)))*this.ageFactor);
 		if (this.population < 0) {
 			this.population = 0;
 		}
@@ -582,59 +597,7 @@
 		this.slotsUsed += diff;
 	}
 
-	var Data = function(obj){
-		this.nation = obj;
-		this.data = {
-			age : {
-				name: "Age",
-				all: 0,
-				list: [],
-			},
-			infra : {
-				name: "Infrastructure",
-				all: 0,
-				list: [],
-			},
-			population: {
-				name: "Population",
-				all: 0,
-				list: [],
-			},
-			disease: {
-				name: "Disease",
-				all: 0,
-				list: [],
-			},
-			crime : {
-				name: "Crime",
-				all: 0,
-				list: [],
-			},
-			commerce: {
-				name: "Commerce",
-				all: 0,
-				list: [],
-			},
-			powered : {
-				name: "Powered",
-				all: 0,
-				list: [],
-			},
-			coalPlant : {
-				name: "Coal Plant",
-				all: 0,
-				list: [],
-			},
-			oilPlant : {
-				name: "Oil Plant",
-				all: 0,
-				list: [],
-			},
-		}
-		for(var i=0;i<obj.cities.length;i++){
-			
-		}
-	};
+	
 	/***************
 	***FUNCTIONS****
 	***************/
@@ -659,20 +622,18 @@
 		};
 		
 		for(var i=0;i<obj.cities.length;i++){
-			var city = {};
 			var ref = obj.cities[i];
-			city.id = ref.id;
-			city.name = ref.name;
-			city.infra = ref.infra;
-			city.land = ref.land;
-			city.age = ref.age;
-			city.buildings = {};
-			
-			for(var b in ref.buildings){
-				city.buildings[b] = ref.buildings[b].amount;
+			if(ref != undefined){
+				var city = {};
+				city.id = ref.id;
+				city.name = ref.name;
+				city.infra = ref.infra;
+				city.land = ref.land;
+				city.age = ref.age;
+				city.buildings = ref.buildings;
+				//console.log(ref.buildings);
+				data.cities.push(city);
 			}
-			
-			data.cities.push(city);
 		}
 		
 		for(var p in obj.projects){
@@ -687,6 +648,12 @@
 		
 		localStorage.setItem("data", btoa(JSON.stringify(data)));
 	};
+	var saveAPI_key = function(str){
+		localStorage.setItem("api_key", str);
+	}
+	var loadAPI_key = function(){
+		api_key = localStorage.getItem("api_key");
+	}
 	var load = function(){
 		var data = localStorage.getItem("data");
 		if(data === null){
@@ -704,10 +671,17 @@
 			}
 		}
 	}
+	var clearHTML = function(){
+		$("#manage-cities").html("");
+	}
 	var init = function(){
 		nation = new Nation(load());
 		if(nation === undefined || Object.keys(nation).length === 0) {
 			nation = new Nation();
+			nation.createCity();
+			save(nation);
+		}
+		if(nation.cities == undefined || nation.cities.length == 0){
 			nation.createCity();
 			save(nation);
 		}
@@ -716,11 +690,13 @@
 			$("#manage-cities").append(nation.cities[i].constructHTML());
 		}
 		
+		nation_import_id = $("#nation_id").val();
 		$("#config").find('[name="allianceTax"]').val((nation.monetaryTaxRate * 100));
 		$("#config").find('[name="incomeBonus"]').val((nation.incomeBonus * 100));
 		$("#config").find('[name="continent"]').val(nation.continent.name);
 		$("#config").find('[name="domesticPolicy"]').val(nation.domesticPolicy);
 		$("#config").find('[name="warPolicy"]').val(nation.warPolicy);
+		loadAPI_key();
 	}
 	var format = function(n){
 		if(isNaN(n)){
@@ -748,6 +724,181 @@
 			}
 		};
 	}
+	var loadCityFromAJAX = function([args], n, i, l){
+		var data = arguments[0][0];
+		console.log(data);
+		var city = new City(n);
+		city.cityID = data.cityid;
+		city.id = i;
+		city.name = data.name;
+		city.infra = Number(data.infrastructure);
+		city.land = Number(data.land);
+		city.age = Number(data.age);
+		
+		
+		//handle buildings
+		city.buildings.imp_coalpower.amount = ~~data.imp_coalpower;
+		city.buildings.imp_oilpower.amount = ~~data.imp_oilpower;
+		city.buildings.imp_nuclearpower.amount = ~~data.imp_nuclearpower;
+		city.buildings.imp_windpower.amount = ~~data.imp_windpower;
+		city.buildings.imp_coalmine.amount = ~~data.imp_coalmine;
+		city.buildings.imp_ironmine.amount = ~~data.imp_ironmine;
+		city.buildings.imp_leadmine.amount = ~~data.imp_leadmine;
+		city.buildings.imp_uramine.amount = ~~data.imp_uramine;
+		city.buildings.imp_bauxitemine.amount = ~~data.imp_bauxitemine;
+		city.buildings.imp_oilwell.amount = ~~data.imp_oilwell;
+		city.buildings.imp_farm.amount = ~~data.imp_farm;
+		city.buildings.imp_gasrefinery.amount = ~~data.imp_gasrefinery;
+		city.buildings.imp_steelmill.amount = ~~data.imp_steelmill;
+		city.buildings.imp_munitionsfactory.amount = ~~data.imp_munitionsfactory;
+		city.buildings.imp_aluminumrefinery.amount = ~~data.imp_aluminumrefinery;
+		city.buildings.imp_policestation.amount = ~~data.imp_policestation;
+		city.buildings.imp_hospital.amount = ~~data.imp_hospital;
+		city.buildings.imp_recyclingcenter.amount = ~~data.imp_recyclingcenter;
+		city.buildings.imp_subway.amount = ~~data.imp_subway;
+		city.buildings.imp_supermarket.amount = ~~data.imp_supermarket;
+		city.buildings.imp_bank.amount = ~~data.imp_bank;
+		city.buildings.imp_mall.amount = ~~data.imp_mall;
+		city.buildings.imp_stadium.amount = ~~data.imp_stadium;
+		city.buildings.imp_barracks.amount = ~~data.imp_barracks;
+		city.buildings.imp_factory.amount = ~~data.imp_factory;
+		city.buildings.imp_hangar.amount = ~~data.imp_hangar;
+		city.buildings.imp_drydock.amount = ~~data.imp_drydock;
+		
+		n.cities[i] = city;
+		city.update();
+		if(n.cities.length == l){
+			save(n);
+			clearHTML()
+			init();
+			update();
+		}
+	}
+	var loadNationFromAJAX = function(data){
+		nation = new Nation();
+		nation.id = data.nationid;
+		nation.color = data.color;
+		//console.log(data);
+		switch (data.continent){
+			case "Africa":
+				nation.continent = continents.africa;
+				break;
+			case "Antarctica":
+				nation.continent = continents.antarctica;
+				break;
+			case "Australia":
+				nation.continent = continents.australia;
+				break;
+			case "Asia":
+				nation.continent = continents.asia;
+				break;
+			case "North America":
+				nation.continent = continents.northAmerica;
+				break;
+			case "South America":
+				nation.continent = continents.southAmerica;
+				break;
+			case "Europe":
+				nation.continent = continents.europe;
+				break;
+			default:
+				nation.continent = continents.northAmerica;
+		}
+		switch (data.domestic_policy){
+			case "Urbanization":
+				nation.domesticPolicy = "urbanization";
+				break;
+			case "Manifest Destiny":
+				nation.domesticPolicy = "manifestDestiny";
+				break;
+			case "Open Market":
+				nation.domesticPolicy = "openMarket";
+				break;
+			case "Technological Advancement":
+				nation.domesticPolicy = "Technological Advancement";
+				break;
+			case "Imperialism":
+				nation.domesticPolicy = "imperialism";
+				break;
+			default:
+				nation.domesticPolicy = "urbanization";
+		}
+		switch (data.war_policy){
+			case "Attrition":
+				nation.warPolicy = "attrition";
+				break;
+			case "Turtle":
+				nation.warPolicy = "turtle";
+				break;
+			case "Blitzkrieg":
+				nation.warPolicy = "blitz";
+				break;
+			case "Fortress":
+				nation.warPolicy = "fortress";
+				break;
+			case "Moneybags":
+				nation.warPolicy = "moneybags";
+				break;
+			case "Pirate":
+				nation.warPolicy = "pirate";
+				break;
+			case "Tactician":
+				nation.warPolicy = "tactician";
+				break;
+			case "Guardian":
+				nation.warPolicy = "guardian";
+				break;
+			case "Covert":
+				nation.warPolicy = "covert";
+				break;
+			case "Arcane":
+				nation.warPolicy = "arcane";
+				break;
+			default:
+				nation.warPolicy = "turtle";
+		}
+		var index = 0;
+		for(index=0;index<data.cityids.length;index++){
+			importCity(data.cityids[index], nation, index, data.cityids.length);
+		}
+		
+	}
+	/***************
+	*****AJAX*****
+	***************/
+	$.ajaxPrefilter( function (options) {
+	  if (options.crossDomain && jQuery.support.cors) {
+		var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+		options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+	  }
+	});
+	var importNation = function(id){
+		//console.log("https://politicsandwar.com/api/nation/id=" + id + "&key=" + api_key);
+		$.ajax({
+			url: "https://politicsandwar.com/api/nation/id=" + id + "&key=" + api_key,
+			success: loadNationFromAJAX,
+			error: logResponse,
+			dataType: "json",
+			cache: false
+			});
+	}
+	var importCity = function(id, n, i, l){
+		//console.log("https://politicsandwar.com/api/city/id=" + id + "&key=" + api_key);
+		$.ajax({
+			url: "https://politicsandwar.com/api/city/id=" + id + "&key=" + api_key,
+			success: function(){
+				loadCityFromAJAX(arguments, n, i, l);
+			},
+			error: logResponse,
+			dataType: "json",
+			cache: false
+			});
+	}
+	function logResponse(response){
+		console.log("AJAX ERROR");
+		console.log(response);
+	}
+	
 	/***************
 	*****EVENTS*****
 	***************/
@@ -763,6 +914,21 @@
 	});
 	$("button.delete").on("click", function(){
 		var id = $(this).parents().eq(1).attr("id");
+	});
+	$("#api_key").on("change", function(){
+		api_key = $(this).val();
+		saveAPI_key(api_key);
+		
+	});
+	$("#nation_id").on("change", function(){
+		nation_import_id = $(this).val();
+	});
+	$("#colorBonus").on("change", function(){
+		nation.colorBonus = $(this).val();
+		update();
+	});
+	$("#import_nation").on("click",function(){
+		importNation(nation_import_id);
 	});
 	$("#manage-cities").on("change", ".city .general input", function(){
 		var city = nation.cities[$(this).parents().eq(5).attr("id"

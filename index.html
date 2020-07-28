@@ -28,10 +28,26 @@
 
     <div class="tab-content">
         <div class="tab-pane fade in active" id="manage-nation">
-
+			<div class="section api" id="api">
+				<div class="section-heading">
+                    <h4>API</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                </div>
+				<!--<span id="apiKey"><label for="api_key">API key: </label><button class="import_nation">Import Nation</button></span>-->
+				<div class="section-body">
+                    <div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-3 header">API Key</div>
+                            <div class="col-sm-3 input">
+                                <input name="api_key" id="api_key"></input>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
             <div class="section nation" id="config">
                 <div class="section-heading">
-                    <h4>Configure Nation</h4><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
+                    <h4>Configure Nation</h4><span id="nationImport"><label for="nation_id">Nation ID: </label><input type="number" name="nation_id" id="nation_id"></input><button class="import_nation" id="import_nation">Import Nation</button></span><span class="minimize"><span class="glyphicon glyphicon-minus"></span></span>
                 </div>
 
                 <div class="section-body">
@@ -77,6 +93,7 @@
 									<option name="africa">Africa <img src="images/oil.png"><img src="images/bauxite.png"><img src="images/uranium.png"></option>
 									<option name="asia">Asia <img src="images/oil.png"><img src="images/iron.png"><img src="images/uranium.png"></option>
 									<option name="australia">Australia <img src="images/coal.png"><img src="images/bauxite.png"><img src="images/lead.png"></option>
+									<option name="antarctica">Antarctica <img src="images/coal.png"><img src="images/oil.png"><img src="images/uranium.png"></option>
 								</select>
 							</div>
 							
@@ -116,6 +133,18 @@
                                     <option value="covert">Covert</option>
                                     <option value="arcane">Arcane</option>
                                 </select>
+                            </div>
+
+                        </div>
+						<div class="row">
+
+                            <div class="col-sm-3 header">Color</div>
+                            <div id="color" class="col-sm-3">
+                                
+                            </div>
+                            <div class="col-sm-3 header">Color Bloc Bonus</div>
+                            <div class="col-sm-3 input">
+                               <input id="colorBonus" type="number"></input>
                             </div>
 
                         </div>

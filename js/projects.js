@@ -151,7 +151,7 @@
 				money: 15000000
 			}
 		},
-		recycling: {
+		imp_subway: {
 			built: false,
 			cost: {
 				food: 100000,

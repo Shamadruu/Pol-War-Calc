@@ -1,8 +1,8 @@
 //Read-Only buildings data
 	var buildings = {
-		coalPlant: {
+		imp_coalpower: {
 			name: "Coal Plant",	
-			key: "coalPlant",
+			key: "imp_coalpower",
 			amount: 0,
 			cost: {
 				money: 5000
@@ -15,9 +15,9 @@
 			},
 			pollution: 8
 		},
-		oilPlant: {
+		imp_oilpower: {
 			name: "Oil Plant",
-			key: "oilPlant",
+			key: "imp_oilpower",
 			amount: 0,
 			cost: {
 				money: 7000
@@ -30,9 +30,9 @@
 			},
 			pollution: 6
 		},
-		nuclearPlant: {
+		imp_nuclearpower: {
 			name: "Nuclear Plant",
-			key: "nuclearPlant",
+			key: "imp_nuclearpower",
 			amount: 0,
 			cost: {
 				money: 500000,
@@ -46,9 +46,9 @@
 			},
 			pollution: 0
 		},
-		windPlant: {
+		imp_windpower: {
 			name: "Wind Plant",
-			key: "windPlant",
+			key: "imp_windpower",
 			amount: 0,
 			cost: {
 				money: 30000,
@@ -61,9 +61,9 @@
 			},
 			pollution: 0
 		},
-		coalMine: {
+		imp_coalmine: {
 			name: "Coal Mine",
-			key: "coalMine",
+			key: "imp_coalmine",
 			amount: 0,
 			cap: 10,
 			cost: {
@@ -77,9 +77,9 @@
 			},
 			pollution: 12
 		},
-		ironMine: {
+		imp_ironmine: {
 			name: "Iron Mine",
-			key: "ironMine",
+			key: "imp_ironmine",
 			amount: 0, 
 			cap: 10,
 			cost: {
@@ -93,9 +93,9 @@
 			},
 			pollution: 12
 		},
-		leadMine: {
+		imp_leadmine: {
 			name: "Lead Mine",
-			key: "leadMine",
+			key: "imp_leadmine",
 			amount: 0, 
 			cap: 10,
 			cost: {
@@ -109,9 +109,9 @@
 			},
 			pollution: 12
 		},
-		uraniumMine: {
+		imp_uramine: {
 			name: "Uranium Mine",
-			key: "uraniumMine",
+			key: "imp_uramine",
 			amount: 0, 
 			cap: 10,
 			cost: {
@@ -125,9 +125,9 @@
 			},
 			pollution: 12
 		},
-		bauxiteMine: {
+		imp_bauxitemine: {
 			name: "Bauxite Mine",
-			key: "bauxiteMine",
+			key: "imp_bauxitemine",
 			amount: 0, 
 			cap: 10,
 			cost: {
@@ -141,9 +141,9 @@
 			},
 			pollution: 12
 		},
-		oilWell: {
+		imp_oilwell: {
 			name: "Oil Well",
-			key: "oilWell",
+			key: "imp_oilwell",
 			amount: 0, 
 			cap: 10,
 			cost: {
@@ -157,9 +157,9 @@
 			},
 			pollution: 12
 		},
-		farm: {
+		imp_farm: {
 			name: "Farm",
-			key: "farm",
+			key: "imp_farm",
 			amount: 0, 
 			cap: 20,
 			cost: {
@@ -173,9 +173,9 @@
 			},
 			pollution: 2
 		},
-		oilRefinery: {
+		imp_gasrefinery: {
 			name: "Oil Refinery",
-			key: "oilRefinery",
+			key: "imp_gasrefinery",
 			amount: 0, 
 			cap: 5,
 			cost: {
@@ -190,9 +190,9 @@
 			},
 			pollution: 32
 		},
-		steelMill: {
+		imp_steelmill: {
 			name: "Steel Mill",
-			key: "steelMill",
+			key: "imp_steelmill",
 			amount: 0, 
 			cap: 5,
 			cost: {
@@ -208,9 +208,9 @@
 			},
 			pollution: 40
 		},
-		munitionsFactory: {
+		imp_munitionsfactory: {
 			name: "Munitions Factory",
-			key: "munitionsFactory",
+			key: "imp_munitionsfactory",
 			amount: 0, 
 			cap: 5,
 			cost: {
@@ -225,9 +225,9 @@
 			},
 			pollution: 32
 		},
-		aluminumRefinery: {
+		imp_aluminumrefinery: {
 			name: "Aluminum Refinery",
-			key: "aluminumRefinery",
+			key: "imp_aluminumrefinery",
 			amount: 0, 
 			cap: 5,
 			cost: {
@@ -242,9 +242,9 @@
 			},
 			pollution: 40
 		},
-		police: {
+		imp_policestation: {
 			name: "Police Station",
-			key: "police",
+			key: "imp_policestation",
 			amount: 0, 
 			cap: 5,
 			cost: {
@@ -257,9 +257,9 @@
 			pollution: 1,
 			crime: -2.5
 		},
-		hospital: {
+		imp_hospital: {
 			name: "Hospital",
-			key: "hospital",
+			key: "imp_hospital",
 			amount: 0, 
 			cap: 5,
 			cost: {
@@ -272,9 +272,9 @@
 			pollution: 4,
 			disease: -2.5
 		},
-		recycling: {
+		imp_recyclingcenter: {
 			name: "Recycling Center",
-			key: "recycling",
+			key: "imp_recyclingcenter",
 			amount: 0, 
 			cap: 3,
 			cost: {
@@ -285,9 +285,9 @@
 			},
 			pollution: -70,
 		},
-		subway: {
+		imp_subway: {
 			name: "Subway",
-			key: "subway",
+			key: "imp_subway",
 			amount: 0, 
 			cap: 1,
 			cost: {
@@ -301,9 +301,9 @@
 			pollution: -45,
 			commerce: 8
 		},
-		market: {
+		imp_supermarket: {
 			name: "Supermarket",
-			key: "market",
+			key: "imp_supermarket",
 			amount: 0, 
 			cap: 6,
 			cost: {
@@ -314,9 +314,9 @@
 			},
 			commerce: 3
 		},
-		bank: {
+		imp_bank: {
 			name: "Bank",
-			key: "bank",
+			key: "imp_bank",
 			amount: 0, 
 			cap: 5,
 			cost: {
@@ -329,9 +329,9 @@
 			},
 			commerce: 5
 		},
-		mall: {
+		imp_mall: {
 			name: "Shopping Mall",
-			key: "mall",
+			key: "imp_mall",
 			amount: 0, 
 			cap: 4,
 			cost: {
@@ -345,9 +345,9 @@
 			pollution: 2,
 			commerce: 9,
 		},
-		stadium: {
+		imp_stadium: {
 			name: "Stadium",
-			key: "stadium",
+			key: "imp_stadium",
 			amount: 0, 
 			cap: 3,
 			cost: {
@@ -361,9 +361,9 @@
 			pollution: 5,
 			commerce: 12
 		},
-		barracks: {
+		imp_barracks: {
 			name: "Barracks",
-			key: "barracks",
+			key: "imp_barracks",
 			amount: 0, 
 			cap: 5,
 			cost: {
@@ -374,9 +374,9 @@
 				soldiers: 3000
 			}
 		},
-		factory: {
+		imp_factory: {
 			name: "Factory",
-			key: "factory",
+			key: "imp_factory",
 			amount: 0, 
 			cap: 5,
 			cost: {
@@ -388,9 +388,9 @@
 				tanks: 250
 			}
 		},
-		airBase: {
+		imp_hangar: {
 			name: "Air Force Base",
-			key: "airBase",
+			key: "imp_hangar",
 			amount: 0, 
 			cap: 5,
 			cost: {
@@ -402,9 +402,9 @@
 				aircraft: 15
 			}
 		},
-		drydock: {
+		imp_drydock: {
 			name: "Drydock",
-			key: "drydock",
+			key: "imp_drydock",
 			amount: 0, 
 			cap: 3,
 			cost: {

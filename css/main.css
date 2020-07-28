@@ -149,7 +149,26 @@ span.minimize {
 	position: relative;
 	left: 75%;
 	margin-right: 1em;
-	color: #8c8c8c;
+	color: #fff;
+	background-color: #23262a;
+	border: 1px solid #c8c8c8;
+	border-radius: 2em;
+}
+#nationImport {
+	width: 40%;
+	position: relative;
+	display: inline-block;
+	left: 55%;
+}	
+#nationImport label{
+	margin-right: 1.5em;
+}
+.import_nation {
+	width: 10em;
+	position: relative;
+	margin-left: 2.5em;
+	margin-right: 1em;
+	color: #fff;
 	background-color: #23262a;
 	border: 1px solid #c8c8c8;
 	border-radius: 2em;
