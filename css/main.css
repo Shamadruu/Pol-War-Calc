@@ -12,6 +12,7 @@ Responsive?
 	position: fixed;
 	top: 0%;
 	z-index: 1;
+	width:100%;
 }
 #main li:not(.active){
 	background-color: #272b30;
